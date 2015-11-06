@@ -5,15 +5,15 @@ package group2.cs301.labyrinthgame.Labyrinth;
  */
 public class Tile {
     //tile type variables
-    public static int TEE = 1000;
-    public static int CORNER = 1001;
-    public static int LINE = 1002;
+    public static final int TEE = 1000;
+    public static final int CORNER = 1001;
+    public static final int LINE = 1002;
 
     //tile rotations
-    public static int UP = 2000;
-    public static int RIGHT = 2001;
-    public static int DOWN = 2002;
-    public static int LEFT = 2003;
+    public static final int UP = 2000;
+    public static final int RIGHT = 2001;
+    public static final int DOWN = 2002;
+    public static final int LEFT = 2003;
 
     private int type;
     private int rotation;
@@ -28,7 +28,7 @@ public class Tile {
     private Tile tileRightwards = null;
     private Tile tileLeftWards = null;
 
-    private String treasure;
+    private int treasure;
 
     //creates a new tile with default values
     public Tile() {
@@ -39,12 +39,12 @@ public class Tile {
         player3present = false;
         player4present = false;
 
-        treasure = null;
+        treasure = 0;
     }
 
     //creates a new tile with passed in properties
     public Tile(int initType, int initRotation, boolean initP1, boolean initP2,
-                 boolean initP3, boolean initP4, String initTreasure) {
+                 boolean initP3, boolean initP4, int initTreasure) {
         type = initType;
         rotation = initRotation;
         player1present = initP1;
