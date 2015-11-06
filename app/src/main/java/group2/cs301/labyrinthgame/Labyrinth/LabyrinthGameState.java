@@ -7,8 +7,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
  */
 public class LabyrinthGameState extends GameState {
     private int currentPlayer;
-    private Tile[][] gameTiles;
-    private Tile extraTile;
+    private Board gameBoard;
     private String[] player1Targets;
     private String[] player2Targets;
     private String[] player3Targets;
@@ -17,8 +16,7 @@ public class LabyrinthGameState extends GameState {
     //creates a new gameState
     public LabyrinthGameState () {
         currentPlayer = 0;
-        gameTiles = new Tile[7][7];
-        extraTile = new Tile();
+        gameBoard = new Board();
         player1Targets = new String[4];
         player2Targets = new String[4];
         player3Targets = new String[4];
@@ -28,14 +26,8 @@ public class LabyrinthGameState extends GameState {
     //creates a deep copy of a given game state
     public LabyrinthGameState (LabyrinthGameState toCopy) {
         currentPlayer = toCopy.currentPlayer;
-        extraTile = new Tile(toCopy.extraTile);
 
-        gameTiles = new Tile[7][7];
-        for(int i = 0; i < 7; i++) {
-            for(int j = 0; j < 7; j++) {
-                gameTiles[i][j] = new Tile(toCopy.gameTiles[i][j]);
-            }
-        }
+        gameBoard = new Board(toCopy.gameBoard);
 
         player1Targets = new String[toCopy.player1Targets.length];
         for(int i = 0; i < player1Targets.length; i++) {
