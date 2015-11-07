@@ -57,7 +57,14 @@ public class Tile {
         treasure = initTreasure;
     }
 
-    //creates a copy of passed tile
+    /**
+     * Tile
+     *
+     * @param toCopy tile to be compied into a new tile
+     *
+     * constructor for the Tile class that creates a new tile identical to one passed in
+     * creates a deep copy
+     */
     public Tile(Tile toCopy) {
         type = toCopy.type;
         rotation = toCopy.rotation;
