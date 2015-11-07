@@ -10,10 +10,15 @@ public class Board {
     private Tile[][] gameTiles;
     private Tile extraTile;
 
+    /**
+     * Board
+     *
+     * constructor that creates a random board
+     */
     public Board() {
         gameTiles = new Tile[7][7];
         setNew();
-    }
+    }//ctor
 
     /**
      * Constructor that creates a new board identical to one that's passed in
@@ -28,7 +33,7 @@ public class Board {
             }
         }
         extraTile = toCopy.extraTile;
-    }
+    }//ctor
 
     /**
      * setNew
@@ -129,7 +134,7 @@ public class Board {
             treasureTick++;
         }
 
-    }
+    }//setNew
 
     /*
     * insertExtraTile
@@ -176,7 +181,7 @@ public class Board {
             }
         }
         extraTile = tempTile;
-    }
+    }//insertExtraTile
 
     /**
      * rotateExtraTile
@@ -212,6 +217,6 @@ public class Board {
 
         gameTiles[x][y].setPlayersPresent(curPlayer, true);
 
-    }
+    }//movePlayer
 
 }

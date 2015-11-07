@@ -1,7 +1,8 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
 /**
- * Created by Brendan on 11/1/2015.
+ * @author Brendan Thomas, Ben Rumptz
+ * @version November 7, 2015
  */
 public class Tile {
     //tile type variables
@@ -69,7 +70,7 @@ public class Tile {
         playersPresent[3] = initP4;
 
         treasure = initTreasure;
-    }
+    }//ctor
 
     /**
      * Tile
@@ -88,7 +89,7 @@ public class Tile {
         playersPresent[3] = toCopy.playersPresent[3];
 
         treasure = toCopy.treasure;
-    }
+    }//ctor
 
     /**
      * tickTile
