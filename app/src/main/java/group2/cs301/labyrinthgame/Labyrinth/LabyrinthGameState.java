@@ -96,4 +96,13 @@ public class LabyrinthGameState extends GameState {
     public void move(int x, int y) {
         gameBoard.movePlayer(x, y, currentPlayer);
     }//move
+
+
+    /**
+     * getGameBoard - gets the board
+     * @return  the board
+     */
+    public Board getGameBoard() {
+        return gameBoard;
+    }
 }

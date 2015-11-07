@@ -218,4 +218,12 @@ public class Board {
 
     }//movePlayer
 
+    /**
+     * getExtraTile - gets the extra tile
+     * @return  the extra tile
+     */
+    public Tile getExtraTile() {
+        return extraTile;
+    }//getExtraTile
+
 }
