@@ -57,7 +57,7 @@ public class LabyrinthGameState extends GameState {
 
     //move a player to a tile
     public void move(int x, int y) {
-
+        gameBoard.movePlayer(x, y, currentPlayer);
     }
 
 

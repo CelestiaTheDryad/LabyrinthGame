@@ -95,4 +95,23 @@ public class Tile {
         }
     }//tickTile
 
+
+    /**
+     * setPlayersPresent - sets the given player at this tile
+     * @param curPlayer    the given player
+     * @param isPresent    true if player is present
+     */
+    public void setPlayersPresent(int curPlayer, boolean isPresent) {
+        playersPresent[curPlayer] = isPresent;
+    }//setPlayersPresent
+
+
+    /**
+     * getPlayerPresent - returns whether the given player is on this Tile
+     * @param curPlayer     the current player
+     * @return              true if the given player is present
+     */
+    public boolean getPlayerPresent(int curPlayer) {
+        return playersPresent[curPlayer];
+    }
 }
