@@ -4,7 +4,8 @@ import group2.cs301.labyrinthgame.Game.GamePlayer;
 import group2.cs301.labyrinthgame.Game.actionMsg.GameAction;
 
 /**
- * Created by R2-D2 on 11/5/15.
+ * @author R2-D2, Bern
+ * @version 11/7/15
  */
 public class InsertTileAction extends GameAction {
 
@@ -21,4 +22,7 @@ public class InsertTileAction extends GameAction {
         x = xx;
         y = yy;
     }
+
+    public int getX(){ return x; }
+    public int getY(){ return y; }
 }
