@@ -15,7 +15,11 @@ public class Board {
         setNew();
     }
 
-    //creates a deep copy of a passed Board object
+    /**
+     * Constructor that creates a new board identical to one that's passed in
+     *
+     * @param toCopy board to be copied
+     */
     public Board(Board toCopy) {
         gameTiles = new Tile[7][7];
         for(int i = 0; i < 7; i++) {
@@ -26,7 +30,12 @@ public class Board {
         extraTile = toCopy.extraTile;
     }
 
-    //sets the board to a random state
+    /**
+     * setNew
+     *
+     * sets the board to a random starting state concurrent with
+     * the rules of labyrinth
+     */
     private void setNew() {
         int linesToAdd = 13;
         int teesToAdd = 6;
@@ -124,8 +133,10 @@ public class Board {
 
     /*
     * insertExtraTile
+    *
     * @param xx, yy coordinates of where to insert our tile
     * @precondition xx and yy must be valid coordinates for inserting
+    *
     * inserts the extra tile into a specified coordinate and places the new extra tile
     * into the extra tile inst variable
     */
@@ -167,11 +178,22 @@ public class Board {
         extraTile = tempTile;
     }
 
+    /**
+     * rotateExtraTile
+     *
+     * rotates the extra tile
+     */
     public void rotateExtraTile() {
         extraTile.tickTile();
     }//rotateExtraTile
 
-
+    /**
+     * movePlayer
+     *
+     * @param x int for the column the player is moving to
+     * @param y int for the row the player is moving to
+     * @param curPlayer int for the player that is moving
+     */
     public void movePlayer(int x, int y, int curPlayer) {
 
         //FUCK GRAMMAAR
