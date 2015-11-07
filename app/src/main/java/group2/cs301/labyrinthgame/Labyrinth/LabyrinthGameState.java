@@ -51,7 +51,9 @@ public class LabyrinthGameState extends GameState {
     }
 
 
-
+    public void rotateTile() {
+        gameBoard.rotateExtraTile();
+    }
 
 
 
