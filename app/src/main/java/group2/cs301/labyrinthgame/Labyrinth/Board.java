@@ -168,7 +168,7 @@ public class Board {
             //moves down the column from 0 to 6, moving tiles while it goes
             for(int y = 0; y < 7; y++){
                 tempTile = gameTiles[xx][y];
-                if(y == 0) gameTiles[xx][y] = extraTile;
+                gameTiles[xx][y] = extraTile;
                 extraTile = tempTile;
             }
         }
