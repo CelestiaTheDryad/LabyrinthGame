@@ -1,10 +1,8 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
-import group2.cs301.labyrinthgame.R;
-
 /**
- * @author Brendan, Ben
- * @version 11/7/15
+ * @author Brendan Thomas, Ben Rumptz
+ * @version November 7, 2015
  */
 public class Board {
     private Tile[][] gameTiles;
@@ -103,6 +101,7 @@ public class Board {
                 }
             } while (!successful);
 
+            //get the random tile orientation
             switch ((int) (Math.random()*4)+1) {
                 case 1 : orientation = Tile.RIGHT;
                     break;
@@ -218,5 +217,16 @@ public class Board {
         gameTiles[x][y].setPlayersPresent(curPlayer, true);
 
     }//movePlayer
+
+    /**
+     * linkTile
+     *
+     * links a tile in a passed in spot to its neighbors
+     * @param column column of the tile to be linked
+     * @param row row of the tile to be linked
+     */
+    public void linkTile(int column, int row) {
+        //TODO code this method
+    }
 
 }
