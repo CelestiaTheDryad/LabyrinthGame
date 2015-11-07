@@ -17,8 +17,8 @@ public class InsertTileAction extends GameAction {
      * @param player the player who created the action
      */
     public InsertTileAction(GamePlayer player, int xx, int yy) {
+        super(player);
         x = xx;
         y = yy;
-        super(player);
     }
 }
