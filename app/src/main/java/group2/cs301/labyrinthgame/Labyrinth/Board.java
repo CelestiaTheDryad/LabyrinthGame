@@ -229,9 +229,14 @@ public class Board {
         int rotation = toLink.getRotation();
         int type = toLink.getType();
 
+        //handle tile links according to tile type
         if(type == Tile.CORNER || type == Tile.TEE) {
+            //set each direction's link according
             if(rotation == Tile.UP || rotation == Tile.LEFT && row > 0) {
                 toLink.setTileUpwards(gameTiles[column][row-1]);
+            }
+            else {
+                toLink.setTileUpwards(null);
             }
         }
         if(type == Tile.TEE) {
@@ -240,6 +245,6 @@ public class Board {
         if(type == Tile.LINE) {
 
         }
-    }
+    }//linkTile
 
 }
