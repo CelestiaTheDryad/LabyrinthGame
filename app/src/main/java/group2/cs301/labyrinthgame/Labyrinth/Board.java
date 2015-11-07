@@ -3,7 +3,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import group2.cs301.labyrinthgame.R;
 
 /**
- * @author Brendan, Bern
+ * @author Brendan, Ben
  * @version 11/7/15
  */
 public class Board {
