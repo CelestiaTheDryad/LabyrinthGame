@@ -126,4 +126,9 @@ public class Board {
         extraTile.tickTile();
     }//rotateExtraTile
 
+
+    public void movePlayer(int x, int y, int curPlayer) {
+        //gameTiles[x][y]
+    }
+
 }
