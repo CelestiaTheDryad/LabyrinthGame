@@ -21,7 +21,7 @@ public class LabyrinthGameState extends GameState {
         player2Targets = new int[4];
         player3Targets = new int[4];
         player4Targets = new int[4];
-    }
+    }//ctor
 
     //creates a deep copy of a given game state
     public LabyrinthGameState (LabyrinthGameState toCopy) {
@@ -48,11 +48,16 @@ public class LabyrinthGameState extends GameState {
         for(int i = 0; i < player4Targets.length; i++) {
             player4Targets[i] = toCopy.player4Targets[i];
         }
-    }
+    }//ctor
 
-
+    //rotates the extra tile one tick
     public void rotateTile() {
         gameBoard.rotateExtraTile();
+    }//rotateTile
+
+    //move a player to a tile
+    public void move(int x, int y) {
+
     }
 
 
