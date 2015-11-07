@@ -4,7 +4,7 @@ import group2.cs301.labyrinthgame.Game.GamePlayer;
 import group2.cs301.labyrinthgame.Game.actionMsg.GameAction;
 
 /**
- * @author R2-D2, Bern
+ * @author Andrew Williams, Bern
  * @version 11/7/15
  */
 public class InsertTileAction extends GameAction {
