@@ -122,10 +122,18 @@ public class Board {
             }
 
             //move row and column forward
-            column +=2;
-            if(column > 7) {
+            column++;
+
+            //if it moves to a spot where the tile is locked move it again
+            if(column % 2 == 0 && row % 2 == 0) {
+                column++;
+            }
+
+            //if it moves the column past the edge of a row move it down a row
+            if(column == 7) {
                 column = 0;
                 row++;
+                //if it moves to a row where the first column is locked tick column, again
                 if(row % 2 == 0) {
                     column++;
                 }
@@ -229,9 +237,14 @@ public class Board {
         int rotation = toLink.getRotation();
         int type = toLink.getType();
 
+        //handle tile links according to tile type
         if(type == Tile.CORNER || type == Tile.TEE) {
+            //set each direction's link according the tile's rotation
             if(rotation == Tile.UP || rotation == Tile.LEFT && row > 0) {
                 toLink.setTileUpwards(gameTiles[column][row-1]);
+            }
+            else {
+                toLink.setTileUpwards(null);
             }
         }
         if(type == Tile.TEE) {
@@ -240,7 +253,7 @@ public class Board {
         if(type == Tile.LINE) {
 
         }
-    }
+    }//linkTile
 
     /**
      * getExtraTile - gets the extra tile
