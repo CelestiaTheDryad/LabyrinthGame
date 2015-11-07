@@ -151,35 +151,34 @@ public class Board {
             //moves across the row from 0 to 6, moving tiles while it goes
             for(int x = 0; x < 7; x++){
                 tempTile = gameTiles[x][yy];
-                if(x == 0) gameTiles[x][yy] = extraTile;
-                else gameTiles[x][yy] = tempTile;
+                gameTiles[x][yy] = extraTile;
+                extraTile = tempTile;
             }
         }
         else if(xx == 6){
             //moves across the row from 6 to 0, moving tiles while it goes
             for(int x = 6; x > -1; x--){
                 tempTile = gameTiles[x][yy];
-                if(x == 6) gameTiles[x][yy] = extraTile;
-                else gameTiles[x][yy] = tempTile;
+                gameTiles[x][yy] = extraTile;
+                extraTile = tempTile;
             }
         }
         else if(yy == 0){
             //moves down the column from 0 to 6, moving tiles while it goes
             for(int y = 0; y < 7; y++){
                 tempTile = gameTiles[xx][y];
-                if(y == 0) gameTiles[xx][y] = extraTile;
-                else gameTiles[xx][y] = tempTile;
+                gameTiles[xx][y] = extraTile;
+                extraTile = tempTile;
             }
         }
         else if(yy == 6){
             //moves up the column from 6 to 0, moving tiles while it goes
             for(int y = 6; y > -1; y--){
                 tempTile = gameTiles[xx][y];
-                if(y == 6) gameTiles[xx][y] = extraTile;
-                else gameTiles[xx][y] = tempTile;
+                gameTiles[xx][y] = extraTile;
+                extraTile = tempTile;
             }
         }
-        extraTile = tempTile;
     }//insertExtraTile
 
     /**
