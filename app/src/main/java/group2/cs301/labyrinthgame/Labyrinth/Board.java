@@ -225,7 +225,21 @@ public class Board {
      * @param row row of the tile to be linked
      */
     public void linkTile(int column, int row) {
-        Tile tile = gameTiles[column][row];
+        Tile toLink = gameTiles[column][row];
+        int rotation = toLink.getRotation();
+        int type = toLink.getType();
+
+        if(type == Tile.CORNER || type == Tile.TEE) {
+            if(rotation == Tile.UP || rotation == Tile.LEFT && row > 0) {
+                toLink.setTileUpwards(gameTiles[column][row-1]);
+            }
+        }
+        if(type == Tile.TEE) {
+
+        }
+        if(type == Tile.LINE) {
+
+        }
     }
 
 }

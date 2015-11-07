@@ -147,4 +147,40 @@ public class Tile {
      * @return int of the tile's type
      */
     public int getType() {return type;}//getType
+
+    /**
+     * setTileUpwards
+     *
+     * sets the tileUpwards link to a passed in tile (may be set to null)
+     *
+     * @param toSet tile to set the link to
+     */
+    public void setTileUpwards(Tile toSet) {tileUpwards = toSet;}//setUpwardsTile
+
+    /**
+     * setTileRightwards
+     *
+     * sets the tileRightwards link to a passed in tile (may be set to null)
+     *
+     * @param toSet tile to set the link to
+     */
+    public void setTileRightwards(Tile toSet) {tileRightwards = toSet;}//setRightwardsTile
+
+    /**
+     * setTileDownwards
+     *
+     * sets the tileDownwards link to a passed in tile (may be set to null)
+     *
+     * @param toSet tile to set the link to
+     */
+    public void setTileDownwards(Tile toSet) {tileDownwards = toSet;}//setDownwardsTile
+
+    /**
+     * setTileLeftwards
+     *
+     * sets the tileLeftwards link to a passed in tile (may be set to null)
+     *
+     * @param toSet tile to set the link to
+     */
+    public void setTileLeftWards(Tile toSet) {tileLeftWards = toSet;}//setLeftwardsTile
 }
