@@ -8,6 +8,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
  */
 public class LabyrinthGameState extends GameState {
     private int currentPlayer;
+    private int numPlayers;
     private Board gameBoard;
     private int[] player1Targets;
     private int[] player2Targets;
@@ -20,10 +21,13 @@ public class LabyrinthGameState extends GameState {
     /**
      * LabyrinthgameState
      *
-     * creates a new game state with default values
+     * @param initNumPlayers the number of players playing this game
+     *
+     * creates a new game state (default)
      */
-    public LabyrinthGameState () {
+    public LabyrinthGameState (int initNumPlayers) {
         currentPlayer = 0;
+        numPlayers = initNumPlayers;
         gameBoard = new Board();
         player1Targets = new int[4];
         player2Targets = new int[4];
@@ -63,6 +67,9 @@ public class LabyrinthGameState extends GameState {
         for(int i = 0; i < player4Targets.length; i++) {
             player4Targets[i] = toCopy.player4Targets[i];
         }
+        numPlayers = toCopy.numPlayers;
+        lastXInserted = toCopy.lastXInserted;
+        lastYInserted = toCopy.lastYInserted;
     }//ctor
 
     /*
@@ -96,6 +103,15 @@ public class LabyrinthGameState extends GameState {
     public void move(int x, int y) {
         gameBoard.movePlayer(x, y, currentPlayer);
     }//move
+
+
+    /**
+     * getGameBoard - gets the board
+     * @return  the board
+     */
+    public Board getGameBoard() {
+        return gameBoard;
+    }
 
     /**
      * linkTiles
