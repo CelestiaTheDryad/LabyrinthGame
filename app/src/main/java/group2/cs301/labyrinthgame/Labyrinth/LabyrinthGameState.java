@@ -49,4 +49,13 @@ public class LabyrinthGameState extends GameState {
             player4Targets[i] = toCopy.player4Targets[i];
         }
     }
+
+
+
+
+
+
+
+
+
 }

@@ -88,7 +88,7 @@ public class Board {
                 }
             } while (!successful);
 
-            switch ((int) (Math.random()*4)) {
+            switch ((int) (Math.random()*4)+1) {
                 case 1 : orientation = Tile.RIGHT;
                     break;
                 case 2 : orientation = Tile.LEFT;
