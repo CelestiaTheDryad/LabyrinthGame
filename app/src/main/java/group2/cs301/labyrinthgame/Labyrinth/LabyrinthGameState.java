@@ -13,6 +13,9 @@ public class LabyrinthGameState extends GameState {
     private int[] player3Targets;
     private int[] player4Targets;
 
+    private int lastXInserted;
+    private int lastYInserted;
+
     //creates a new gameState
     public LabyrinthGameState () {
         currentPlayer = 0;
@@ -21,6 +24,8 @@ public class LabyrinthGameState extends GameState {
         player2Targets = new int[4];
         player3Targets = new int[4];
         player4Targets = new int[4];
+        lastXInserted = 0;
+        lastYInserted = 0;
     }
 
     //creates a deep copy of a given game state
@@ -50,6 +55,16 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    /*
+    * insertTile
+    * @param xx, yy coordinates to insert the extra tile
+    * calls the insertExtraTile function from gameBoard
+    */
+    public void insertTile(int xx, int yy){
+        gameBoard.insertExtraTile(xx, yy);
+        lastXInserted = xx;
+        lastYInserted = yy;
+    }
 
     public void rotateTile() {
         gameBoard.rotateExtraTile();
