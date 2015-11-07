@@ -173,7 +173,23 @@ public class Board {
 
 
     public void movePlayer(int x, int y, int curPlayer) {
-        //gameTiles[x][y]
+
+        //FUCK GRAMMAAR
+        boolean isBraked = false;
+
+        for(int i = 0; i < gameTiles[0].length; i++) {
+            if(isBraked) {break;}//for double breaking the loops
+            for(int j = 0; j < gameTiles[0].length; j++) {
+                if(gameTiles[i][j].getPlayerPresent(curPlayer)) {
+                    gameTiles[i][j].setPlayersPresent(curPlayer, false);
+                    isBraked = true;
+                    break;
+                }
+            }
+        }
+
+        gameTiles[x][y].setPlayersPresent(curPlayer, true);
+
     }
 
 }
