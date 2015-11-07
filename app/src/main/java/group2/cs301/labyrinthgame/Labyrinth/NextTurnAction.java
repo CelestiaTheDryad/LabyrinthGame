@@ -14,5 +14,5 @@ public class NextTurnAction extends GameAction {
      */
     public NextTurnAction(GamePlayer player) {
         super(player);
-    }
+    }//ctor
 }
