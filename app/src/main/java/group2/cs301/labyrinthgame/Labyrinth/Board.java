@@ -72,7 +72,7 @@ public class Board {
         gameTiles[6][6] = new Tile(Tile.CORNER, Tile.LEFT, false, false, false, false, 0);
 
         //add 34 randomly generated tiles
-        for(int i = 0; i < 35; ++i) {
+        for(int i = 0; i < 34; ++i) {
             int orientation = 0;
             int type = 0;
 
@@ -114,7 +114,7 @@ public class Board {
             }
 
             //create the tile in its array spot
-            if(i < 34) {
+            if(i < 33) {
                 gameTiles[column][row] = new Tile(type, orientation, false, false, false, false, treasureTick);
             }
             else {
@@ -138,6 +138,8 @@ public class Board {
                     column++;
                 }
             }
+
+            //tick the treasure up one
             treasureTick++;
         }
 
