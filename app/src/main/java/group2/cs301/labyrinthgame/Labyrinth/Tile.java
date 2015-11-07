@@ -67,4 +67,12 @@ public class Tile {
 
         treasure = toCopy.treasure;
     }
+
+    public void tickTile() {
+        rotation++;
+        if(rotation == LEFT+1) {
+            rotation = UP;
+        }
+    }//tickTile
+
 }

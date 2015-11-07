@@ -121,4 +121,9 @@ public class Board {
 
     }
 
+
+    public void rotateExtraTile() {
+        extraTile.tickTile();
+    }//rotateExtraTile
+
 }
