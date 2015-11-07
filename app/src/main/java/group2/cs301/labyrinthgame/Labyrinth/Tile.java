@@ -64,6 +64,7 @@ public class Tile {
                  boolean initP3, boolean initP4, int initTreasure) {
         type = initType;
         rotation = initRotation;
+        playersPresent = new boolean[4];
         playersPresent[0] = initP1;
         playersPresent[1] = initP2;
         playersPresent[2] = initP3;
@@ -83,6 +84,7 @@ public class Tile {
         type = toCopy.type;
         rotation = toCopy.rotation;
 
+        playersPresent = new boolean[4];
         playersPresent[0] = toCopy.playersPresent[0];
         playersPresent[1] = toCopy.playersPresent[1];
         playersPresent[2] = toCopy.playersPresent[2];
