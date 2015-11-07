@@ -226,7 +226,7 @@ public class Board {
      * @param row row of the tile to be linked
      */
     public void linkTile(int column, int row) {
-        //TODO code this method
+        Tile tile = gameTiles[column][row];
     }
 
 }
