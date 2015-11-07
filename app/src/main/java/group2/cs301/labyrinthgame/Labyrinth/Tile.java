@@ -23,6 +23,8 @@ public class Tile {
     private boolean player3present;
     private boolean player4present;
 
+    private boolean highlighted;
+
     private Tile tileUpwards = null;
     private Tile tileDownwards = null;
     private Tile tileRightwards = null;
@@ -66,5 +68,27 @@ public class Tile {
         player4present = toCopy.player4present;
 
         treasure = toCopy.treasure;
+    }
+
+    /**
+     * gatRotation
+     *
+     * @return int representing the rotation of the tile
+     *
+     * returns the rotation of the tile
+     */
+    public int getRotation() {
+        return rotation;
+    }
+
+    /**
+     * getType
+     *
+     * @return int representing the type of the tile
+     *
+     * returns the type of the tile
+     */
+    public int getType() {
+        return type;
     }
 }

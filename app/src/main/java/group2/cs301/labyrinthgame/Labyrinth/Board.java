@@ -121,4 +121,14 @@ public class Board {
 
     }
 
+    /**
+     * linkTile
+     *
+     * @param column int of the column of the tile to be checked
+     * @param row int of the row of the tile to be checked
+     */
+    public void linkTile(int column, int row) {
+        //TODO code this method
+    }
+
 }
