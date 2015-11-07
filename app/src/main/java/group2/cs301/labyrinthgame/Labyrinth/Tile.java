@@ -91,4 +91,12 @@ public class Tile {
     public int getType() {
         return type;
     }
+
+    public void tickTile() {
+        rotation++;
+        if(rotation == LEFT+1) {
+            rotation = UP;
+        }
+    }//tickTile
+
 }

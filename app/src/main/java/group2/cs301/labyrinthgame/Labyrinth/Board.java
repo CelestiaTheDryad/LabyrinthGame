@@ -88,7 +88,7 @@ public class Board {
                 }
             } while (!successful);
 
-            switch ((int) (Math.random()*4)) {
+            switch ((int) (Math.random()*4)+1) {
                 case 1 : orientation = Tile.RIGHT;
                     break;
                 case 2 : orientation = Tile.LEFT;
@@ -120,6 +120,31 @@ public class Board {
         }
 
     }
+
+    /*
+    * insertExtraTile
+    * @param xx, yy coordinates of where to insert our tile
+    * inserts the extra tile into a specified coordinate and places the new extra tile
+    * into the extra tile inst variable
+    */
+    public void insertExtraTile(int xx, int yy){
+        if(xx == 0){
+            //TODO: implement the logic for inserting on the left side of board
+        }
+        else if(xx == 6){
+            //TODO: implement the logic for inserting on the right side of board
+        }
+        else if(yy == 0){
+            //TODO: implement the logic for inserting on the top side of board
+        }
+        else if(yy == 6){
+            //TODO: implement the logic for inserting on the bottom side of board
+        }
+    }
+
+    public void rotateExtraTile() {
+        extraTile.tickTile();
+    }//rotateExtraTile
 
     /**
      * linkTile

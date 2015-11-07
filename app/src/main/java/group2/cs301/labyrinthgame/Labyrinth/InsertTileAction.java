@@ -4,15 +4,25 @@ import group2.cs301.labyrinthgame.Game.GamePlayer;
 import group2.cs301.labyrinthgame.Game.actionMsg.GameAction;
 
 /**
- * Created by R2-D2 on 11/5/15.
+ * @author Andrew Williams, Bern
+ * @version 11/7/15
  */
 public class InsertTileAction extends GameAction {
+
+    private int x;
+    private int y;
+
     /**
      * constructor for GameAction
      *
      * @param player the player who created the action
      */
-    public InsertTileAction(GamePlayer player) {
+    public InsertTileAction(GamePlayer player, int xx, int yy) {
         super(player);
+        x = xx;
+        y = yy;
     }
+
+    public int getX(){ return x; }
+    public int getY(){ return y; }
 }
