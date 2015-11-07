@@ -3,7 +3,8 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
- * Created by Brendan on 11/1/2015.
+ * @author Brendan, Bern
+ * @version 11/7/15
  */
 public class LabyrinthGameState extends GameState {
     private int currentPlayer;
