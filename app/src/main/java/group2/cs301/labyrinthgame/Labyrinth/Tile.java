@@ -18,10 +18,7 @@ public class Tile {
     private int type;
     private int rotation;
 
-    private boolean player1present;
-    private boolean player2present;
-    private boolean player3present;
-    private boolean player4present;
+    private boolean[] playersPresent;
 
     private Tile tileUpwards = null;
     private Tile tileDownwards = null;
@@ -34,40 +31,63 @@ public class Tile {
     public Tile() {
         type = Tile.LINE;
         rotation = Tile.UP;
-        player1present = false;
-        player2present = false;
-        player3present = false;
-        player4present = false;
+        playersPresent = new boolean[4];
+        playersPresent[0] = false;
+        playersPresent[1] = false;
+        playersPresent[2] = false;
+        playersPresent[3] = false;
 
         treasure = 0;
     }
 
-    //creates a new tile with passed in properties
+
+    /**
+     * Tile
+     *
+     * Creates a new tile with passed in properties
+     *
+     * @param initType      Type of tile: T, Corner, or Line
+     * @param initRotation  The orientation of the tile
+     * @param initP1        Tells whether player 1 is on the tile
+     * @param initP2        Tells whether player 2 is on the tile
+     * @param initP3        Tells whether player 3 is on the tile
+     * @param initP4        Tells whether player 4 is on the tile
+     * @param initTreasure  Tells which treasure is on the tile
+     */
     public Tile(int initType, int initRotation, boolean initP1, boolean initP2,
                  boolean initP3, boolean initP4, int initTreasure) {
         type = initType;
         rotation = initRotation;
-        player1present = initP1;
-        player2present = initP2;
-        player3present = initP3;
-        player4present = initP4;
+        playersPresent[0] = initP1;
+        playersPresent[1] = initP2;
+        playersPresent[2] = initP3;
+        playersPresent[3] = initP4;
 
         treasure = initTreasure;
     }
 
-    //creates a copy of passed tile
+    /**
+     * Tile
+     *
+     * creates a copy of passed tile
+     *
+     * @param toCopy
+     */
     public Tile(Tile toCopy) {
         type = toCopy.type;
         rotation = toCopy.rotation;
 
-        player1present = toCopy.player1present;
-        player2present = toCopy.player2present;
-        player3present = toCopy.player3present;
-        player4present = toCopy.player4present;
+        playersPresent[0] = toCopy.playersPresent[0];
+        playersPresent[1] = toCopy.playersPresent[1];
+        playersPresent[2] = toCopy.playersPresent[2];
+        playersPresent[3] = toCopy.playersPresent[3];
 
         treasure = toCopy.treasure;
     }
 
+    /**
+     * tickTile
+     */
     public void tickTile() {
         rotation++;
         if(rotation == LEFT+1) {
