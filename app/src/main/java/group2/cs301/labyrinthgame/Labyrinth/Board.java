@@ -3,19 +3,28 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import group2.cs301.labyrinthgame.R;
 
 /**
- * @author Brendan, Bern
+ * @author Brendan, Ben
  * @version 11/7/15
  */
 public class Board {
     private Tile[][] gameTiles;
     private Tile extraTile;
 
+    /**
+     * Board
+     *
+     * constructor that creates a random board
+     */
     public Board() {
         gameTiles = new Tile[7][7];
         setNew();
-    }
+    }//ctor
 
-    //creates a deep copy of a passed Board object
+    /**
+     * Constructor that creates a new board identical to one that's passed in
+     *
+     * @param toCopy board to be copied
+     */
     public Board(Board toCopy) {
         gameTiles = new Tile[7][7];
         for(int i = 0; i < 7; i++) {
@@ -24,9 +33,14 @@ public class Board {
             }
         }
         extraTile = toCopy.extraTile;
-    }
+    }//ctor
 
-    //sets the board to a random state
+    /**
+     * setNew
+     *
+     * sets the board to a random starting state concurrent with
+     * the rules of labyrinth
+     */
     private void setNew() {
         int linesToAdd = 13;
         int teesToAdd = 6;
@@ -120,12 +134,14 @@ public class Board {
             treasureTick++;
         }
 
-    }
+    }//setNew
 
     /*
     * insertExtraTile
+    *
     * @param xx, yy coordinates of where to insert our tile
     * @precondition xx and yy must be valid coordinates for inserting
+    *
     * inserts the extra tile into a specified coordinate and places the new extra tile
     * into the extra tile inst variable
     */
@@ -136,16 +152,16 @@ public class Board {
             //moves across the row from 0 to 6, moving tiles while it goes
             for(int x = 0; x < 7; x++){
                 tempTile = gameTiles[x][yy];
-                if(x == 0) gameTiles[x][yy] = extraTile;
-                else gameTiles[x][yy] = tempTile;
+                gameTiles[x][yy] = extraTile;
+                extraTile = tempTile;
             }
         }
         else if(xx == 6){
             //moves across the row from 6 to 0, moving tiles while it goes
             for(int x = 6; x > -1; x--){
                 tempTile = gameTiles[x][yy];
-                if(x == 6) gameTiles[x][yy] = extraTile;
-                else gameTiles[x][yy] = tempTile;
+                gameTiles[x][yy] = extraTile;
+                extraTile = tempTile;
             }
         }
         else if(yy == 0){
@@ -153,25 +169,35 @@ public class Board {
             for(int y = 0; y < 7; y++){
                 tempTile = gameTiles[xx][y];
                 if(y == 0) gameTiles[xx][y] = extraTile;
-                else gameTiles[xx][y] = tempTile;
+                extraTile = tempTile;
             }
         }
         else if(yy == 6){
             //moves up the column from 6 to 0, moving tiles while it goes
             for(int y = 6; y > -1; y--){
                 tempTile = gameTiles[xx][y];
-                if(y == 6) gameTiles[xx][y] = extraTile;
-                else gameTiles[xx][y] = tempTile;
+                gameTiles[xx][y] = extraTile;
+                extraTile = tempTile;
             }
         }
-        extraTile = tempTile;
-    }
+    }//insertExtraTile
 
+    /**
+     * rotateExtraTile
+     *
+     * rotates the extra tile
+     */
     public void rotateExtraTile() {
         extraTile.tickTile();
     }//rotateExtraTile
 
-
+    /**
+     * movePlayer
+     *
+     * @param x int for the column the player is moving to
+     * @param y int for the row the player is moving to
+     * @param curPlayer int for the player that is moving
+     */
     public void movePlayer(int x, int y, int curPlayer) {
 
         //FUCK GRAMMAAR
@@ -190,6 +216,6 @@ public class Board {
 
         gameTiles[x][y].setPlayersPresent(curPlayer, true);
 
-    }
+    }//movePlayer
 
 }

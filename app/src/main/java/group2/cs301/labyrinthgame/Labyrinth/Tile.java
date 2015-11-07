@@ -1,7 +1,8 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
 /**
- * Created by Brendan on 11/1/2015.
+ * @author Brendan Thomas, Ben Rumptz
+ * @version November 7, 2015
  */
 public class Tile {
     //tile type variables
@@ -27,7 +28,12 @@ public class Tile {
 
     private int treasure;
 
-    //creates a new tile with default values
+    /**
+     * Tile
+     *
+     * creates a new tile with some default values
+     * this constructor should not be used in the actual running of the game
+     */
     public Tile() {
         type = Tile.LINE;
         rotation = Tile.UP;
@@ -38,7 +44,7 @@ public class Tile {
         playersPresent[3] = false;
 
         treasure = 0;
-    }
+    }//ctor
 
 
     /**
@@ -64,7 +70,7 @@ public class Tile {
         playersPresent[3] = initP4;
 
         treasure = initTreasure;
-    }
+    }//ctor
 
     /**
      * Tile
@@ -83,10 +89,12 @@ public class Tile {
         playersPresent[3] = toCopy.playersPresent[3];
 
         treasure = toCopy.treasure;
-    }
+    }//ctor
 
     /**
      * tickTile
+     *
+     * rotates clockwise once
      */
     public void tickTile() {
         rotation++;

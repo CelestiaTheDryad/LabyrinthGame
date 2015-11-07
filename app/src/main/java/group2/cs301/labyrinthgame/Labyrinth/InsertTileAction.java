@@ -21,7 +21,7 @@ public class InsertTileAction extends GameAction {
         super(player);
         x = xx;
         y = yy;
-    }
+    }//ctor
 
     public int getX(){ return x; }
     public int getY(){ return y; }

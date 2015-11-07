@@ -14,5 +14,5 @@ public class RotateTileAction extends GameAction {
      */
     public RotateTileAction(GamePlayer player) {
         super(player);
-    }
+    } //ctor
 }

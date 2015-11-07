@@ -3,7 +3,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
- * @author Brendan, Bern
+ * @author Brendan, Ben
  * @version 11/7/15
  */
 public class LabyrinthGameState extends GameState {
@@ -17,7 +17,11 @@ public class LabyrinthGameState extends GameState {
     private int lastXInserted;
     private int lastYInserted;
 
-    //creates a new gameState
+    /**
+     * LabyrinthgameState
+     *
+     * creates a new game state with default values
+     */
     public LabyrinthGameState () {
         currentPlayer = 0;
         gameBoard = new Board();
@@ -29,7 +33,12 @@ public class LabyrinthGameState extends GameState {
         lastYInserted = 0;
     }//ctor
 
-    //creates a deep copy of a given game state
+    /**
+     * LabyrinthGameState
+     *
+     * creates a game state that's an identical deep copy of a passed in game state
+     * @param toCopy game state to be copied
+     */
     public LabyrinthGameState (LabyrinthGameState toCopy) {
         currentPlayer = toCopy.currentPlayer;
 
@@ -65,15 +74,26 @@ public class LabyrinthGameState extends GameState {
         gameBoard.insertExtraTile(xx, yy);
         lastXInserted = xx;
         lastYInserted = yy;
-    }
+    }//insertTile
 
-    //rotates the extra tile one tick
+    /**
+     * rotateTile
+     *
+     * calls the board's rotateExtraTile function to rotate the extra tile one tick
+     */
     public void rotateTile() {
         gameBoard.rotateExtraTile();
     }//rotateTile
 
-    //move a player to a tile
+    /**
+     * move
+     *
+     * moves the current player to a new spot on the game board
+     *
+     * @param x column to be moved to
+     * @param y row to be moved to
+     */
     public void move(int x, int y) {
         gameBoard.movePlayer(x, y, currentPlayer);
-    }
+    }//move
 }
