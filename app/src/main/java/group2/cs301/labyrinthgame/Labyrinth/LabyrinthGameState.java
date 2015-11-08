@@ -4,7 +4,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
  * @author Brendan Thomas, Ben Rumptz
- * @version November 7, 2015
+ * @version November 8, 2015
  */
 public class LabyrinthGameState extends GameState {
     private int currentPlayer;

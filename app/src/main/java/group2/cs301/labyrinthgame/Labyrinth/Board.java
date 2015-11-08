@@ -2,7 +2,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 
 /**
  * @author Brendan Thomas, Ben Rumptz
- * @version November 7, 2015
+ * @version November 8, 2015
  */
 public class Board {
     private Tile[][] gameTiles;
