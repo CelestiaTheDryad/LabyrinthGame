@@ -157,6 +157,7 @@ public class Board {
     public void insertExtraTile(int xx, int yy){
         //temp variable that will hold the new extraTile at the end of this function
         Tile tempTile = null;
+        //left side
         if(xx == 0){
             //moves across the row from 0 to 6, moving tiles while it goes
             for(int x = 0; x < 7; x++){
@@ -165,6 +166,7 @@ public class Board {
                 extraTile = tempTile;
             }
         }
+        //right side
         else if(xx == 6){
             //moves across the row from 6 to 0, moving tiles while it goes
             for(int x = 6; x > -1; x--){
@@ -173,6 +175,7 @@ public class Board {
                 extraTile = tempTile;
             }
         }
+        //top side
         else if(yy == 0){
             //moves down the column from 0 to 6, moving tiles while it goes
             for(int y = 0; y < 7; y++){
@@ -181,6 +184,7 @@ public class Board {
                 extraTile = tempTile;
             }
         }
+        //bottom side
         else if(yy == 6){
             //moves up the column from 6 to 0, moving tiles while it goes
             for(int y = 6; y > -1; y--){
@@ -239,6 +243,62 @@ public class Board {
         Tile toLink = gameTiles[column][row];
         int rotation = toLink.getRotation();
         int type = toLink.getType();
+
+        //test up
+        if(row > 0) {
+            Tile toTest = gameTiles[column][row-1];
+            if(toLink.isConnected(Tile.UP) && toTest.isConnected(Tile.DOWN)) {
+                toLink.setTileUpwards(toTest);
+            }
+            else {
+                toLink.setTileUpwards(null);
+            }
+        }
+        else {
+            toLink.setTileUpwards(null);
+        }
+
+        //test right
+        if(column < 6) {
+            Tile toTest = gameTiles[column+1][row];
+            if(toLink.isConnected(Tile.RIGHT) && toTest.isConnected(Tile.LEFT)) {
+                toLink.setTileRightwards(toTest);
+            }
+            else {
+                toLink.setTileRightwards(null);
+            }
+        }
+        else {
+            toLink.setTileRightwards(null);
+        }
+
+        //test down
+        if(row < 6) {
+            Tile toTest = gameTiles[column][row+1];
+            if(toLink.isConnected(Tile.DOWN) && toTest.isConnected(Tile.UP)) {
+                toLink.setTileDownwards(toTest);
+            }
+            else {
+                toLink.setTileDownwards(null);
+            }
+        }
+        else {
+            toLink.setTileDownwards(null);
+        }
+
+        //test left
+        if(column > 0) {
+            Tile toTest = gameTiles[column-1][row];
+            if(toLink.isConnected(Tile.LEFT) && toTest.isConnected(Tile.RIGHT)) {
+                toLink.setTileDownwards(toTest);
+            }
+            else {
+                toLink.setTileDownwards(null);
+            }
+        }
+        else {
+            toLink.setTileDownwards(null);
+        }
     }//linkTile
 
     /**

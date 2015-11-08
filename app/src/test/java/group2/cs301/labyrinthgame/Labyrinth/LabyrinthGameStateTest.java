@@ -49,7 +49,7 @@ public class LabyrinthGameStateTest extends TestCase {
         assertEquals(initFifthTile, finalSixthTile);
         assertEquals(initSixthTile, finalSeventhTile);
         assertEquals(initSeventhTile, finalExtraTile);
-    }
+    }//testInsertTile
 
     //test the rotate tile method for rotating the spare tile
     public void testRotateTile() throws Exception {
