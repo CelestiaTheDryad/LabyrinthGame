@@ -324,5 +324,5 @@ public class Board {
      */
     public void setTile(int row, int column, Tile toSet) {
         gameTiles[column][row] = toSet;
-    }
+    }//setTile
 }

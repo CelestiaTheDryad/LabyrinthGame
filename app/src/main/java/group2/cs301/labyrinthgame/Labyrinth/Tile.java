@@ -275,4 +275,16 @@ public class Tile {
         }
         return false;
     }//isConnected
+
+    /**
+     * getTileConnection
+     *
+     * gets the tile connected to this tile in a given direction
+     *
+     * @param direction direction to get the connected tile
+     * @return the tile's connection in that direction, null if the tile is not connected in that direction
+     */
+    public Tile getTileConnection(int direction) {
+        return null;
+    }//getTileConnection
 }
