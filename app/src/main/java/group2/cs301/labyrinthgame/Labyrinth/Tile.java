@@ -111,7 +111,7 @@ public class Tile {
      * @param curPlayer    the given player
      * @param isPresent    true if player is present
      */
-    public void setPlayersPresent(int curPlayer, boolean isPresent) {
+    public void setPlayer(int curPlayer, boolean isPresent) {
         playersPresent[curPlayer] = isPresent;
     }//setPlayersPresent
 
@@ -121,7 +121,7 @@ public class Tile {
      * @param curPlayer     the current player
      * @return              true if the given player is present
      */
-    public boolean getPlayerPresent(int curPlayer) {
+    public boolean getPlayer(int curPlayer) {
         return playersPresent[curPlayer];
     }
 

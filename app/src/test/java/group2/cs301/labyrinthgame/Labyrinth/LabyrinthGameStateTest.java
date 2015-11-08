@@ -12,16 +12,18 @@ public class LabyrinthGameStateTest extends TestCase {
     }
 
     public void testRotateTile() throws Exception {
-//        LabyrinthGameState labyrinthGameState = new LabyrinthGameState();
-//        Tile origTile = labyrinthGameState.getGameBoard().getExtraTile();
-//        origTile.tickTile();
-//        labyrinthGameState.rotateTile();
-//        assertEquals(origTile.getRotation(), labyrinthGameState.getGameBoard().getExtraTile().getRotation());
+        LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
+        Tile origTile = labyrinthGameState.getGameBoard().getExtraTile();
+        origTile.tickTile();
+        labyrinthGameState.rotateTile();
+        assertEquals(origTile.getRotation(), labyrinthGameState.getGameBoard().getExtraTile().getRotation());
     }
 
     public void testMove() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
-
-
+        labyrinthGameState.move(3,6);
+        int curPlayer = labyrinthGameState.getCurrentPlayer();
+        Tile tile = labyrinthGameState.getGameBoard().getTile(3,6);
+        assertTrue(tile.getPlayer(curPlayer));
     }
 }

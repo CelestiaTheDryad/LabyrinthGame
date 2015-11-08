@@ -215,17 +215,18 @@ public class Board {
         for(int i = 0; i < gameTiles[0].length; i++) {
             if(isBraked) {break;}//for double breaking the loops
             for(int j = 0; j < gameTiles[0].length; j++) {
-                if(gameTiles[i][j].getPlayerPresent(curPlayer)) {
-                    gameTiles[i][j].setPlayersPresent(curPlayer, false);
+                if(gameTiles[i][j].getPlayer(curPlayer)) {
+                    gameTiles[i][j].setPlayer(curPlayer, false);
                     isBraked = true;
                     break;
                 }
             }
         }
 
-        gameTiles[x][y].setPlayersPresent(curPlayer, true);
+        gameTiles[x][y].setPlayer(curPlayer, true);
 
     }//movePlayer
+
 
     /**
      * linkTile
@@ -264,5 +265,11 @@ public class Board {
     public Tile getExtraTile() {
         return extraTile;
     }//getExtraTile
+
+
+    public Tile getTile(int x, int y) {
+        return gameTiles[x][y];
+    }
+
 
 }

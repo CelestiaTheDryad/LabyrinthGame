@@ -125,4 +125,12 @@ public class LabyrinthGameState extends GameState {
             }
         }
     }//linkTiles
+
+    /**
+     * getCurrentPlayer - gets current player
+     * @return  current player
+     */
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
 }
