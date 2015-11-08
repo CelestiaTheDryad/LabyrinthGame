@@ -311,5 +311,18 @@ public class Board {
 
     public Tile getTile(int x, int y) {
         return gameTiles[x][y];
+    }//getTile
+
+    /**
+     * setTile
+     *
+     * sets the tile at a given position to a given tile
+     *
+     * @param row row to set the tile to
+     * @param column column to se the tile to
+     * @param toSet tile to be set into the board
+     */
+    public void setTile(int row, int column, Tile toSet) {
+        gameTiles[column][row] = toSet;
     }
 }
