@@ -130,4 +130,12 @@ public class LabyrinthGameState extends GameState {
     //getter functions
     public int getLastXInserted(){ return lastXInserted; }
     public int getLastYInserted(){ return lastYInserted; }
+
+    /**
+     * getCurrentPlayer - gets current player
+     * @return  current player
+     */
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
 }
