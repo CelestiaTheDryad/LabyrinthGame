@@ -265,4 +265,8 @@ public class Board {
         return extraTile;
     }//getExtraTile
 
+    //Test function, please ignore
+    public Tile getTile(int xx, int yy){
+        return gameTiles[xx][yy];
+    }
 }
