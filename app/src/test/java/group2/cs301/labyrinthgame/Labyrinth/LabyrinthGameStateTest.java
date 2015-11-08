@@ -51,6 +51,7 @@ public class LabyrinthGameStateTest extends TestCase {
         assertEquals(initSeventhTile, finalExtraTile);
     }
 
+    //test the rotate tile method for rotating the spare tile
     public void testRotateTile() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
         Tile origTile = labyrinthGameState.getGameBoard().getExtraTile();
@@ -59,6 +60,7 @@ public class LabyrinthGameStateTest extends TestCase {
         assertEquals(origTile.getRotation(), labyrinthGameState.getGameBoard().getExtraTile().getRotation());
     }
 
+    //tests the move method for moving a player
     public void testMove() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
         labyrinthGameState.move(3, 6);
@@ -67,15 +69,17 @@ public class LabyrinthGameStateTest extends TestCase {
         assertTrue(tile.getPlayer(curPlayer));
     }
 
+    //test the basic constructor
     public void testLabyrinthGameState() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
         assertEquals(0, labyrinthGameState.getCurrentPlayer());
         assertEquals(0, labyrinthGameState.getLastXInserted());
         assertEquals(0, labyrinthGameState.getLastYInserted());
         assertNotNull(labyrinthGameState.getGameBoard().getExtraTile());
-        assertNotNull(labyrinthGameState.getGameBoard().getTile(1,1));
+        assertNotNull(labyrinthGameState.getGameBoard().getTile(1, 1));
     }
 
+    //test the copy constructor
     public void testLabyrinthGameState1() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
         LabyrinthGameState labyrinthGameState1 = new LabyrinthGameState(labyrinthGameState);
@@ -83,7 +87,24 @@ public class LabyrinthGameStateTest extends TestCase {
         assertEquals(labyrinthGameState.getCurrentPlayer(), labyrinthGameState1.getCurrentPlayer());
         assertEquals(labyrinthGameState.getLastXInserted(), labyrinthGameState1.getLastXInserted());
         assertEquals(labyrinthGameState.getLastYInserted(), labyrinthGameState1.getLastYInserted());
-        assertEquals(labyrinthGameState.getGameBoard().getTile(1,1).getRotation(),
-                            labyrinthGameState1.getGameBoard().getTile(1,1).getRotation());
+        assertEquals(labyrinthGameState.getGameBoard().getTile(1, 1).getRotation(),
+                labyrinthGameState1.getGameBoard().getTile(1, 1).getRotation());
     }
+
+    //test nextTurn method
+    public void testNextTurn() throws Exception {
+        LabyrinthGameState labyrinthGameState = new LabyrinthGameState(3);
+        labyrinthGameState.nextTurn();
+        labyrinthGameState.nextTurn();
+        labyrinthGameState.nextTurn();
+        labyrinthGameState.nextTurn();
+        assertEquals(1, labyrinthGameState.getCurrentPlayer());
+
+        LabyrinthGameState labyrinthGameState1 = new LabyrinthGameState(4);
+        labyrinthGameState1.nextTurn();
+        labyrinthGameState1.nextTurn();
+        labyrinthGameState1.nextTurn();
+        assertEquals(3, labyrinthGameState1.getCurrentPlayer());
+    }
+
 }

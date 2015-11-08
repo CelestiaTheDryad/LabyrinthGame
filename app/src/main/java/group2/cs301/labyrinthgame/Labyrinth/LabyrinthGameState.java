@@ -107,6 +107,19 @@ public class LabyrinthGameState extends GameState {
 
 
     /**
+     * nextTurn
+     *
+     * advances currentPlayer to the next player in a cycle
+     */
+    public void nextTurn() {
+        currentPlayer++;
+        if(currentPlayer == numPlayers) {
+            currentPlayer = 0;
+        }
+    }
+
+
+    /**
      * getGameBoard - gets the board
      * @return  the board
      */
