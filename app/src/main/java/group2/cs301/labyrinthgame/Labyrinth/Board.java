@@ -157,6 +157,7 @@ public class Board {
     public void insertExtraTile(int xx, int yy){
         //temp variable that will hold the new extraTile at the end of this function
         Tile tempTile = null;
+        //left side
         if(xx == 0){
             //moves across the row from 0 to 6, moving tiles while it goes
             for(int x = 0; x < 7; x++){
@@ -165,6 +166,7 @@ public class Board {
                 extraTile = tempTile;
             }
         }
+        //right side
         else if(xx == 6){
             //moves across the row from 6 to 0, moving tiles while it goes
             for(int x = 6; x > -1; x--){
@@ -173,6 +175,7 @@ public class Board {
                 extraTile = tempTile;
             }
         }
+        //top side
         else if(yy == 0){
             //moves down the column from 0 to 6, moving tiles while it goes
             for(int y = 0; y < 7; y++){
@@ -181,6 +184,7 @@ public class Board {
                 extraTile = tempTile;
             }
         }
+        //bottom side
         else if(yy == 6){
             //moves up the column from 6 to 0, moving tiles while it goes
             for(int y = 6; y > -1; y--){

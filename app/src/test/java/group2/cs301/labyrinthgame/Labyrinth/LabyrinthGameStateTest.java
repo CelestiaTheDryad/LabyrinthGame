@@ -49,7 +49,7 @@ public class LabyrinthGameStateTest extends TestCase {
         assertEquals(initFifthTile, finalSixthTile);
         assertEquals(initSixthTile, finalSeventhTile);
         assertEquals(initSeventhTile, finalExtraTile);
-    }
+    }//testInsertTile
 
     public void testRotateTile() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
@@ -61,9 +61,29 @@ public class LabyrinthGameStateTest extends TestCase {
 
     public void testMove() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
-        labyrinthGameState.move(3,6);
+        labyrinthGameState.move(3, 6);
         int curPlayer = labyrinthGameState.getCurrentPlayer();
         Tile tile = labyrinthGameState.getGameBoard().getTile(3,6);
         assertTrue(tile.getPlayer(curPlayer));
+    }
+
+    public void testLabyrinthGameState() throws Exception {
+        LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
+        assertEquals(0, labyrinthGameState.getCurrentPlayer());
+        assertEquals(0, labyrinthGameState.getLastXInserted());
+        assertEquals(0, labyrinthGameState.getLastYInserted());
+        assertNotNull(labyrinthGameState.getGameBoard().getExtraTile());
+        assertNotNull(labyrinthGameState.getGameBoard().getTile(1,1));
+    }
+
+    public void testLabyrinthGameState1() throws Exception {
+        LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
+        LabyrinthGameState labyrinthGameState1 = new LabyrinthGameState(labyrinthGameState);
+        assertEquals(labyrinthGameState.getGameBoard().getExtraTile(), labyrinthGameState1.getGameBoard().getExtraTile());
+        assertEquals(labyrinthGameState.getCurrentPlayer(), labyrinthGameState1.getCurrentPlayer());
+        assertEquals(labyrinthGameState.getLastXInserted(), labyrinthGameState1.getLastXInserted());
+        assertEquals(labyrinthGameState.getLastYInserted(), labyrinthGameState1.getLastYInserted());
+        assertEquals(labyrinthGameState.getGameBoard().getTile(1,1).getRotation(),
+                            labyrinthGameState1.getGameBoard().getTile(1,1).getRotation());
     }
 }
