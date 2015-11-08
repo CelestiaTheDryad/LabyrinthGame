@@ -80,6 +80,8 @@ public class LabyrinthGameState extends GameState {
     */
     public void insertTile(int xx, int yy){
         gameBoard.insertExtraTile(xx, yy);
+        //update our tiles' links
+        this.linkTiles();
         lastXInserted = xx;
         lastYInserted = yy;
     }//insertTile
