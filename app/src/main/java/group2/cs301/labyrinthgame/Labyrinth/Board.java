@@ -288,7 +288,7 @@ public class Board {
 
         //test left
         if(column > 0) {
-            Tile toTest = gameTiles[column-0][row];
+            Tile toTest = gameTiles[column-1][row];
             if(toLink.isConnected(Tile.LEFT) && toTest.isConnected(Tile.RIGHT)) {
                 toLink.setTileDownwards(toTest);
             }
