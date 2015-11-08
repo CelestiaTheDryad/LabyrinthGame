@@ -64,6 +64,7 @@ public class Tile {
                  boolean initP3, boolean initP4, int initTreasure) {
         type = initType;
         rotation = initRotation;
+        playersPresent = new boolean[4];
         playersPresent[0] = initP1;
         playersPresent[1] = initP2;
         playersPresent[2] = initP3;
@@ -83,6 +84,7 @@ public class Tile {
         type = toCopy.type;
         rotation = toCopy.rotation;
 
+        playersPresent = new boolean[4];
         playersPresent[0] = toCopy.playersPresent[0];
         playersPresent[1] = toCopy.playersPresent[1];
         playersPresent[2] = toCopy.playersPresent[2];
@@ -109,7 +111,7 @@ public class Tile {
      * @param curPlayer    the given player
      * @param isPresent    true if player is present
      */
-    public void setPlayersPresent(int curPlayer, boolean isPresent) {
+    public void setPlayer(int curPlayer, boolean isPresent) {
         playersPresent[curPlayer] = isPresent;
     }//setPlayersPresent
 
@@ -119,7 +121,7 @@ public class Tile {
      * @param curPlayer     the current player
      * @return              true if the given player is present
      */
-    public boolean getPlayerPresent(int curPlayer) {
+    public boolean getPlayer(int curPlayer) {
         return playersPresent[curPlayer];
     }
 

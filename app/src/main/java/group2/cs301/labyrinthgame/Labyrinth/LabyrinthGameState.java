@@ -75,6 +75,7 @@ public class LabyrinthGameState extends GameState {
     /*
     * insertTile
     * @param xx, yy coordinates to insert the extra tile
+    * @precondition xx and yy must be valid coordinates for inserting
     * calls the insertExtraTile function from gameBoard
     */
     public void insertTile(int xx, int yy){
@@ -125,4 +126,16 @@ public class LabyrinthGameState extends GameState {
             }
         }
     }//linkTiles
+
+    //getter functions
+    public int getLastXInserted(){ return lastXInserted; }
+    public int getLastYInserted(){ return lastYInserted; }
+
+    /**
+     * getCurrentPlayer - gets current player
+     * @return  current player
+     */
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
 }
