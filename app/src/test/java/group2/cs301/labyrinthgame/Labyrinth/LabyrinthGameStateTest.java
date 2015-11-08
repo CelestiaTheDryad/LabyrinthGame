@@ -52,11 +52,6 @@ public class LabyrinthGameStateTest extends TestCase {
     }
 
     public void testRotateTile() throws Exception {
-
-
-    }
-
-    public void testRotateTile() throws Exception {
         LabyrinthGameState labyrinthGameState = new LabyrinthGameState(4);
         Tile origTile = labyrinthGameState.getGameBoard().getExtraTile();
         origTile.tickTile();
