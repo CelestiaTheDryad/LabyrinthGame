@@ -19,7 +19,7 @@ public class LabyrinthGameState extends GameState {
     private int lastYInserted;
 
     /**
-     * LabyrinthgameState
+     * LabyrinthGameState
      *
      * @param initNumPlayers the number of players playing this game
      *
@@ -111,7 +111,7 @@ public class LabyrinthGameState extends GameState {
      */
     public Board getGameBoard() {
         return gameBoard;
-    }
+    }//getGameBoard
 
     /**
      * linkTiles

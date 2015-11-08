@@ -183,4 +183,30 @@ public class Tile {
      * @param toSet tile to set the link to
      */
     public void setTileLeftWards(Tile toSet) {tileLeftWards = toSet;}//setLeftwardsTile
+
+    /**
+     * isConnected
+     *
+     * tells whether the tile has a connection to a given direction or not
+     *
+     * @param direction integer representing the direction to analyze, must be one of Tile
+     * @return - true if the tile has a connection in that direction, false if otherwise
+     */
+    public boolean isConnected(int direction) {
+        if(direction == Tile.RIGHT)
+            //handle tile links according to tile type
+            if(type == Tile.CORNER || type == Tile.TEE) {
+                if(rotation == Tile.UP || rotation == Tile.RIGHT) {
+                    return true;
+                }
+            }
+            if(type == Tile.TEE && rotation == Tile.DOWN) {
+                return true;
+            }
+            if(type == Tile.LINE && (rotation == Tile.RIGHT || rotation == Tile.LEFT)) {
+                return true;
+            }
+            return false;
+        //else if
+    }//isConnected
 }
