@@ -80,6 +80,8 @@ public class LabyrinthGameState extends GameState {
     */
     public void insertTile(int xx, int yy){
         gameBoard.insertExtraTile(xx, yy);
+        //update our tiles' links
+        this.linkTiles();
         lastXInserted = xx;
         lastYInserted = yy;
         linkTiles();
@@ -105,6 +107,19 @@ public class LabyrinthGameState extends GameState {
     public void move(int x, int y) {
         gameBoard.movePlayer(x, y, currentPlayer);
     }//move
+
+
+    /**
+     * nextTurn
+     *
+     * advances currentPlayer to the next player in a cycle
+     */
+    public void nextTurn() {
+        currentPlayer++;
+        if(currentPlayer == numPlayers) {
+            currentPlayer = 0;
+        }
+    }
 
 
     /**
