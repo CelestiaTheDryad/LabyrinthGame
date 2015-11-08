@@ -195,20 +195,84 @@ public class Tile {
      * @return - true if the tile has a connection in that direction, false if otherwise
      */
     public boolean isConnected(int direction) {
-        if(direction == Tile.RIGHT)
+        if(direction == Tile.RIGHT) {
             //handle tile links according to tile type
-            if(type == Tile.CORNER || type == Tile.TEE) {
-                if(rotation == Tile.UP || rotation == Tile.RIGHT) {
+            if (type == Tile.CORNER || type == Tile.TEE) {
+                if (rotation == Tile.UP || rotation == Tile.RIGHT) {
                     return true;
                 }
             }
-            if(type == Tile.TEE && rotation == Tile.DOWN) {
+
+            if (type == Tile.TEE) {
+                if(rotation == Tile.DOWN) {
+                    return true;
+                }
+            }
+
+            if (type == Tile.LINE && (rotation == Tile.RIGHT || rotation == Tile.LEFT)) {
                 return true;
             }
-            if(type == Tile.LINE && (rotation == Tile.RIGHT || rotation == Tile.LEFT)) {
-                return true;
+        }
+
+        else if(direction == Tile.DOWN) {
+            if(type == Tile.CORNER || type == Tile.TEE) {
+                if(rotation == Tile.RIGHT || rotation == Tile.DOWN) {
+                    return true;
+                }
             }
-            return false;
-        //else if
+
+            if(type == Tile.TEE) {
+                if(rotation == Tile.LEFT) {
+                    return true;
+                }
+            }
+
+            if(type == Tile.LINE) {
+                if(rotation == Tile.UP || rotation == Tile.DOWN) {
+                    return true;
+                }
+            }
+        }
+
+        else if(direction == Tile.LEFT) {
+            if(type == Tile.CORNER || type == Tile.TEE) {
+                if(rotation == Tile.DOWN || rotation == Tile.LEFT) {
+                    return true;
+                }
+            }
+
+            if(type == Tile.TEE) {
+                if(rotation == Tile.UP) {
+                    return true;
+                }
+            }
+
+            if(type == Tile.LINE) {
+                if(rotation == Tile.LEFT || rotation == Tile.RIGHT) {
+                    return true;
+                }
+            }
+        }
+
+        else if(direction == Tile.UP) {
+            if(type == Tile.CORNER || type == Tile.TEE) {
+                if(rotation == Tile.UP || rotation == Tile.LEFT) {
+                    return true;
+                }
+            }
+
+            if(type == Tile.TEE) {
+                if(rotation == Tile.RIGHT) {
+                    return true;
+                }
+            }
+
+            if(type == Tile.LINE) {
+                if(rotation == Tile.UP || rotation == Tile.DOWN) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }//isConnected
 }

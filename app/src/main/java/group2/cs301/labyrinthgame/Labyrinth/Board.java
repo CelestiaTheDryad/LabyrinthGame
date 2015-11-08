@@ -239,6 +239,62 @@ public class Board {
         Tile toLink = gameTiles[column][row];
         int rotation = toLink.getRotation();
         int type = toLink.getType();
+
+        //test up
+        if(row > 0) {
+            Tile toTest = gameTiles[column][row-1];
+            if(toLink.isConnected(Tile.UP) && toTest.isConnected(Tile.DOWN)) {
+                toLink.setTileUpwards(toTest);
+            }
+            else {
+                toLink.setTileUpwards(null);
+            }
+        }
+        else {
+            toLink.setTileUpwards(null);
+        }
+
+        //test right
+        if(column < 6) {
+            Tile toTest = gameTiles[column+1][row];
+            if(toLink.isConnected(Tile.RIGHT) && toTest.isConnected(Tile.LEFT)) {
+                toLink.setTileRightwards(toTest);
+            }
+            else {
+                toLink.setTileRightwards(null);
+            }
+        }
+        else {
+            toLink.setTileRightwards(null);
+        }
+
+        //test down
+        if(row < 6) {
+            Tile toTest = gameTiles[column][row+1];
+            if(toLink.isConnected(Tile.DOWN) && toTest.isConnected(Tile.UP)) {
+                toLink.setTileDownwards(toTest);
+            }
+            else {
+                toLink.setTileDownwards(null);
+            }
+        }
+        else {
+            toLink.setTileDownwards(null);
+        }
+
+        //test left
+        if(column > 0) {
+            Tile toTest = gameTiles[column-0][row];
+            if(toLink.isConnected(Tile.LEFT) && toTest.isConnected(Tile.RIGHT)) {
+                toLink.setTileDownwards(toTest);
+            }
+            else {
+                toLink.setTileDownwards(null);
+            }
+        }
+        else {
+            toLink.setTileDownwards(null);
+        }
     }//linkTile
 
     /**
