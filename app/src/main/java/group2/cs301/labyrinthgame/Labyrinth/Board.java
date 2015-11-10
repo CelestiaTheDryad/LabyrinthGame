@@ -2,11 +2,13 @@ package group2.cs301.labyrinthgame.Labyrinth;
 
 /**
  * @author Brendan Thomas, Ben Rumptz
- * @version November 7, 2015
+ * @version November 9, 2015
  */
 public class Board {
     private Tile[][] gameTiles;
     private Tile extraTile;
+
+    public static int INSERT_LOCATIONS[][] = {{1,0},{3,0},{5,0},{0,1},{0,3},{0,5},{1,6},{3,6},{5,6},{6,1},{6,3},{6,5}};
 
     /**
      * Board
@@ -66,10 +68,10 @@ public class Board {
         gameTiles[2][4] = new Tile(Tile.TEE, Tile.UP, false, false, false, false, 8);
         gameTiles[4][4] = new Tile(Tile.TEE, Tile.LEFT, false, false, false, false, 9);
         gameTiles[6][4] = new Tile(Tile.TEE, Tile.LEFT, false, false, false, false, 10);
-        gameTiles[0][6] = new Tile(Tile.CORNER, Tile.UP, false, false, false, false, 0);
+        gameTiles[0][6] = new Tile(Tile.CORNER, Tile.UP, false, false, true, false, 0);
         gameTiles[2][6] = new Tile(Tile.TEE, Tile.UP, false, false, false, false, 11);
         gameTiles[4][6] = new Tile(Tile.TEE, Tile.UP, false, false, false, false, 12);
-        gameTiles[6][6] = new Tile(Tile.CORNER, Tile.LEFT, false, false, false, false, 0);
+        gameTiles[6][6] = new Tile(Tile.CORNER, Tile.LEFT, false, false, false, true, 0);
 
         //add 34 randomly generated tiles
         for(int i = 0; i < 34; ++i) {
@@ -212,24 +214,26 @@ public class Board {
      * @param curPlayer int for the player that is moving
      */
     public void movePlayer(int x, int y, int curPlayer) {
-
-        //FUCK GRAMMAAR
-        boolean isBraked = false;
-
-        for(int i = 0; i < gameTiles[0].length; i++) {
-            if(isBraked) {break;}//for double breaking the loops
-            for(int j = 0; j < gameTiles[0].length; j++) {
-                if(gameTiles[i][j].getPlayer(curPlayer)) {
-                    gameTiles[i][j].setPlayer(curPlayer, false);
-                    isBraked = true;
-                    break;
-                }
-            }
-        }
+        int[] currentPos = findPlayer(curPlayer);
+        gameTiles[currentPos[0]][currentPos[1]].setPlayer(curPlayer, false);
 
         gameTiles[x][y].setPlayer(curPlayer, true);
 
     }//movePlayer
+
+    public int[] findPlayer(int player) {
+        for(int i = 0; i < gameTiles[0].length; i++) {
+            for(int j = 0; j < gameTiles[0].length; j++) {
+                if(gameTiles[i][j].hasPlayer(player)) {
+                    int[] toReturn = {i,j};
+                    return toReturn;
+                }
+            }
+        }
+        int[] toReturn = {-1,-1};
+        return  toReturn; //returns an invalid location if the player is not found
+                          // this should never happen on calling this program
+    }
 
 
     /**
@@ -290,16 +294,53 @@ public class Board {
         if(column > 0) {
             Tile toTest = gameTiles[column-1][row];
             if(toLink.isConnected(Tile.LEFT) && toTest.isConnected(Tile.RIGHT)) {
-                toLink.setTileDownwards(toTest);
+                toLink.setTileLeftWards(toTest);
             }
             else {
-                toLink.setTileDownwards(null);
+                toLink.setTileLeftWards(null);
             }
         }
         else {
-            toLink.setTileDownwards(null);
+            toLink.setTileLeftWards(null);
         }
     }//linkTile
+
+    /**
+     * highLightTile
+     *
+     * highlights the tile at the specified position
+     *
+     * @param column - column of the tile to be highlighted
+     * @param row - row of the tile to be highlighted
+     */
+    public void highlightTile(int column, int row) {
+        gameTiles[column][row].setHighlighted(true);
+    }//highlightTile
+
+    /**
+     * highlightToMove
+     *
+     * highlights all the tiles a given player may move to
+     *
+     * @param player - the number of the player whose moves should be highlighted
+     */
+    public void highlightToMove(int player) {
+        int[] playerPos = findPlayer(player);
+        gameTiles[playerPos[0]][playerPos[1]].highlightPaths();
+    }//highlightTileToMove
+
+    /**
+     * clearHighlights
+     *
+     * sets the highlight value of every tile to false
+     */
+    public void clearHighlights() {
+        for(int i = 0; i < 7; ++i) {
+            for(int j = 0; j < 7; ++j) {
+                gameTiles[i][j].setHighlighted(false);
+            }
+        }
+    }//clearHighlights
 
     /**
      * getExtraTile - gets the extra tile
