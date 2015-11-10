@@ -4,8 +4,8 @@ import group2.cs301.labyrinthgame.Game.GamePlayer;
 import group2.cs301.labyrinthgame.Game.actionMsg.GameAction;
 
 /**
- * @author Andrew Williams, Ben
- * @version 11/7/15
+ * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
+ * @version November 9, 2015
  */
 public class MoveAction extends GameAction {
 

@@ -4,7 +4,8 @@ import group2.cs301.labyrinthgame.Game.GamePlayer;
 import group2.cs301.labyrinthgame.Game.actionMsg.GameAction;
 
 /**
- * Created by Andrew Williams on 11/5/15.
+ * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
+ * @version November 9, 2015
  */
 public class NextTurnAction extends GameAction {
     /**

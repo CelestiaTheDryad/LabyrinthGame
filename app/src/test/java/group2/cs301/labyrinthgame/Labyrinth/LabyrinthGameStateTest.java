@@ -3,8 +3,8 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import junit.framework.TestCase;
 
 /**
- * @author Andrew Williams, Brendan Thomas, Ben Rumptz
- * @version November 8, 2015
+ * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
+ * @version November 9, 2015
  */
 public class LabyrinthGameStateTest extends TestCase {
 
