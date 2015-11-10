@@ -84,7 +84,6 @@ public class LabyrinthGameState extends GameState {
         this.linkTiles();
         lastXInserted = xx;
         lastYInserted = yy;
-        linkTiles();
     }//insertTile
 
     /**

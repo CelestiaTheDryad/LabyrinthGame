@@ -333,4 +333,7 @@ public class Tile {
     public Tile getTileConnection(int direction) {
         return null;
     }//getTileConnection
+
+    public boolean[] getPlayersPresent(){ return playersPresent; }
+    public void setPlayersPresent(boolean[] pp){ this.playersPresent = pp; }
 }
