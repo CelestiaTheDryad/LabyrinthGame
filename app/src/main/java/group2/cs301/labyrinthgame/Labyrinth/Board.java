@@ -326,7 +326,7 @@ public class Board {
         extraTile.setTileDownwards(null);
         extraTile.setTileLeftWards(null);
         extraTile.setTileRightwards(null);
-    }
+    }//cleanExtraTile
 
     /**
      * getExtraTile - gets the extra tile
