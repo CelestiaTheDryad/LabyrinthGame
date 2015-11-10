@@ -67,7 +67,7 @@ public class LabyrinthGameStateTest extends TestCase {
         labyrinthGameState.move(3, 6);
         int curPlayer = labyrinthGameState.getCurrentPlayer();
         Tile tile = labyrinthGameState.getGameBoard().getTile(3,6);
-        assertTrue(tile.getPlayer(curPlayer));
+        assertTrue(tile.hasPlayer(curPlayer));
     }
 
     //test the basic constructor
