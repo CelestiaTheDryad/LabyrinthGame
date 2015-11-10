@@ -112,10 +112,10 @@ public class LabyrinthGameStateTest extends TestCase {
         Tile tile = new Tile(Tile.TEE, Tile.DOWN, true, false, false, true, 0);
         assertEquals(tile.getTreasure(), 0);
         assertEquals(tile.getRotation(), Tile.DOWN);
-        assertTrue(tile.getPlayer(0));
-        assertFalse(tile.getPlayer(1));
-        assertFalse(tile.getPlayer(2));
-        assertTrue(tile.getPlayer(3));
+        assertTrue(tile.hasPlayer(0));
+        assertFalse(tile.hasPlayer(1));
+        assertFalse(tile.hasPlayer(2));
+        assertTrue(tile.hasPlayer(3));
         assertEquals(tile.getType(), Tile.TEE);
     }
 
