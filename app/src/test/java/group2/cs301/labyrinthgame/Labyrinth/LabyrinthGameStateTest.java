@@ -108,4 +108,31 @@ public class LabyrinthGameStateTest extends TestCase {
         assertEquals(3, labyrinthGameState1.getCurrentPlayer());
     }
 
+    public void testTile() throws Exception {
+        Tile tile = new Tile(Tile.TEE, Tile.DOWN, true, false, false, true, 0);
+        assertEquals(tile.getTreasure(), 0);
+        assertEquals(tile.getRotation(), Tile.DOWN);
+        assertTrue(tile.getPlayer(0));
+        assertFalse(tile.getPlayer(1));
+        assertFalse(tile.getPlayer(2));
+        assertTrue(tile.getPlayer(3));
+        assertEquals(tile.getType(), Tile.TEE);
+    }
+
+    public void testBoard() throws Exception {
+        Board board = new Board();
+        int x = (int)Math.random()*7;
+        int y = (int)Math.random()*7;
+        assertNotNull(board.getTile(x, y)); //checks if a random tile exists
+        assertNotNull(board.getExtraTile());
+        Tile tile = new Tile(Tile.TEE, Tile.DOWN, true, false, false, true, 0);
+        board.setTile(x, y, tile);
+        assertEquals(board.getTile(x, y), tile);
+    }
+
+    //test tile linking
+    public void testTileLink() throws Exception {
+
+    }
+
 }

@@ -3,7 +3,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
- * @author Brendan Thomas, Ben Rumptz
+ * @author Brendan Thomas, Ben Rumptz, Andrew Williams
  * @version November 8, 2015
  */
 public class LabyrinthGameState extends GameState {
@@ -138,7 +138,7 @@ public class LabyrinthGameState extends GameState {
     public void linkTiles() {
         for(int i = 0; i < 7; ++i) {
             for(int j = 0; j < 7; ++j) {
-                gameBoard.linkTile(j, i);
+                gameBoard.linkTile(i, j);
             }
         }
     }//linkTiles
