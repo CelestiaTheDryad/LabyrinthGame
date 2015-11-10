@@ -1,8 +1,8 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
 /**
- * @author Brendan Thomas, Ben Rumptz, Andrew Williams
- * @version November 8, 2015
+ * @author Brendan Thomas, Ben Rumptz
+ * @version November 9, 2015
  */
 public class Tile {
     //tile type variables
@@ -18,6 +18,8 @@ public class Tile {
 
     private int type;
     private int rotation;
+    private int treasure; //0 means no treasure, 1-24 means a certain treasure
+    private boolean highlighted;
 
     private boolean[] playersPresent;
 
@@ -25,8 +27,6 @@ public class Tile {
     private Tile tileDownwards = null;
     private Tile tileRightwards = null;
     private Tile tileLeftWards = null;
-
-    private int treasure;
 
     /**
      * Tile
@@ -121,9 +121,33 @@ public class Tile {
      * @param curPlayer     the current player
      * @return              true if the given player is present
      */
-    public boolean getPlayer(int curPlayer) {
+    public boolean hasPlayer(int curPlayer) {
         return playersPresent[curPlayer];
-    }
+    }//hasPlayer
+
+    /**
+     * highlightPaths
+     *
+     * highlights this tile and any tile connected to it that's not already highlighted
+     */
+    public void highlightPaths() {
+        if(highlighted) {
+            return;
+        }
+        if(tileUpwards != null) {
+            tileUpwards.highlightPaths();
+        }
+        if(tileRightwards != null) {
+            tileRightwards.highlightPaths();
+        }
+        if(tileDownwards != null) {
+            tileDownwards.highlightPaths();
+        }
+        if(tileLeftWards != null) {
+            tileLeftWards.highlightPaths();
+        }
+        highlighted = true;
+    }//highlightPaths
 
     /**
      * getRotation
@@ -185,6 +209,28 @@ public class Tile {
      * @param toSet tile to set the link to
      */
     public void setTileLeftWards(Tile toSet) {tileLeftWards = toSet;}//setLeftwardsTile
+
+    /**
+     * setHighlighted
+     *
+     * sets wether or not the tile is highlghted
+     *
+     * @param isHighlighted - whether or not the tile is highlighted
+     */
+    public void setHighlighted(boolean isHighlighted) {
+        highlighted = isHighlighted;
+    }//setHighlighted
+
+    /**
+     * isHighlighted
+     *
+     * tells whether or not the tile is highlighted
+     *
+     * @return boolean whether the tile is highlighted
+     */
+    public boolean isHighlighted() {
+        return highlighted;
+    }//isHighlighted
 
     /**
      * isConnected
@@ -287,4 +333,7 @@ public class Tile {
     public Tile getTileConnection(int direction) {
         return null;
     }//getTileConnection
+
+    public boolean[] getPlayersPresent(){ return playersPresent; }
+    public void setPlayersPresent(boolean[] pp){ this.playersPresent = pp; }
 }

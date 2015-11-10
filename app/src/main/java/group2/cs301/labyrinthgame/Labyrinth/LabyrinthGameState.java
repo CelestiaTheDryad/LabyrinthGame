@@ -3,8 +3,8 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
- * @author Brendan Thomas, Ben Rumptz, Andrew Williams
- * @version November 8, 2015
+ * @author Brendan Thomas, Ben Rumptz
+ * @version November 9, 2015
  */
 public class LabyrinthGameState extends GameState {
     private int currentPlayer;
@@ -84,7 +84,6 @@ public class LabyrinthGameState extends GameState {
         this.linkTiles();
         lastXInserted = xx;
         lastYInserted = yy;
-        linkTiles();
     }//insertTile
 
     /**
@@ -142,6 +141,58 @@ public class LabyrinthGameState extends GameState {
             }
         }
     }//linkTiles
+
+    /**
+     * highlightToInsert
+     *
+     * highlights all the valid places to insert a tile
+     */
+    public void highlightToInsert() {
+        gameBoard.clearHighlights();
+
+        //find the x location of the reverse move
+        int revX;
+        if(lastXInserted == 0) {
+            revX = 6;
+        }
+        else if(lastXInserted == 6) {
+            revX = 0;
+        }
+        else {
+            revX = lastXInserted;
+        }
+
+        //find the y location of the reverse move
+        int revY;
+        if(lastYInserted == 0) {
+            revY = 6;
+        }
+        else if(lastYInserted == 6) {
+           revY = 0;
+        }
+        else {
+            revY = lastYInserted;
+        }
+
+        //loop through each insert location and highlight if it doesn't
+        for(int i = 0; i < 12; ++i) {
+            int[] location = Board.INSERT_LOCATIONS[i];
+            if(!(revX == location[0] && revY == location[1])) {
+                gameBoard.highlightTile(location[0], location[1]);
+            }
+        }
+    }//highlightToInsert
+
+    /**
+     * highlightToMove
+     *
+     * highlights the tiles that a specified player can move to
+     * @param player the number of the player who's movements are to be highlighted
+     */
+    public void highlightToMove(int player) {
+        gameBoard.clearHighlights();
+        gameBoard.highlightToMove(player);
+    }//highlightToMove
 
     //getter functions
     public int getLastXInserted(){ return lastXInserted; }
