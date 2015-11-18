@@ -3,7 +3,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
- * @author Brendan Thomas, Ben Rumptz
+ * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
  * @version November 9, 2015
  */
 public class LabyrinthGameState extends GameState {

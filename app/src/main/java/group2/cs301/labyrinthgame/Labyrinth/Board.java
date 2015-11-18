@@ -1,7 +1,7 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
 /**
- * @author Brendan Thomas, Ben Rumptz
+ * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
  * @version November 9, 2015
  */
 public class Board {
