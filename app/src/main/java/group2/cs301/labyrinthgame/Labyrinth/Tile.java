@@ -315,10 +315,4 @@ public class Tile {
         return null;
     }//getTileConnection
 
-    public boolean[] getPlayersPresent(){
-
-        return playersPresent;
-
-    }
-    public void setPlayersPresent(boolean[] pp){ this.playersPresent = pp; }
 }

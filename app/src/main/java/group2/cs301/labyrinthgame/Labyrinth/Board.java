@@ -168,8 +168,6 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-//            boolean[] extraPP = extraTile.getPlayersPresent();
-//            gameTiles[0][yy].setPlayersPresent(extraPP);
         }
         //right side
         else if(xx == 6){
@@ -180,8 +178,6 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-//            boolean[] extraPP = extraTile.getPlayersPresent();
-//            gameTiles[6][yy].setPlayersPresent(extraPP);
         }
         //top side
         else if(yy == 0){
@@ -192,8 +188,6 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-//            boolean[] extraPP = extraTile.getPlayersPresent();
-//            gameTiles[xx][0].setPlayersPresent(extraPP);
         }
         //bottom side
         else if(yy == 6){
@@ -204,8 +198,6 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-//            boolean[] extraPP = extraTile.getPlayersPresent();
-//            gameTiles[xx][6].setPlayersPresent(extraPP);
         }
         cleanExtraTile();
     }//insertExtraTile
@@ -332,8 +324,6 @@ public class Board {
     * removes all links on the extra tile and clears any players on the extra tile
      */
     public void cleanExtraTile(){
-        boolean[] extraPP = {false,false,false,false};
-        extraTile.setPlayersPresent(extraPP);
         extraTile.setTileUpwards(null);
         extraTile.setTileDownwards(null);
         extraTile.setTileLeftWards(null);

@@ -83,6 +83,8 @@ public class LabyrinthGameState extends GameState implements Serializable {
         this.linkTiles();
         lastXInserted = xx;
         lastYInserted = yy;
+
+        //todo: handle wrapping players
     }//insertTile
 
     /**
