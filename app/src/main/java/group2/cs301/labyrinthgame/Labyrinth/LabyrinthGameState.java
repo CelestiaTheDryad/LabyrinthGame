@@ -1,22 +1,25 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import android.util.Log;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
  * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
  * @version November 9, 2015
  */
-public class LabyrinthGameState extends GameState {
+public class LabyrinthGameState extends GameState implements Serializable {
     private int currentPlayer;
     private int numPlayers;
     private Board gameBoard;
-    private int[] player1Targets;
-    private int[] player2Targets;
-    private int[] player3Targets;
-    private int[] player4Targets;
 
     private int lastXInserted;
     private int lastYInserted;
+
+    private ArrayList<PlayerData> players;
 
     /**
      * LabyrinthGameState
@@ -26,13 +29,24 @@ public class LabyrinthGameState extends GameState {
      * creates a new game state (default)
      */
     public LabyrinthGameState (int initNumPlayers) {
-        currentPlayer = 0;
+        if(numPlayers < 2 || numPlayers > 4) {
+            Log.println(Log.ERROR, "", "WRONG NUMBER OF PLAYERS");
+            initNumPlayers = 4;
+        }
+
+        players = new ArrayList<>();
+
+        switch (initNumPlayers) {
+            case 4: players.add(new PlayerData(6,6));
+            case 3: players.add(new PlayerData(0,6));
+            case 2: players.add(new PlayerData(6,0));
+            case 1: players.add(new PlayerData(0,0));
+        }
+
         numPlayers = initNumPlayers;
+        currentPlayer = 0;
+
         gameBoard = new Board();
-        player1Targets = new int[4];
-        player2Targets = new int[4];
-        player3Targets = new int[4];
-        player4Targets = new int[4];
         lastXInserted = 0;
         lastYInserted = 0;
     }//ctor
@@ -48,25 +62,10 @@ public class LabyrinthGameState extends GameState {
 
         gameBoard = new Board(toCopy.gameBoard);
 
-        player1Targets = new int[toCopy.player1Targets.length];
-        for(int i = 0; i < player1Targets.length; i++) {
-            player1Targets[i] = toCopy.player1Targets[i];
+        for(PlayerData playerData: toCopy.players) {
+            this.players.add(new PlayerData(playerData));
         }
 
-        player2Targets = new int[toCopy.player2Targets.length];
-        for(int i = 0; i < player2Targets.length; i++) {
-            player2Targets[i] = toCopy.player2Targets[i];
-        }
-
-        player3Targets = new int[toCopy.player3Targets.length];
-        for(int i = 0; i < player3Targets.length; i++) {
-            player3Targets[i] = toCopy.player3Targets[i];
-        }
-
-        player4Targets = new int[toCopy.player4Targets.length];
-        for(int i = 0; i < player4Targets.length; i++) {
-            player4Targets[i] = toCopy.player4Targets[i];
-        }
         numPlayers = toCopy.numPlayers;
         lastXInserted = toCopy.lastXInserted;
         lastYInserted = toCopy.lastYInserted;
@@ -104,7 +103,7 @@ public class LabyrinthGameState extends GameState {
      * @param y row to be moved to
      */
     public void move(int x, int y) {
-        gameBoard.movePlayer(x, y, currentPlayer);
+        players.get(currentPlayer).movePlayer(x, y);
     }//move
 
 
@@ -191,7 +190,7 @@ public class LabyrinthGameState extends GameState {
      */
     public void highlightToMove(int player) {
         gameBoard.clearHighlights();
-        gameBoard.highlightToMove(player);
+        gameBoard.highlightToMove(players.get(player).getXposition(), players.get(player).getYposition());
     }//highlightToMove
 
     //getter functions

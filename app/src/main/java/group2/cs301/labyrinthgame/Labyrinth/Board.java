@@ -168,8 +168,8 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-            boolean[] extraPP = extraTile.getPlayersPresent();
-            gameTiles[0][yy].setPlayersPresent(extraPP);
+//            boolean[] extraPP = extraTile.getPlayersPresent();
+//            gameTiles[0][yy].setPlayersPresent(extraPP);
         }
         //right side
         else if(xx == 6){
@@ -180,8 +180,8 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-            boolean[] extraPP = extraTile.getPlayersPresent();
-            gameTiles[6][yy].setPlayersPresent(extraPP);
+//            boolean[] extraPP = extraTile.getPlayersPresent();
+//            gameTiles[6][yy].setPlayersPresent(extraPP);
         }
         //top side
         else if(yy == 0){
@@ -192,8 +192,8 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-            boolean[] extraPP = extraTile.getPlayersPresent();
-            gameTiles[xx][0].setPlayersPresent(extraPP);
+//            boolean[] extraPP = extraTile.getPlayersPresent();
+//            gameTiles[xx][0].setPlayersPresent(extraPP);
         }
         //bottom side
         else if(yy == 6){
@@ -204,8 +204,8 @@ public class Board {
                 extraTile = tempTile;
             }
             //moves any players on extraTile to the newly inserted tile
-            boolean[] extraPP = extraTile.getPlayersPresent();
-            gameTiles[xx][6].setPlayersPresent(extraPP);
+//            boolean[] extraPP = extraTile.getPlayersPresent();
+//            gameTiles[xx][6].setPlayersPresent(extraPP);
         }
         cleanExtraTile();
     }//insertExtraTile
@@ -218,35 +218,6 @@ public class Board {
     public void rotateExtraTile() {
         extraTile.tickTile();
     }//rotateExtraTile
-
-    /**
-     * movePlayer
-     *
-     * @param x int for the column the player is moving to
-     * @param y int for the row the player is moving to
-     * @param curPlayer int for the player that is moving
-     */
-    public void movePlayer(int x, int y, int curPlayer) {
-        int[] currentPos = findPlayer(curPlayer);
-        gameTiles[currentPos[0]][currentPos[1]].setPlayer(curPlayer, false);
-
-        gameTiles[x][y].setPlayer(curPlayer, true);
-
-    }//movePlayer
-
-    public int[] findPlayer(int player) {
-        for(int i = 0; i < gameTiles[0].length; i++) {
-            for(int j = 0; j < gameTiles[0].length; j++) {
-                if(gameTiles[i][j].hasPlayer(player)) {
-                    int[] toReturn = {i,j};
-                    return toReturn;
-                }
-            }
-        }
-        int[] toReturn = {-1,-1};
-        return  toReturn; //returns an invalid location if the player is not found
-                          // this should never happen on calling this program
-    }//findPlayer
 
 
     /**
@@ -335,11 +306,11 @@ public class Board {
      *
      * highlights all the tiles a given player may move to
      *
-     * @param player - the number of the player whose moves should be highlighted
+     * @param X - X index of player
+     * @param Y - Y index of player
      */
-    public void highlightToMove(int player) {
-        int[] playerPos = findPlayer(player);
-        gameTiles[playerPos[0]][playerPos[1]].highlightPaths();
+    public void highlightToMove(int X, int Y) {
+        gameTiles[X][Y].highlightPaths();
     }//highlightTileToMove
 
     /**

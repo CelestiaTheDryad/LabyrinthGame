@@ -21,7 +21,7 @@ public class Tile {
     private int treasure; //0 means no treasure, 1-24 means a certain treasure
     private boolean highlighted;
 
-    private boolean[] playersPresent;
+    //private boolean[] playersPresent;
 
     private Tile tileUpwards = null;
     private Tile tileDownwards = null;
@@ -37,11 +37,11 @@ public class Tile {
     public Tile() {
         type = Tile.LINE;
         rotation = Tile.UP;
-        playersPresent = new boolean[4];
-        playersPresent[0] = false;
-        playersPresent[1] = false;
-        playersPresent[2] = false;
-        playersPresent[3] = false;
+//        playersPresent = new boolean[4];
+//        playersPresent[0] = false;
+//        playersPresent[1] = false;
+//        playersPresent[2] = false;
+//        playersPresent[3] = false;
 
         treasure = 0;
     }//ctor
@@ -64,11 +64,11 @@ public class Tile {
                  boolean initP3, boolean initP4, int initTreasure) {
         type = initType;
         rotation = initRotation;
-        playersPresent = new boolean[4];
-        playersPresent[0] = initP1;
-        playersPresent[1] = initP2;
-        playersPresent[2] = initP3;
-        playersPresent[3] = initP4;
+//        playersPresent = new boolean[4];
+//        playersPresent[0] = initP1;
+//        playersPresent[1] = initP2;
+//        playersPresent[2] = initP3;
+//        playersPresent[3] = initP4;
 
         treasure = initTreasure;
     }//ctor
@@ -84,11 +84,11 @@ public class Tile {
         type = toCopy.type;
         rotation = toCopy.rotation;
 
-        playersPresent = new boolean[4];
-        playersPresent[0] = toCopy.playersPresent[0];
-        playersPresent[1] = toCopy.playersPresent[1];
-        playersPresent[2] = toCopy.playersPresent[2];
-        playersPresent[3] = toCopy.playersPresent[3];
+//        playersPresent = new boolean[4];
+//        playersPresent[0] = toCopy.playersPresent[0];
+//        playersPresent[1] = toCopy.playersPresent[1];
+//        playersPresent[2] = toCopy.playersPresent[2];
+//        playersPresent[3] = toCopy.playersPresent[3];
 
         treasure = toCopy.treasure;
     }//ctor
@@ -105,25 +105,6 @@ public class Tile {
         }
     }//tickTile
 
-
-    /**
-     * setPlayersPresent - sets the given player at this tile
-     * @param curPlayer    the given player
-     * @param isPresent    true if player is present
-     */
-    public void setPlayer(int curPlayer, boolean isPresent) {
-        playersPresent[curPlayer] = isPresent;
-    }//setPlayersPresent
-
-
-    /**
-     * getPlayerPresent - returns whether the given player is on this Tile
-     * @param curPlayer     the current player
-     * @return              true if the given player is present
-     */
-    public boolean hasPlayer(int curPlayer) {
-        return playersPresent[curPlayer];
-    }//hasPlayer
 
     /**
      * highlightPaths
@@ -334,6 +315,10 @@ public class Tile {
         return null;
     }//getTileConnection
 
-    public boolean[] getPlayersPresent(){ return playersPresent; }
+    public boolean[] getPlayersPresent(){
+
+        return playersPresent;
+
+    }
     public void setPlayersPresent(boolean[] pp){ this.playersPresent = pp; }
 }
