@@ -28,7 +28,7 @@ import android.view.View;
  * 
  * @author Steven R. Vegdahl
  * @author Andrew Nuxoll
- * @date July 2013
+ * @version July 2013
  * 
  */
 public abstract class GameHumanPlayer implements GamePlayer, Tickable {

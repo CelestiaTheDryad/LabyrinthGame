@@ -12,11 +12,9 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
 public class LabyrinthGameHumanPlayer extends GameHumanPlayer {
 
 
-
-
-    LabyrinthGameHumanPlayer(String name) {
+    public LabyrinthGameHumanPlayer(String name) {
         super(name);
-    }
+    }//ctor
 
     @Override
     public View getTopView() {
