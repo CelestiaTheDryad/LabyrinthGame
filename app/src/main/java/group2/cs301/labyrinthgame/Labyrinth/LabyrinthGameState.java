@@ -84,7 +84,18 @@ public class LabyrinthGameState extends GameState implements Serializable {
         lastXInserted = xx;
         lastYInserted = yy;
 
-        //todo: handle wrapping players
+        if(xx == 0) {
+            move( (xx++)%7, yy);
+        }
+        else if(xx == 6) {
+            move( (xx--)%7 , yy);
+        }
+        else if(yy == 0) {
+            move(xx, (yy++)%7 );
+        }
+        else if(yy == 6) {
+            move(xx, (yy--)%7 );
+        }
     }//insertTile
 
     /**
