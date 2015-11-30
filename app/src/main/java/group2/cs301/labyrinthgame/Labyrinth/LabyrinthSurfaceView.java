@@ -91,7 +91,49 @@ public class LabyrinthSurfaceView extends SurfaceView {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+
+        drawNormalBoard(canvas);
+
+        if (moveAnim != null) {
+            //moveAnim.tick();
+            //TODO do everything required for player movement animation
+        }
+        else if (shiftAnim != null) {
+            shiftAnim.tick(canvas, this);
+        }
+        else {
+            drawHighlights(canvas);
+            //TODO draw players
+        }
+
+        //TODO handle animations ending
     }//draw
+
+    /**
+     * drawHighlights
+     *
+     * draws the highlights on all of the tiles that need to be highlighted
+     *
+     * @param canvas - canvas to draw the highlights on
+     */
+    public void drawHighlights(Canvas canvas) {
+        //TODO draw the highlights
+    }
+
+    /**
+     * drawNormalBoard
+     *
+     * draws the board with all the tiles in their permanent spot
+     *
+     * @param canvas - canvas to draw the tiles on
+     */
+    public void drawNormalBoard(Canvas canvas) {
+        for (int column = 1; column < 8; column ++) {
+            for (int row = 1; row < 8; row++) {
+                drawTile(board.getTile(column-1, row-1), column, row, 0, 0, canvas);
+            }
+        }
+    }
 
     /**
      * drawTile
@@ -106,7 +148,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
      * @param rowOffset - the number of pixels to offset the tile's row by
      * @param canvas - the canvas to draw the tile on
      */
-    private void drawTile(Tile toDraw, int column, int row, int rowOffset, int columnOffset, Canvas canvas) {
+    public void drawTile(Tile toDraw, int column, int row, int rowOffset, int columnOffset, Canvas canvas) {
         int lightGrey = Color.rgb(200,200,200);
         int medGrey = Color.rgb(125,125,125);
         int darkGrey = Color.rgb(50,50,50);
@@ -150,6 +192,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
             }
         }//draw background
 
+        //TODO draw the rest of the tile
 
     }//drawTile
 

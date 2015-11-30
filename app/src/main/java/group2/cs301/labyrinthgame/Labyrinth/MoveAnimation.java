@@ -6,15 +6,8 @@ package group2.cs301.labyrinthgame.Labyrinth;
  *
  * Thread that controls the drawing of a moving player
  */
-public class MoveAnimation extends Thread {
+public class MoveAnimation {
 
     public MoveAnimation() {
     }
-
-    @Override
-    /**
-     *
-     */
-    public void run() {
-    }//run
 }
