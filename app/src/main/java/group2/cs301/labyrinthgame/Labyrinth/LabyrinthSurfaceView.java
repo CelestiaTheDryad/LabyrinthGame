@@ -9,9 +9,9 @@ import android.view.SurfaceView;
 
 /**
  * @author Brendan Thomas
- * @version November 22, 2015
+ * @version November 29, 2015
  *
- * This class is the drawing surface
+ * This class is the drawing surface for the game board
  */
 public class LabyrinthSurfaceView extends SurfaceView {
 
@@ -19,6 +19,9 @@ public class LabyrinthSurfaceView extends SurfaceView {
     private int drawTop;
     private int drawSize;
     private int tileSize;
+    private Board board;
+    private ShiftAnimation shiftAnim;
+    private MoveAnimation moveAnim;
 
     public LabyrinthSurfaceView(Context context) {
         super(context);
@@ -109,14 +112,14 @@ public class LabyrinthSurfaceView extends SurfaceView {
         int darkGrey = Color.rgb(50,50,50);
 
         //find pixel boundaries to draw the tile in
-        int tileleft = drawLeft + column * tileSize + columnOffset + 2;
+        int tileLeft = drawLeft + column * tileSize + columnOffset + 2;
         int tileRight = drawLeft + (column + 1) * tileSize + columnOffset - 2;
         int tileTop = drawTop + row * tileSize + rowOffset + 2;
         int tileBottom = drawTop + (row + 1) * tileSize + rowOffset - 2;
 
         //draw the background
-        for(int blockLeft = 0; blockLeft < tileRight; blockLeft += 5) {
-            for(int blockTop = 0; blockTop < tileBottom; blockTop += 5) {
+        for(int blockLeft = tileLeft; blockLeft < tileRight; blockLeft += 5) {
+            for(int blockTop = tileTop; blockTop < tileBottom; blockTop += 5) {
                 int color;
                 int blockRight = blockLeft + 5;
                 int blockBottom = blockTop + 5;
@@ -149,4 +152,28 @@ public class LabyrinthSurfaceView extends SurfaceView {
 
 
     }//drawTile
+
+    /**
+     * setBoardToDraw
+     *
+     * takes a board and sets that to be drawn on the canvas
+     *
+     * @param toDraw - the board to be drawn
+     */
+    public void setBoardToDraw(Board toDraw) {
+        board = toDraw;
+    }//setBoardToDraw
+
+    /**
+     * startShiftAnimation
+     *
+     * starts the thread to animate a shifting row of tiles, the setBoardToDraw method
+     * should have already been called to update the board to the post-move state
+     *
+     * @param insertColumn - column that the tile was inserted in
+     * @param insertRow - row that the tile was inserted in
+     */
+    public void startShiftAnimation(int insertColumn, int insertRow) {
+
+    }//startShiftAnimation
 }
