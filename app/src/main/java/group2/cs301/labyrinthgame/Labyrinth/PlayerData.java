@@ -53,7 +53,7 @@ public class PlayerData implements Serializable{
 
 
     public int[] getTreasures() {
-        return getTreasures();
+        return treasures;
     }
 
 

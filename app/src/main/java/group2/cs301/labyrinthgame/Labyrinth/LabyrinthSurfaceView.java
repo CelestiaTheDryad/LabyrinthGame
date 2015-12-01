@@ -110,13 +110,15 @@ public class LabyrinthSurfaceView extends SurfaceView {
         }
         else if (shiftAnim != null) {
             shiftAnim.tick(canvas, this);
+            if(shiftAnim.isOver()) {
+                ticker.setStopped();
+                shiftAnim = null;
+            }
         }
         else {
             drawHighlights(canvas);
             //TODO draw players
         }
-
-        //TODO handle animations ending
     }//draw
 
     /**
@@ -239,7 +241,24 @@ public class LabyrinthSurfaceView extends SurfaceView {
         //handle right side connection
         if(toDraw.isConnected(Tile.RIGHT)) {
             canvas.drawRect(centerRight, centerTop - borderSize, tileRight, centerTop, darkOrange);
+            canvas.drawRect(centerRight, centerTop, tileRight, centerBottom, lightOrange);
+            canvas.drawRect(centerRight, centerBottom, tileRight, centerBottom + borderSize, darkOrange);
         }
+        else {
+            canvas.drawRect(centerRight, centerTop - borderSize, centerRight + borderSize, centerBottom + borderSize, darkOrange);
+        }
+
+        //handle bottom side connection
+        if(toDraw.isConnected(Tile.DOWN)) {
+            canvas.drawRect(centerLeft - borderSize, centerBottom, centerLeft, tileBottom, darkOrange);
+            canvas.drawRect(centerLeft, centerBottom, centerRight,tileBottom, lightOrange);
+            canvas.drawRect(centerRight, centerBottom, centerRight + borderSize, tileBottom, darkOrange);
+        }
+        else {
+            canvas.drawRect(centerLeft - borderSize, centerBottom, centerRight + borderSize, centerBottom + borderSize, darkOrange);
+        }
+
+        //TODO draw treasures
 
     }//drawTile
 
@@ -287,11 +306,11 @@ public class LabyrinthSurfaceView extends SurfaceView {
     /**
      * animRunning
      *
-     * tells if an animation is currently running by checking the animation ticker thread
+     * tells if an animation is currently running by checking the animations
      *
      * @return - true if there is an animation going, false if not
      */
     private boolean animRunning() {
-        return ticker != null;
+        return shiftAnim!= null || moveAnim != null;
     }//animRunning
 }

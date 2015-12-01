@@ -6,7 +6,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
  */
 public class AnimationThread extends Thread {
 
-    private int ticksLeft;
+    private boolean running = true;
     private LabyrinthSurfaceView view;
 
     /**
@@ -24,7 +24,7 @@ public class AnimationThread extends Thread {
 
     @Override
     public void run() {
-        while(true) {
+        while(running) {
             view.postInvalidate();
             try {
                 Thread.sleep(34); //runs at just under 30hz
@@ -33,5 +33,14 @@ public class AnimationThread extends Thread {
                 //interruption is not an issue
             }
         }
+    }
+
+    /**
+     * setStopped
+     *
+     * stops the execution of this thread.
+     */
+    public void setStopped() {
+        running = false;
     }
 }
