@@ -1,14 +1,20 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import java.io.Serializable;
+
 /**
- * Created by Andrew Williams
- * on 11/22/15.
+ * @author Andrew Williams, Brendan Thomas
+ * @version December 1, 2015
  */
-public class PlayerData {
+public class PlayerData implements Serializable{
 
     private int Xposition;
     private int Yposition;
+    // Treasure Info: 0-24 possible treasures
+    // 0 == no treasure's remaining
+    // 1-24 == treasure ID
     private int[] treasures;
+    // current treasure to search for
     private int currentTreasure;
 
     public PlayerData(int X, int Y) {

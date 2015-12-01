@@ -9,7 +9,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
 /**
  * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
- * @version November 9, 2015
+ * @version December 1, 2015
  */
 public class LabyrinthGameState extends GameState implements Serializable {
 
@@ -221,5 +221,13 @@ public class LabyrinthGameState extends GameState implements Serializable {
      */
     public int getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    /**
+     * getPlayers - returns the data for all of the players
+     * @return - ArrayList of playerData (one per player)
+     */
+    public ArrayList<PlayerData> getPlayers() {
+        return players;
     }
 }
