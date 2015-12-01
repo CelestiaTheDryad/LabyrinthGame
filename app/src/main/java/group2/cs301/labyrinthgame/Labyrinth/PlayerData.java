@@ -14,15 +14,15 @@ public class PlayerData {
     public PlayerData(int X, int Y) {
         Yposition = Y;
         Xposition = X;
-        treasures = new int[4];
+        treasures = new int[LabyrinthGameState.MAX_NUM_CARDS];
         currentTreasure = 0;
     }
 
     public PlayerData(PlayerData toCopy) {
         this.Xposition = toCopy.Xposition;
         this.Yposition = toCopy.Yposition;
-        this.treasures = new int[4];
-        for(int i = 0; i < 4; i++) {
+        this.treasures = new int[LabyrinthGameState.MAX_NUM_CARDS];
+        for(int i = 0; i < LabyrinthGameState.MAX_NUM_CARDS; i++) {
             this.treasures[i] = toCopy.treasures[i];
         }
 
@@ -49,10 +49,11 @@ public class PlayerData {
     }
 
 
-
+    //todo
     public int[] getTreasures() {
-        return getTreasures();
+        return treasures;
     }
+
 
 
     public boolean takeTreasure(int takenTreasure) {

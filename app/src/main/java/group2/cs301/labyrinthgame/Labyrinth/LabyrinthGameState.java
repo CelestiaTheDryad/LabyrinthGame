@@ -12,6 +12,9 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
  * @version November 9, 2015
  */
 public class LabyrinthGameState extends GameState implements Serializable {
+
+    public static final int MAX_NUM_CARDS = 6;
+
     private int currentPlayer;
     private int numPlayers;
     private Board gameBoard;
@@ -29,7 +32,7 @@ public class LabyrinthGameState extends GameState implements Serializable {
      * creates a new game state (default)
      */
     public LabyrinthGameState (int initNumPlayers) {
-        if(numPlayers < 2 || numPlayers > 4) {
+        if(initNumPlayers < 2 || initNumPlayers > 4) {
             Log.println(Log.ERROR, "", "WRONG NUMBER OF PLAYERS");
             initNumPlayers = 4;
         }
@@ -61,6 +64,8 @@ public class LabyrinthGameState extends GameState implements Serializable {
         currentPlayer = toCopy.currentPlayer;
 
         gameBoard = new Board(toCopy.gameBoard);
+
+        players = new ArrayList<>();
 
         for(PlayerData playerData: toCopy.players) {
             this.players.add(new PlayerData(playerData));
@@ -94,7 +99,7 @@ public class LabyrinthGameState extends GameState implements Serializable {
             move(xx, (yy++)%7 );
         }
         else if(yy == 6) {
-            move(xx, (yy--)%7 );
+            move(xx, (yy--) % 7);
         }
     }//insertTile
 

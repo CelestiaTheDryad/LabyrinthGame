@@ -1,5 +1,7 @@
-package group2.cs301.labyrinthgame.Game;
+package group2.cs301.labyrinthgame.Labyrinth;
 
+import group2.cs301.labyrinthgame.Game.GamePlayer;
+import group2.cs301.labyrinthgame.Game.LocalGame;
 import group2.cs301.labyrinthgame.Game.actionMsg.GameAction;
 import group2.cs301.labyrinthgame.Labyrinth.InsertTileAction;
 import group2.cs301.labyrinthgame.Labyrinth.LabyrinthGameHumanPlayer;
