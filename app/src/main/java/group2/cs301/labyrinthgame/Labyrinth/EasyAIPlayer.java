@@ -2,6 +2,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 
 import group2.cs301.labyrinthgame.Game.*;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
+import java.util.*;
 
 /**
  * This is an easy AI player that knows how to play The A-Maze-ing Labyrinth.
@@ -33,8 +34,16 @@ public class EasyAIPlayer extends GameComputerPlayer {
 
     @Override
     protected void receiveInfo(GameInfo info) {
+        //First Action to send is Insert
         if(isActionInsert){
-            //select random coords from the legalInsertSpots and create a InsertTileAction
+            Random gen = new Random();
+            int xx = gen.nextInt(3);
+            int yy = gen.nextInt(3);
+            game.sendAction(new InsertTileAction(this, xx, yy));
+            isActionInsert = false;
+        }
+        else{
+            //if we are not inserting, we must be moving
         }
     }
 }
