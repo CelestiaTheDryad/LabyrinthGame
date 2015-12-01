@@ -10,7 +10,11 @@ public class PlayerData implements Serializable{
 
     private int Xposition;
     private int Yposition;
+    // Treasure Info: 0-24 possible treasures
+    // 0 == no treasure's remaining
+    // 1-24 == treasure ID
     private int[] treasures;
+    // current treasure to search for
     private int currentTreasure;
 
     public PlayerData(int X, int Y) {
