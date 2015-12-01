@@ -1,10 +1,12 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import java.io.Serializable;
+
 /**
  * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
  * @version November 9, 2015
  */
-public class Tile {
+public class Tile implements Serializable {
     //tile type variables
     public static final int TEE = 1000;
     public static final int CORNER = 1001;

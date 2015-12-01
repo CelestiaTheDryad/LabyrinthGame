@@ -4,12 +4,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 /**
  * @author Brendan Thomas
- * @version November 29, 2015
+ * @version December 1, 2015
  *
  * This class is the drawing surface for the game board
  */
@@ -19,9 +22,12 @@ public class LabyrinthSurfaceView extends SurfaceView {
     private int drawTop;
     private int drawSize;
     private int tileSize;
+    private int borderSize = 5;
     private Board board;
+    private ArrayList<PlayerData> players;
     private ShiftAnimation shiftAnim;
     private MoveAnimation moveAnim;
+    private AnimationThread ticker;
 
     public LabyrinthSurfaceView(Context context) {
         super(context);
@@ -86,14 +92,18 @@ public class LabyrinthSurfaceView extends SurfaceView {
         tileSize = drawSize / 9;
         drawTop = canvasHeight - genBuffer - heightBuffer;
         drawLeft = canvasWidth - genBuffer - widthBuffer;
+        moveAnim = null;
+        shiftAnim = null;
+        ticker = null;
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(@NonNull Canvas canvas) {
         super.draw(canvas);
 
         drawNormalBoard(canvas);
 
+        //there should never be a time when both animations are running
         if (moveAnim != null) {
             //moveAnim.tick();
             //TODO do everything required for player movement animation
@@ -154,10 +164,10 @@ public class LabyrinthSurfaceView extends SurfaceView {
         int darkGrey = Color.rgb(50,50,50);
 
         //find pixel boundaries to draw the tile in
-        int tileLeft = drawLeft + column * tileSize + columnOffset + 2;
-        int tileRight = drawLeft + (column + 1) * tileSize + columnOffset - 2;
-        int tileTop = drawTop + row * tileSize + rowOffset + 2;
-        int tileBottom = drawTop + (row + 1) * tileSize + rowOffset - 2;
+        int tileLeft = drawLeft + column * tileSize + columnOffset + (borderSize / 2);
+        int tileRight = drawLeft + (column + 1) * tileSize + columnOffset - (borderSize / 2);
+        int tileTop = drawTop + row * tileSize + rowOffset + (borderSize / 2);
+        int tileBottom = drawTop + (row + 1) * tileSize + rowOffset - (borderSize / 2);
 
         //draw the background
         for(int blockLeft = tileLeft; blockLeft < tileRight; blockLeft += 5) {
@@ -192,7 +202,44 @@ public class LabyrinthSurfaceView extends SurfaceView {
             }
         }//draw background
 
-        //TODO draw the rest of the tile
+        //draw the paths
+        int centerTop = (tileSize / 3) + tileTop - (borderSize / 2);
+        int centerLeft = (tileSize / 3) + tileLeft - (borderSize / 2);
+        int centerRight = centerLeft + (tileSize / 3);
+        int centerBottom = centerTop + (tileSize / 3);
+
+        Paint lightOrange = new Paint();
+        lightOrange.setColor(Color.rgb(236, 196, 34));
+        Paint darkOrange = new Paint();
+        darkOrange.setColor(Color.rgb(219,154,34));
+
+        //center
+        canvas.drawRect(centerLeft, centerTop, centerRight, centerBottom, lightOrange);
+
+        //handle top side connection
+        if(toDraw.isConnected(Tile.UP)) {
+            canvas.drawRect(centerLeft - borderSize, tileTop, centerLeft,  centerTop, darkOrange);
+            canvas.drawRect(centerLeft, tileTop, centerRight, centerTop, lightOrange);
+            canvas.drawRect(centerRight, tileTop, centerRight + borderSize, centerTop, darkOrange);
+        }
+        else {
+            canvas.drawRect(centerLeft - borderSize, centerTop - borderSize,centerRight + borderSize, centerTop, darkOrange);
+        }
+
+        //handle left side connection
+        if(toDraw.isConnected(Tile.LEFT)) {
+            canvas.drawRect(tileLeft, centerTop - borderSize, centerLeft, centerTop, darkOrange);
+            canvas.drawRect(tileLeft, centerTop, centerLeft, centerBottom, lightOrange);
+            canvas.drawRect(tileLeft, centerBottom, centerLeft, centerBottom + borderSize, darkOrange);
+        }
+        else {
+            canvas.drawRect(centerLeft - borderSize, centerTop - borderSize, centerLeft, centerBottom + borderSize, darkOrange);
+        }
+
+        //handle right side connection
+        if(toDraw.isConnected(Tile.RIGHT)) {
+            canvas.drawRect(centerRight, centerTop - borderSize, tileRight, centerTop, darkOrange);
+        }
 
     }//drawTile
 
@@ -208,6 +255,17 @@ public class LabyrinthSurfaceView extends SurfaceView {
     }//setBoardToDraw
 
     /**
+     * setPlayerData
+     *
+     * gives a set of player data to the view for drawing
+     *
+     * @param list - the arraylist of playerdata to use
+     */
+    public void setPlayerData(ArrayList<PlayerData> list) {
+        players = list;
+    }//setPlayerData
+
+    /**
      * startShiftAnimation
      *
      * starts the thread to animate a shifting row of tiles, the setBoardToDraw method
@@ -215,8 +273,25 @@ public class LabyrinthSurfaceView extends SurfaceView {
      *
      * @param insertColumn - column that the tile was inserted in
      * @param insertRow - row that the tile was inserted in
+     * @return - returns true if an animation was started, false if it was not started
      */
-    public void startShiftAnimation(int insertColumn, int insertRow) {
-
+    public boolean startShiftAnimation(int insertColumn, int insertRow) {
+        if(animRunning()) {
+            return false;
+        }
+        shiftAnim = new ShiftAnimation(insertColumn, insertRow, board, tileSize);
+        ticker = new AnimationThread(this);
+        return true;
     }//startShiftAnimation
+
+    /**
+     * animRunning
+     *
+     * tells if an animation is currently running by checking the animation ticker thread
+     *
+     * @return - true if there is an animation going, false if not
+     */
+    private boolean animRunning() {
+        return ticker != null;
+    }//animRunning
 }

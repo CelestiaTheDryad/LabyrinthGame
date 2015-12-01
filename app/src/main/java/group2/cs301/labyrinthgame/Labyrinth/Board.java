@@ -1,10 +1,12 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import java.io.Serializable;
+
 /**
  * @author G. Emily Nitzberg, Brendan Thomas, Ben Rumptz, Andrew Williams
  * @version November 9, 2015
  */
-public class Board {
+public class Board implements Serializable{
     private Tile[][] gameTiles;
     private Tile extraTile;
 

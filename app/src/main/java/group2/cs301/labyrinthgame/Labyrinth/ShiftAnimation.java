@@ -6,7 +6,7 @@ import android.graphics.Canvas;
  * @author Brendan Thomas
  * @version November 29, 2015
  *
- * class that controls the drawing of a shifting row of tiles
+ * class that controls the drawing of a shifting row of tiles on a LabyrinthSurfaceView
  */
 public class ShiftAnimation{
 
@@ -39,7 +39,14 @@ public class ShiftAnimation{
         }
     }//ctor
 
-
+    /**
+     * tick
+     *
+     * progresses the animation by one frame and draws all updates
+     *
+     * @param canvas - the canvas to draw updates on
+     * @param view - the parent view for drawing methods
+     */
     public void tick(Canvas canvas, LabyrinthSurfaceView view) {
         if (horizontal) {
             view.drawTile(board.getExtraTile(), 0, insertRow, tickNum, 0, canvas);
@@ -68,10 +75,10 @@ public class ShiftAnimation{
     /**
      * isOver
      *
-     * @return returns whether the animation is finished or not
+     * @return returns true if the animation is finished, false if it is not finished
      */
     public boolean isOver() {
-        if (tickNum == tickMax) {
+        if (tickNum > tickMax) {
            return true;
         }
         return false;
