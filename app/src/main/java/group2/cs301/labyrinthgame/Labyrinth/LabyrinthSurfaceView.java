@@ -56,9 +56,15 @@ public class LabyrinthSurfaceView extends SurfaceView {
         //set the background of the canvas to a nice brown
         setBackgroundColor(Color.rgb(112, 56, 13));
 
+        moveAnim = null;
+        shiftAnim = null;
+        ticker = null;
+    }
+
+    private void calcStuff(Canvas canvas) {
         //get values for the canvas size and tile size
-        int canvasHeight = getHeight();
-        int canvasWidth = getWidth();
+        int canvasHeight = canvas.getHeight();
+        int canvasWidth = canvas.getWidth();
         int widthBuffer;
         int heightBuffer;
         int genBuffer;
@@ -88,19 +94,15 @@ public class LabyrinthSurfaceView extends SurfaceView {
         }
 
         //find out how big to draw the tiles
-        drawSize = (canvasHeight - heightBuffer - genBuffer);
+        drawSize = canvasHeight - heightBuffer - genBuffer;
         tileSize = drawSize / 9;
-        drawTop = canvasHeight - genBuffer - heightBuffer;
-        drawLeft = canvasWidth - genBuffer - widthBuffer;
-        moveAnim = null;
-        shiftAnim = null;
-        ticker = null;
+        drawTop = genBuffer + heightBuffer;
+        drawLeft = genBuffer + widthBuffer;
     }
 
     @Override
-    public void draw(@NonNull Canvas canvas) {
-        super.draw(canvas);
-
+    public void onDraw(Canvas canvas) {
+        calcStuff(canvas);
         drawNormalBoard(canvas);
 
         //there should never be a time when both animations are running
@@ -300,6 +302,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
         }
         shiftAnim = new ShiftAnimation(insertColumn, insertRow, board, tileSize);
         ticker = new AnimationThread(this);
+        ticker.start();
         return true;
     }//startShiftAnimation
 
