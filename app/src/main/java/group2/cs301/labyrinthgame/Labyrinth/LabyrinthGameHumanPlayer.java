@@ -81,6 +81,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
     @Override
     public void receiveInfo(GameInfo info) {
+        int i = 0;
         if(info instanceof LabyrinthGameState) {
             labyrinthGameState = (LabyrinthGameState)info;
             updateGUI();

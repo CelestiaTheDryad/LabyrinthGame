@@ -83,6 +83,7 @@ public class Tile implements Serializable {
 //        playersPresent[3] = toCopy.playersPresent[3];
 
         treasure = toCopy.treasure;
+        highlighted = toCopy.highlighted;
     }//ctor
 
     /**
