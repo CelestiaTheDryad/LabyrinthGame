@@ -348,6 +348,7 @@ public class Board implements Serializable{
         extraTile.setTileDownwards(null);
         extraTile.setTileLeftWards(null);
         extraTile.setTileRightwards(null);
+        extraTile.setHighlighted(false);
     }//cleanExtraTile
 
     /**
