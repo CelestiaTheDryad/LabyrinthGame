@@ -1,7 +1,11 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import android.media.Image;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import group2.cs301.labyrinthgame.Game.GameHumanPlayer;
 import group2.cs301.labyrinthgame.Game.GameMainActivity;
@@ -9,6 +13,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
 import group2.cs301.labyrinthgame.Game.infoMsg.IllegalMoveInfo;
 import group2.cs301.labyrinthgame.Game.infoMsg.NotYourTurnInfo;
 import group2.cs301.labyrinthgame.Game.infoMsg.TimerInfo;
+import group2.cs301.labyrinthgame.R;
 
 /**
  * @author Created by Andrew Williams
@@ -20,6 +25,12 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer {
     private GameMainActivity myActivity; // the current activity
 
     private LabyrinthGameState labyrinthGameState;
+
+    private LabyrinthSurfaceView surfView;
+    private ImageView extraTileBase;
+    private ImageView extraTileTreasure;
+    private ImageView extraTileHighlight;
+    private ImageButton extraTileButton;
 
 
     public LabyrinthGameHumanPlayer(String name) {super(name);}//constructor
@@ -41,6 +52,13 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer {
     public void setAsGui(GameMainActivity activity) {
 
         myActivity = activity;
+        surfView = (LabyrinthSurfaceView) myActivity.findViewById(R.id.GameBoard);
+        extraTileBase = (ImageView) myActivity.findViewById(R.id.extra_tile_base);
+        extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);
+        extraTileTreasure = (ImageView) myActivity.findViewById(R.id.extra_tile_treasure);
+        extraTileButton = (ImageButton) myActivity.findViewById(R.id.extra_tile_button);
+
+
 
 
 

@@ -26,7 +26,7 @@
         <group2.cs301.labyrinthgame.Labyrinth.LabyrinthSurfaceView
             android:layout_width="620dp"
             android:layout_height="620dp"
-            android:id="@+id/surfaceView" />
+            android:id="@+id/GameBoard" />
 
         <Space
             android:layout_width="fill_parent"
