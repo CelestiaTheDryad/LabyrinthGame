@@ -27,7 +27,7 @@ public class EasyAIPlayer extends GameComputerPlayer {
     * Keeping this here since idk if we need to override this
     */
     protected void initAfterReady(){
-
+        super.initAfterReady();
     }
 
     @Override
@@ -54,16 +54,14 @@ public class EasyAIPlayer extends GameComputerPlayer {
         if(myState.getCurrentPlayer() != super.playerNum)
             return;
 
-        //First Action to send is Insert
         if(myState.getStage() == LabyrinthGameState.INSERTING){
-            int[] val = Board.INSERT_LOCATIONS[(int) Math.random() *12];
+            int[] val = Board.INSERT_LOCATIONS[(int) (Math.random() *12)];
             int xx = val[0];
             int yy = val[1];
             game.sendAction(new InsertTileAction(this, xx, yy));
             return;
         }//if
         else if(myState.getStage() == LabyrinthGameState.MOVING){
-            //if we are not inserting, we must be moving
             PlayerData myData = myState.getPlayers().get(super.playerNum);
             myState.highlightToMove(super.playerNum);
 
@@ -95,15 +93,11 @@ public class EasyAIPlayer extends GameComputerPlayer {
                 }
             }
             //if we did not move to a treasure tile, move now
-            if(curMaxDist != -1) {
-                game.sendAction(new MoveAction(this, xx, yy));
-                return;
-            }
+            game.sendAction(new MoveAction(this, xx, yy));
         }
         else if(myState.getStage() == LabyrinthGameState.ENDING){
             //end our turn last
             game.sendAction(new NextTurnAction(this));
-            return;
         }
     }
 }

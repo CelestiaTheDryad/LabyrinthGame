@@ -107,6 +107,7 @@ public class Tile implements Serializable {
         if(highlighted) {
             return;
         }
+        highlighted = true;
         if(tileUpwards != null) {
             tileUpwards.highlightPaths();
         }
@@ -119,7 +120,6 @@ public class Tile implements Serializable {
         if(tileLeftWards != null) {
             tileLeftWards.highlightPaths();
         }
-        highlighted = true;
     }//highlightPaths
 
     /**

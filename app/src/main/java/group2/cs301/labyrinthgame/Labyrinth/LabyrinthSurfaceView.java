@@ -65,7 +65,9 @@ public class LabyrinthSurfaceView extends SurfaceView {
         shiftAnim = null;
         ticker = null;
 
+        //protect from null pointer crashes
         board = new Board();
+        players = new ArrayList<PlayerData>();
 
         treasureImages = new Bitmap[24];
         treasureImages[0] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_alarm_bell);
@@ -152,7 +154,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
         }
         else {
             drawHighlights(canvas);
-            //TODO draw players
+            drawPlayers(canvas);
         }
     }//draw
 
@@ -164,7 +166,57 @@ public class LabyrinthSurfaceView extends SurfaceView {
      * @param canvas - canvas to draw the highlights on
      */
     public void drawHighlights(Canvas canvas) {
-        //TODO draw the highlights
+        for (int column = 1; column < 8; column++) {
+            for (int row = 1; row < 8; row++) {
+                if (board.getTile(column - 1, row -1).isHighlighted()) {
+                    //find pixel boundaries to draw the tile in
+                    int tileLeft = drawLeft + column * tileSize + (borderSize / 2);
+                    int tileRight = drawLeft + (column + 1) * tileSize - (borderSize / 2);
+                    int tileTop = drawTop + row * tileSize + (borderSize / 2);
+                    int tileBottom = drawTop + (row + 1) * tileSize - (borderSize / 2);
+
+                    Paint color = new Paint();
+                    color.setColor(Color.rgb(249, 4, 148));
+
+                    canvas.drawRect(tileLeft, tileTop, tileRight, tileTop + borderSize, color);
+                    canvas.drawRect(tileLeft, tileTop, tileLeft + borderSize, tileBottom, color);
+                    canvas.drawRect(tileRight - borderSize, tileTop, tileRight, tileBottom, color);
+                    canvas.drawRect(tileLeft, tileBottom - borderSize, tileRight, tileBottom, color);
+                }
+            }
+        }
+    }//drawHighlights
+
+    public void drawPlayers(Canvas canvas) {
+        for(PlayerData player: players) {
+            int column = player.getXposition();
+            int row = player.getYposition();
+
+            int columnOffset;
+            int rowOffset;
+
+            if (player.getPlayerColor() == Color.RED) {
+                columnOffset = tileSize / 4 * -1;
+                rowOffset = tileSize / 4 * -1;
+            }
+            else if (player.getPlayerColor() == Color.BLUE) {
+                columnOffset = tileSize / 4;
+                rowOffset = tileSize / 4 * -1;
+            }
+            else if (player.getPlayerColor() == Color.GREEN) {
+                columnOffset = tileSize / 4 * -1;
+                rowOffset = tileSize / 4;
+            }
+            else {
+                columnOffset = tileSize / 4;
+                rowOffset = tileSize / 4;
+            }
+
+            Paint color = new Paint();
+            color.setColor(player.getPlayerColor());
+
+            canvas.drawCircle(drawLeft + (column + 1) * tileSize + columnOffset, drawTop + (row + 1) * tileSize + rowOffset, 15, color);
+        }
     }
 
     /**
