@@ -30,11 +30,11 @@ public class PlayerData implements Serializable{
         if (X == 0 && Y == 0) {
             playerColor = Color.RED;
         }
-        else if (X == 0 && Y == 6) {
+        else if (X == 6 && Y == 0) {
             playerColor = Color.BLUE;
         }
-        else if (X == 6 && Y == 0) {
-            playerColor = Color.rgb(200,100,0);
+        else if (X == 0 && Y == 6) {
+            playerColor = Color.rgb(255,130,0);
         }
         else if (X == 6 && Y == 6) {
             playerColor = Color.GREEN;
@@ -60,6 +60,11 @@ public class PlayerData implements Serializable{
      */
     public int getCurrentTreasure() {
         return treasures[currentTreasure];
+    }
+
+
+    public int getRemainingTreasures() {
+        return LabyrinthGameState.MAX_NUM_CARDS - currentTreasure;
     }
 
 
