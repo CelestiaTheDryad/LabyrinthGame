@@ -65,7 +65,9 @@ public class LabyrinthSurfaceView extends SurfaceView {
         shiftAnim = null;
         ticker = null;
 
+        //protect from null pointer crashes
         board = new Board();
+        players = new ArrayList<PlayerData>();
 
         treasureImages = new Bitmap[24];
         treasureImages[0] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_alarm_bell);
