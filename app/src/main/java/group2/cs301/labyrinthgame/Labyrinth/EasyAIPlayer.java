@@ -55,11 +55,18 @@ public class EasyAIPlayer extends GameComputerPlayer {
             return;
 
         if(myState.getStage() == LabyrinthGameState.INSERTING){
-            int[] val = Board.INSERT_LOCATIONS[(int) (Math.random() *12)];
-            int xx = val[0];
-            int yy = val[1];
-            game.sendAction(new InsertTileAction(this, xx, yy));
-            return;
+            boolean thing = true;
+            int x;
+            int y;
+            do {
+                int rand = (int) (Math.random() * 12);
+                x = Board.INSERT_LOCATIONS[rand][0];
+                y = Board.INSERT_LOCATIONS[rand][1];
+                if (x != ((LabyrinthGameState) info).getLastXInserted() || y != ((LabyrinthGameState) info).getLastYInserted()) {
+                    thing = false;
+                }
+            } while (thing);
+            game.sendAction(new InsertTileAction(this, x, y));
         }//if
         else if(myState.getStage() == LabyrinthGameState.MOVING){
             PlayerData myData = myState.getPlayers().get(super.playerNum);
