@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import group2.cs301.labyrinthgame.Game.GameHumanPlayer;
 import group2.cs301.labyrinthgame.Game.GameMainActivity;
@@ -31,6 +32,9 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer {
     private ImageView extraTileTreasure;
     private ImageView extraTileHighlight;
     private ImageButton extraTileButton;
+    private TextView playerTurnDisplay;
+    private TextView targetCountDisplay;
+    private ImageView targetDisplay;
 
 
     public LabyrinthGameHumanPlayer(String name) {super(name);}//constructor
@@ -44,7 +48,13 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer {
     public void receiveInfo(GameInfo info) {
         if(info instanceof LabyrinthGameState) {
             labyrinthGameState = (LabyrinthGameState)info;
+            updateGUI();
         }
+    }
+
+    private void updateGUI() {
+        surfView.setBoardToDraw(labyrinthGameState.getGameBoard());
+        surfView.setPlayerData(labyrinthGameState.getPlayers());
     }
 
 
@@ -57,11 +67,23 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer {
         extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);
         extraTileTreasure = (ImageView) myActivity.findViewById(R.id.extra_tile_treasure);
         extraTileButton = (ImageButton) myActivity.findViewById(R.id.extra_tile_button);
-
-
-
-
-
-
+        playerTurnDisplay = (TextView) myActivity.findViewById(R.id.turnView);
+        targetCountDisplay = (TextView) myActivity.findViewById(R.id.targetCountView);
+        targetDisplay = (ImageView) myActivity.findViewById(R.id.targetView);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
