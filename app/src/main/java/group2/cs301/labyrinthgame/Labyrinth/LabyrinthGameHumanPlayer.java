@@ -33,7 +33,6 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     private ImageView extraTileBase;
     private ImageView extraTileTreasure;
     private ImageView extraTileHighlight;
-    private ImageButton extraTileButton;
     private TextView playerTurnDisplay;
     private TextView targetCountDisplay;
     private ImageView targetDisplay;
@@ -124,6 +123,79 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
         targetCountDisplay.setText("You have " + remainingTreasures + " to collect.");
 
+        Tile extraTile = labyrinthGameState.getGameBoard().getExtraTile();
+
+        if(extraTile.getType() == Tile.CORNER)
+        {
+            if(extraTile.getRotation() == Tile.UP)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_corner_rot_0);
+            }
+            if(extraTile.getRotation() == Tile.RIGHT)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_corner_rot_1);
+            }
+            if(extraTile.getRotation() == Tile.DOWN)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_corner_rot_2);
+            }
+            if(extraTile.getRotation() == Tile.LEFT)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_corner_rot_3);
+            }
+        }
+        if(extraTile.getType() == Tile.TEE)
+        {
+            if(extraTile.getRotation() == Tile.UP)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_cross_rot_3);
+            }
+            if(extraTile.getRotation() == Tile.RIGHT)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_cross_rot_0);
+            }
+            if(extraTile.getRotation() == Tile.DOWN)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_cross_rot_1);
+            }
+            if(extraTile.getRotation() == Tile.LEFT)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_cross_rot_2);
+            }
+        }
+        if(extraTile.getType() == Tile.LINE)
+        {
+            if(extraTile.getRotation() == Tile.UP)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_line_rot_0);
+            }
+            if(extraTile.getRotation() == Tile.RIGHT)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_line_rot_1);
+            }
+            if(extraTile.getRotation() == Tile.DOWN)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_line_rot_0);
+            }
+            if(extraTile.getRotation() == Tile.LEFT)
+            {
+                extraTileBase.setImageResource(R.drawable.tile_line_rot_1);
+            }
+        }
+
+        extraTileTreasure.setImageResource(treasuresResources[extraTile.getTreasure()]);
+
+        if(extraTile.isHighlighted())
+        {
+            extraTileHighlight.setImageResource(R.drawable.tile_highlight);
+        }
+        else
+        {
+            extraTileHighlight.setImageResource(R.drawable.tile_blank);
+        }
+
+        surfView.postInvalidate();
+
     }
 
 
@@ -134,14 +206,12 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         extraTileBase = (ImageView) myActivity.findViewById(R.id.extra_tile_base);
         extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);
         extraTileTreasure = (ImageView) myActivity.findViewById(R.id.extra_tile_treasure);
-        extraTileButton = (ImageButton) myActivity.findViewById(R.id.extra_tile_button);
         playerTurnDisplay = (TextView) myActivity.findViewById(R.id.turnView);
         targetCountDisplay = (TextView) myActivity.findViewById(R.id.targetCountView);
         targetDisplay = (ImageView) myActivity.findViewById(R.id.targetView);
         nextTurnButton = (Button) myActivity.findViewById(R.id.NextTurnButton);
 
         nextTurnButton.setOnClickListener(this);
-        extraTileButton.setOnClickListener(this);
         surfView.setOnTouchListener(this);
 
     }
@@ -152,9 +222,9 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         if(v == nextTurnButton) {
             game.sendAction(new NextTurnAction(this));
         }
-        else if(v == extraTileButton) {
-            game.sendAction(new RotateTileAction(this));
-        }
+//        else if(v == extraTileButton) {
+//            game.sendAction(new RotateTileAction(this));
+//        }
 
     }
 

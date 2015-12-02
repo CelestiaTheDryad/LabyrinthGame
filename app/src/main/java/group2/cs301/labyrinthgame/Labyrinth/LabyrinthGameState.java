@@ -46,10 +46,10 @@ public class LabyrinthGameState extends GameState implements Serializable {
         players = new ArrayList<>();
 
         switch (initNumPlayers) {
-            case 4: players.add(new PlayerData(6,6));
-            case 3: players.add(new PlayerData(0,6));
-            case 2: players.add(new PlayerData(6,0));
-            case 1: players.add(new PlayerData(0,0));
+            case 4: players.add(new PlayerData(6,6, new int[] {1,2,3,24,23,22}));
+            case 3: players.add(new PlayerData(0,6, new int[] {4,5,6,21,20,19}));
+            case 2: players.add(new PlayerData(6,0, new int[] {7,8,9,18,17,16}));
+            case 1: players.add(new PlayerData(0,0, new int[] {10,11,12,13,14,15}));
         }
 
         numPlayers = initNumPlayers;
@@ -58,6 +58,9 @@ public class LabyrinthGameState extends GameState implements Serializable {
         gameBoard = new Board();
         lastXInserted = 0;
         lastYInserted = 0;
+
+        stage = INSERTING;
+        highlightToInsert();
     }//ctor
 
     /**

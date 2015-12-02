@@ -22,7 +22,7 @@ public class PlayerData implements Serializable{
     private int currentTreasure;
     private int playerColor;
 
-    public PlayerData(int X, int Y) {
+    public PlayerData(int X, int Y, int[] initTreasures) {
         Yposition = Y;
         Xposition = X;
         Ystart = Y;
@@ -39,7 +39,7 @@ public class PlayerData implements Serializable{
         else if (X == 6 && Y == 6) {
             playerColor = Color.GREEN;
         }
-        treasures= new int[LabyrinthGameState.MAX_NUM_CARDS];
+        treasures= initTreasures;
         currentTreasure = 0;
     }
 
