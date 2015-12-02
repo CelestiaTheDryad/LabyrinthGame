@@ -63,7 +63,7 @@ public class EasyAIPlayer extends GameComputerPlayer {
             else if(myState.getStage() == LabyrinthGameState.MOVING){
                 //if we are not inserting, we must be moving
                 PlayerData myData = myState.getPlayers().get(playerNum);
-                myState.highlightToMove(playerNum);
+                //myState.highlightToMove(playerNum);
 
                 //first get all my tiles
                 //loop through each one at a time

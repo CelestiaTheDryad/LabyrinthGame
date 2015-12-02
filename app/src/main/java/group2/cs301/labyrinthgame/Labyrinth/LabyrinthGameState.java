@@ -38,18 +38,21 @@ public class LabyrinthGameState extends GameState implements Serializable {
      * creates a new game state (default)
      */
     public LabyrinthGameState (int initNumPlayers) {
-        if(initNumPlayers < 2 || initNumPlayers > 4) {
-            Log.println(Log.ERROR, "", "WRONG NUMBER OF PLAYERS");
-            initNumPlayers = 4;
-        }
+//        if(initNumPlayers < 2 || initNumPlayers > 4) {
+//            Log.println(Log.ERROR, "", "WRONG NUMBER OF PLAYERS");
+//            initNumPlayers = 4;
+//        }
 
         players = new ArrayList<>();
 
-        switch (initNumPlayers) {
-            case 4: players.add(new PlayerData(6,6, new int[] {1,2,3,24,23,22}));
-            case 3: players.add(new PlayerData(0,6, new int[] {4,5,6,21,20,19}));
-            case 2: players.add(new PlayerData(6,0, new int[] {7,8,9,18,17,16}));
-            case 1: players.add(new PlayerData(0,0, new int[] {10,11,12,13,14,15}));
+        if(initNumPlayers > 0) {
+            players.add(new PlayerData(0,0, new int[] {10,11,12,13,14,15}));
+        } if(initNumPlayers > 1) {
+            players.add(new PlayerData(6,0, new int[] {7,8,9,18,17,16}));
+        } if(initNumPlayers > 2) {
+            players.add(new PlayerData(0,6, new int[] {4,5,6,21,20,19}));
+        } if(initNumPlayers > 3) {
+            players.add(new PlayerData(6,6, new int[] {1,2,3,24,23,22}));
         }
 
         numPlayers = initNumPlayers;
