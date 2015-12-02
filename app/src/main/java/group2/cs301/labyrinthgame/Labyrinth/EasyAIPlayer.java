@@ -9,19 +9,25 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
  * It also really enjoys walking so it walks as far away from its starting place as possible.
  *
  * @author Ben Rumptz
- * @version 11/18/15
+ * @version 12/1/15
  */
 public class EasyAIPlayer extends GameComputerPlayer {
+    //vars to determine which part of the turn to take
     private boolean isActionInsert;
-    private final int[] legalXInsertSpots = {1, 3, 5};
-    private final int[] legalYInsertSpots = {1, 3, 5};
+    private boolean isActionMove;
+    //holds my state
     private LabyrinthGameState myState;
 
 
+    /*
+    * EasyAIPlayer()
+    * initializes an Easy AI by calling the super constructor
+    */
     public EasyAIPlayer(){
         super("Easy AI");
-        //default to true
+        //init turn segregation vars
         isActionInsert = true;
+        isActionMove = false;
     }
 
     @Override
@@ -33,12 +39,27 @@ public class EasyAIPlayer extends GameComputerPlayer {
     }
 
     @Override
+    /*
+    * recieveInfo
+    *
+    * When we are passed a GameInfo that is a GameState, begins running
+    * if it is not our turn stop exectuting this ftn
+    * if it is our turn create GameActions with the following precedence (Insert > Move > EndTurn)
+    * Completes each section of the flowchart in order && resets at the start after an EndTurn is created
+    *
+    * returns void after sending a GameAction to not run into threading issues
+    */
     protected void receiveInfo(GameInfo info) {
         // use the info we are given to init our gamestate
-        if(info instanceof LabyrinthGameState)
+        if(info instanceof LabyrinthGameState){
             myState = (LabyrinthGameState) info;
-        else
+        }
         // if we are given a non-gamestate GameInfo, return for now
+        else
+            return;
+
+        //don't do anything if it is not my turn
+        if(myState.getCurrentPlayer() != super.playerNum)
             return;
 
         //First Action to send is Insert
@@ -46,14 +67,15 @@ public class EasyAIPlayer extends GameComputerPlayer {
             int[] val = Board.INSERT_LOCATIONS[(int) Math.random() *12];
             int xx = val[0];
             int yy = val[1];
-            game.sendAction(new InsertTileAction(this, xx, yy));
             isActionInsert = false;
+            isActionMove = true;
+            game.sendAction(new InsertTileAction(this, xx, yy));
+            return;
         }//if
-        else{
+        else if(isActionMove){
             //if we are not inserting, we must be moving
-            int myPlayerNum = myState.getCurrentPlayer();
-            PlayerData myData = myState.getPlayers().get(myPlayerNum);
-            myState.highlightToMove(myPlayerNum);
+            PlayerData myData = myState.getPlayers().get(super.playerNum);
+            myState.highlightToMove(super.playerNum);
 
             //first get all my tiles
             //loop through each one at a time
@@ -67,9 +89,10 @@ public class EasyAIPlayer extends GameComputerPlayer {
                 for(int y = 0; y < 7; y++){
                     Tile thisTile = currBoard.getTile(x,y);
                     if(thisTile.isHighlighted() && (thisTile.getTreasure() == myData.getCurrentTreasure())){
-                        game.sendAction(new MoveAction(this, x, y));
                         curMaxDist = -1;
-                        break;
+                        isActionMove = false;
+                        game.sendAction(new MoveAction(this, x, y));
+                        return;
                     }
                     //calculate the furthest tile away and store that tile's x and y coords
                     double dist = (x - myData.getXposition()) * (x - myData.getXposition());
@@ -83,8 +106,18 @@ public class EasyAIPlayer extends GameComputerPlayer {
                 }
             }
             //if we did not move to a treasure tile, move now
-            if(curMaxDist != -1)
-                game.sendAction(new MoveAction(this, xx,yy));
-        }//else
+            if(curMaxDist != -1) {
+                isActionMove = false;
+                game.sendAction(new MoveAction(this, xx, yy));
+                return;
+            }
+        }
+        else{
+            //end our turn last
+            isActionInsert = true;
+            isActionMove = false;
+            game.sendAction(new NextTurnAction(this));
+            return;
+        }
     }
 }
