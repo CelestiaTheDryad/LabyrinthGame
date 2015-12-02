@@ -223,6 +223,9 @@ public class LabyrinthGameState extends GameState implements Serializable {
         return currentPlayer;
     }
 
+
+    public PlayerData getCurrentPlayerData() { return players.get(currentPlayer); }
+
     /**
      * getPlayers - returns the data for all of the players
      * @return - ArrayList of playerData (one per player)

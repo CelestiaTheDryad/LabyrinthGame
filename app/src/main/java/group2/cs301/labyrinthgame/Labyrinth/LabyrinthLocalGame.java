@@ -78,10 +78,13 @@ public class LabyrinthLocalGame extends LocalGame {
      */
     @Override
     public String checkIfGameOver() {
+        String message = null;
 
+        if(labyrinthGameState.getCurrentPlayerData().hasWon()) {
+            message = "Game Over! Player " + (labyrinthGameState.getCurrentPlayer()+1) + "has won!";
+        }
 
-
-        return null;
+        return message;
     }
 
 }
