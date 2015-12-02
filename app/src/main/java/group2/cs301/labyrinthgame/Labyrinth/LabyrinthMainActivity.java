@@ -26,7 +26,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
             }});
         playerTypes.add(new GamePlayerType("Easy Computer Player") {
             public GamePlayer createPlayer(String name) {
-                return new LabyrinthGameHumanPlayer(name);
+                return new EasyAIPlayer(name);
             }});
 
         GameConfig defaultConfig = new GameConfig(playerTypes, 2, 4, "Labyrinth", PORT_NUMBER);

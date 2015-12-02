@@ -18,8 +18,8 @@ public class EasyAIPlayer extends GameComputerPlayer {
     * EasyAIPlayer()
     * initializes an Easy AI by calling the super constructor
     */
-    public EasyAIPlayer(){
-        super("Easy AI");
+    public EasyAIPlayer(String name){
+        super(name);
     }
 
     @Override

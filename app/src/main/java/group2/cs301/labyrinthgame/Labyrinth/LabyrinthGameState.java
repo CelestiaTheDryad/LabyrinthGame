@@ -210,6 +210,8 @@ public class LabyrinthGameState extends GameState implements Serializable {
                 gameBoard.highlightTile(location[0], location[1]);
             }
         }
+
+        gameBoard.highlightExtraTile();
     }//highlightToInsert
 
     /**
