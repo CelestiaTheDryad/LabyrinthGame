@@ -52,10 +52,10 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	public GameHumanPlayer(String name) {
 		// set the name via the argument
 		this.name = name;
-		
+
 		// mark game as not being over
 		this.gameOver = false;
-		
+
 		// get new handler for this thread
 		this.myHandler = new Handler();
 	}
