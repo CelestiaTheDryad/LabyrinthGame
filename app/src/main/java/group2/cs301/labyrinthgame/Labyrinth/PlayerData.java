@@ -107,4 +107,6 @@ public class PlayerData implements Serializable{
         return false;
     }
 
+    public int getPlayerColor() {return playerColor;}
+
 }
