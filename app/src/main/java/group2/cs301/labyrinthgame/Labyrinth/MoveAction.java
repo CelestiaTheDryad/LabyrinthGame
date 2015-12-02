@@ -20,7 +20,7 @@ public class MoveAction extends GameAction {
      * @param xx the y coord
      * @param yy the x coord
      */
-    public MoveAction(int xx, int yy, GamePlayer player) {
+    public MoveAction(GamePlayer player, int xx, int yy) {
         super(player);
         int x = xx;
         int y = yy;
