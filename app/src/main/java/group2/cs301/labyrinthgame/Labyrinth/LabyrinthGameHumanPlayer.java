@@ -196,6 +196,10 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
         surfView.postInvalidate();
 
+        if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING) {
+            surfView.startShiftAnimation(labyrinthGameState.getLastXInserted(), labyrinthGameState.getLastYInserted());
+        }
+
     }
 
 
@@ -211,9 +215,17 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         targetCountDisplay = (TextView) myActivity.findViewById(R.id.targetCountView);
         targetDisplay = (ImageView) myActivity.findViewById(R.id.targetView);
         nextTurnButton = (Button) myActivity.findViewById(R.id.NextTurnButton);
+        extraTileBase = (ImageView) myActivity.findViewById(R.id.extra_tile_base);
+        extraTileTreasure = (ImageView) myActivity.findViewById(R.id.extra_tile_treasure);
+        extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);
+
 
         nextTurnButton.setOnClickListener(this);
         surfView.setOnTouchListener(this);
+
+        extraTileBase.setOnTouchListener(this);
+        extraTileTreasure.setOnTouchListener(this);
+        extraTileHighlight.setOnTouchListener(this);
 
     }
 
@@ -264,6 +276,10 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
                 return false;
             }
 
+            return true;
+        }
+        else if(v == extraTileBase || v == extraTileTreasure || v == extraTileHighlight) {
+            game.sendAction(new RotateTileAction(this));
             return true;
         }
 
