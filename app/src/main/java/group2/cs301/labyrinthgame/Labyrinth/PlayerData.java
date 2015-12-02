@@ -39,17 +39,35 @@ public class PlayerData implements Serializable{
         else if (X == 6 && Y == 6) {
             playerColor = Color.GREEN;
         }
-        treasures= initTreasures;
+        treasures = initTreasures;
         currentTreasure = 0;
     }
 
     public PlayerData(PlayerData toCopy) {
         this.Xposition = toCopy.Xposition;
         this.Yposition = toCopy.Yposition;
+
         this.treasures = new int[LabyrinthGameState.MAX_NUM_CARDS];
         for(int i = 0; i < LabyrinthGameState.MAX_NUM_CARDS; i++) {
             this.treasures[i] = toCopy.treasures[i];
         }
+
+        Ystart = toCopy.Ystart;
+        Xstart = toCopy.Xstart;
+        if (Xstart == 0 && Ystart == 0) {
+            playerColor = Color.RED;
+        }
+        else if (Xstart == 6 && Ystart == 0) {
+            playerColor = Color.BLUE;
+        }
+        else if (Xstart == 0 && Ystart == 6) {
+            playerColor = Color.rgb(255,130,0);
+        }
+        else if (Xstart == 6 && Ystart == 6) {
+            playerColor = Color.GREEN;
+        }
+
+
 
         this.currentTreasure = toCopy.currentTreasure;
     }

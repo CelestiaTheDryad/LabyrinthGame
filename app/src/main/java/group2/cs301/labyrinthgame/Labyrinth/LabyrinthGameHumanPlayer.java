@@ -232,7 +232,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     @Override
     public void onClick(View v) {
 
-        if(v == nextTurnButton) {
+        if(v == nextTurnButton && labyrinthGameState.getStage() == LabyrinthGameState.ENDING) {
             game.sendAction(new NextTurnAction(this));
         }
 //        else if(v == extraTileButton) {
