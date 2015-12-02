@@ -121,6 +121,14 @@
                 android:scaleType="fitXY"
                 android:id="@+id/extra_tile_highlight" />
 
+            <ImageButton
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/tile_blank"
+                android:id="@+id/extra_tile_button" />
+
         </RelativeLayout>
     </LinearLayout>
 
