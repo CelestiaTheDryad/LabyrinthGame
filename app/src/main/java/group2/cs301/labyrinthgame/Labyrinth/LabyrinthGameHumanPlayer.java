@@ -130,6 +130,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     @Override
     public void setAsGui(GameMainActivity activity) {
         myActivity = activity;
+        myActivity.setContentView(R.layout.labyrinth_activity_main);
         surfView = (LabyrinthSurfaceView) myActivity.findViewById(R.id.GameBoard);
         extraTileBase = (ImageView) myActivity.findViewById(R.id.extra_tile_base);
         extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);

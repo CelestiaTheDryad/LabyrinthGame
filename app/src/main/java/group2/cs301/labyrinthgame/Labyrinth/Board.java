@@ -335,6 +335,7 @@ public class Board implements Serializable{
                 gameTiles[i][j].setHighlighted(false);
             }
         }
+        extraTile.setHighlighted(false);
     }//clearHighlights
 
     /*
@@ -373,4 +374,8 @@ public class Board implements Serializable{
     public void setTile(int row, int column, Tile toSet) {
         gameTiles[column][row] = toSet;
     }//setTile
+
+    public void highlightExtraTile() {
+        extraTile.setHighlighted(true);
+    }
 }
