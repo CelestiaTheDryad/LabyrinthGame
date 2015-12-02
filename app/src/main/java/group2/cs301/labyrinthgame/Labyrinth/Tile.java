@@ -39,11 +39,6 @@ public class Tile implements Serializable {
     public Tile() {
         type = Tile.LINE;
         rotation = Tile.UP;
-//        playersPresent = new boolean[4];
-//        playersPresent[0] = false;
-//        playersPresent[1] = false;
-//        playersPresent[2] = false;
-//        playersPresent[3] = false;
 
         treasure = 0;
     }//ctor
@@ -66,11 +61,6 @@ public class Tile implements Serializable {
                  boolean initP3, boolean initP4, int initTreasure) {
         type = initType;
         rotation = initRotation;
-//        playersPresent = new boolean[4];
-//        playersPresent[0] = initP1;
-//        playersPresent[1] = initP2;
-//        playersPresent[2] = initP3;
-//        playersPresent[3] = initP4;
 
         treasure = initTreasure;
     }//ctor

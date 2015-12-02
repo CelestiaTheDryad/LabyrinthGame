@@ -76,7 +76,18 @@ public class ShiftAnimation{
             view.drawTile(board.getTile(5, insertRow), 5, drawRow, tickNum, 0, canvas);
             view.drawTile(board.getTile(6, insertRow), 6, drawRow, tickNum, 0, canvas);
         }
-        else {
+        else if (horizontal){
+            view.drawBlank(canvas, true, drawRow);
+            view.drawTile(board.getExtraTile(), 0, drawRow, tickMax - tickNum, 0, canvas);
+            view.drawTile(board.getTile(0, insertRow), 1, drawRow, tickMax - tickNum, 0, canvas);
+            view.drawTile(board.getTile(1, insertRow), 2, drawRow, tickMax - tickNum, 0, canvas);
+            view.drawTile(board.getTile(2, insertRow), 3, drawRow, tickMax - tickNum, 0, canvas);
+            view.drawTile(board.getTile(3, insertRow), 4, drawRow, tickMax - tickNum, 0, canvas);
+            view.drawTile(board.getTile(4, insertRow), 5, drawRow, tickMax - tickNum, 0, canvas);
+            view.drawTile(board.getTile(5, insertRow), 6, drawRow, tickMax - tickNum, 0, canvas);
+            view.drawTile(board.getTile(6, insertRow), 7, drawRow, tickMax - tickNum, 0, canvas);
+        }
+        else if (normal) {
             view.drawBlank(canvas, false, drawColumn);
             view.drawTile(board.getExtraTile(), drawColumn, 7, 0, tickNum, canvas);
             view.drawTile(board.getTile(insertColumn, 0), drawColumn, 0, 0, tickNum, canvas);
@@ -86,6 +97,17 @@ public class ShiftAnimation{
             view.drawTile(board.getTile(insertColumn, 4), drawColumn, 4, 0, tickNum, canvas);
             view.drawTile(board.getTile(insertColumn, 5), drawColumn, 5, 0, tickNum, canvas);
             view.drawTile(board.getTile(insertColumn, 6), drawColumn, 6, 0, tickNum, canvas);
+        }
+        else {
+            view.drawBlank(canvas, false, drawColumn);
+            view.drawTile(board.getExtraTile(), drawColumn, 0, 0, tickMax - tickNum, canvas);
+            view.drawTile(board.getTile(insertColumn, 0), drawColumn, 1, 0, tickMax - tickNum, canvas);
+            view.drawTile(board.getTile(insertColumn, 1), drawColumn, 2, 0, tickMax - tickNum, canvas);
+            view.drawTile(board.getTile(insertColumn, 2), drawColumn, 3, 0, tickMax - tickNum, canvas);
+            view.drawTile(board.getTile(insertColumn, 3), drawColumn, 4, 0, tickMax - tickNum, canvas);
+            view.drawTile(board.getTile(insertColumn, 4), drawColumn, 5, 0, tickMax - tickNum, canvas);
+            view.drawTile(board.getTile(insertColumn, 5), drawColumn, 6, 0, tickMax - tickNum, canvas);
+            view.drawTile(board.getTile(insertColumn, 6), drawColumn, 7, 0, tickMax - tickNum, canvas);
         }
 
         tickNum += tickRate;

@@ -19,6 +19,12 @@ public class LabyrinthGameState extends GameState implements Serializable {
     private int lastXInserted;
     private int lastYInserted;
 
+    private int stage;
+
+    public static final int INSERTING = 3000;
+    public static final int MOVING = 3001;
+    public static final int ENDING = 3002;
+
     private ArrayList<PlayerData> players;
 
     /**
@@ -96,6 +102,7 @@ public class LabyrinthGameState extends GameState implements Serializable {
         else if(yy == 6) {
             move(xx, (yy--)%7 );
         }
+        stage = LabyrinthGameState.MOVING;
     }//insertTile
 
     /**
@@ -117,6 +124,7 @@ public class LabyrinthGameState extends GameState implements Serializable {
      */
     public void move(int x, int y) {
         players.get(currentPlayer).movePlayer(x, y);
+        stage = LabyrinthGameState.ENDING;
     }//move
 
 
@@ -130,6 +138,7 @@ public class LabyrinthGameState extends GameState implements Serializable {
         if(currentPlayer == numPlayers) {
             currentPlayer = 0;
         }
+        stage = LabyrinthGameState.INSERTING;
     }
 
 
@@ -224,5 +233,13 @@ public class LabyrinthGameState extends GameState implements Serializable {
      */
     public ArrayList<PlayerData> getPlayers() {
         return players;
+    }
+
+    /**
+     * getStage - returns the stage of the game
+     * @return - int for the stage of the game
+     */
+    public int getStage() {
+        return stage;
     }
 }

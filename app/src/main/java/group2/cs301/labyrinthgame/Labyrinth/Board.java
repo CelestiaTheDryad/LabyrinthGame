@@ -48,6 +48,7 @@ public class Board implements Serializable{
         int teesToAdd = 6;
         int cornersToAdd = 15;
         int treasureTick = 13;
+        int cornerTreasuresToAdd = 6;
         int column = 1;
         int row = 0;
 
@@ -81,6 +82,7 @@ public class Board implements Serializable{
             int type = 0;
 
             boolean successful;
+            boolean addTreasure = false;
 
             //get random tile type
             do {
@@ -94,11 +96,16 @@ public class Board implements Serializable{
                     cornersToAdd--;
                     type = Tile.CORNER;
                     successful = true;
+                    if(cornerTreasuresToAdd > 0) {
+                        cornerTreasuresToAdd--;
+                        addTreasure = true;
+                    }
                 }
                 else if (rand == 2 && teesToAdd > 0){
                     teesToAdd--;
                     type = Tile.TEE;
                     successful = true;
+                    addTreasure = true;
                 }
                 else {
                     successful = false;
@@ -119,10 +126,23 @@ public class Board implements Serializable{
 
             //create the tile in its array spot
             if(i < 33) {
-                gameTiles[column][row] = new Tile(type, orientation, false, false, false, false, treasureTick);
+                if(addTreasure) {
+                    gameTiles[column][row] = new Tile(type, orientation, false, false, false, false, treasureTick);
+                    treasureTick++;
+                }
+                else {
+
+                    gameTiles[column][row] = new Tile(type, orientation, false, false, false, false, 0);
+                }
             }
             else {
-                extraTile = new Tile(type, orientation, false, false, false, false, treasureTick);
+                if(addTreasure) {
+                    extraTile = new Tile(type, orientation, false, false, false, false, treasureTick);
+                    treasureTick++;
+                }
+                else {
+                    extraTile = new Tile(type, orientation, false, false, false, false, 0);
+                }
             }
 
             //move row and column forward
@@ -142,9 +162,6 @@ public class Board implements Serializable{
                     column++;
                 }
             }
-
-            //tick the treasure up one
-            treasureTick++;
         }
 
     }//setNew

@@ -1,6 +1,8 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+
+import group2.cs301.labyrinthgame.R;
 
 /**
  * @author Brendan Thomas
@@ -28,6 +32,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
     private ShiftAnimation shiftAnim;
     private MoveAnimation moveAnim;
     private AnimationThread ticker;
+    private Bitmap[] treasureImages;
 
     public LabyrinthSurfaceView(Context context) {
         super(context);
@@ -61,6 +66,32 @@ public class LabyrinthSurfaceView extends SurfaceView {
         ticker = null;
 
         board = new Board();
+
+        treasureImages = new Bitmap[24];
+        treasureImages[0] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_alarm_bell);
+        treasureImages[1] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_anchor);
+        treasureImages[2] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_bear);
+        treasureImages[3] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_beer);
+        treasureImages[4] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_black_board);
+        treasureImages[5] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_books);
+        treasureImages[6] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_bow);
+        treasureImages[7] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_briefcase);
+        treasureImages[8] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_cake);
+        treasureImages[9] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_candy);
+        treasureImages[10] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_cash_register);
+        treasureImages[11] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_clock);
+        treasureImages[12] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_dna);
+        treasureImages[13] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_dog);
+        treasureImages[14] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_eagle);
+        treasureImages[15] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_grapes);
+        treasureImages[16] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_microscope);
+        treasureImages[17] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_piggy_bank);
+        treasureImages[18] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_pile_of_gold);
+        treasureImages[19] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_pill);
+        treasureImages[20] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_spaceship);
+        treasureImages[21] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_squirrel);
+        treasureImages[22] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_table_lamp);
+        treasureImages[23] = BitmapFactory.decodeResource(getResources(), R.drawable.treasure_telescope);
     }
 
     private void calcStuff(Canvas canvas) {
@@ -268,7 +299,9 @@ public class LabyrinthSurfaceView extends SurfaceView {
             canvas.drawRect(centerLeft - borderSize, centerBottom, centerRight + borderSize, centerBottom + borderSize, darkOrange);
         }
 
-        //TODO draw treasures
+        if(toDraw.getTreasure() != 0) {
+            canvas.drawBitmap(treasureImages[toDraw.getTreasure() - 1], centerLeft - 5, centerTop - 5, null);
+        }
 
     }//drawTile
 
