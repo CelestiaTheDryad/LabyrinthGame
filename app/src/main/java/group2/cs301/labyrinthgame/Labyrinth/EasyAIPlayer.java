@@ -80,7 +80,7 @@ public class EasyAIPlayer extends GameComputerPlayer {
             //first get all my tiles
             //loop through each one at a time
             //if the tile is highlighted and has my treasure, go there and stop
-            //if it is highlighted and farther away than the last highlighted tile, go there  **FIND A WAY TO CALCULATE DISTANCE FROM CURR TILE
+            //if it is highlighted and farther away than the last highlighted tile, go there
             Board currBoard = myState.getGameBoard();
             double curMaxDist = -1;
             int xx = 0;
