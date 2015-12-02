@@ -21,8 +21,9 @@ public class LabyrinthLocalGame extends LocalGame {
     /**
      * This ctor creates a new game state
      */
+    //todo: fix this to allow more players
     public LabyrinthLocalGame() {
-        labyrinthGameState = new LabyrinthGameState(4);
+        labyrinthGameState = new LabyrinthGameState(2);
     }
 
     /**
@@ -40,6 +41,9 @@ public class LabyrinthLocalGame extends LocalGame {
      */
     @Override
     public boolean makeMove(GameAction action) {
+        if(!canMove(getPlayerIdx(action.getPlayer()))) {
+            return false;
+        }
         if(action instanceof InsertTileAction) {
             labyrinthGameState.insertTile(((InsertTileAction) action).getX(), ((InsertTileAction) action).getY());
             return true;

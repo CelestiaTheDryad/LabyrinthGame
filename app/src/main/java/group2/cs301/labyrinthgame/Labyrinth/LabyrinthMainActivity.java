@@ -9,7 +9,8 @@ import group2.cs301.labyrinthgame.Game.config.GameConfig;
 import group2.cs301.labyrinthgame.Game.config.GamePlayerType;
 
 /**
- * Created by R2-D2 on 12/1/15.
+ * @author Created by R2-D2
+ * @version 12/1/15.
  */
 public class LabyrinthMainActivity extends GameMainActivity {
 
