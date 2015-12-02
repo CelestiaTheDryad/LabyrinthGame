@@ -11,7 +11,8 @@ import group2.cs301.labyrinthgame.Labyrinth.NextTurnAction;
 import group2.cs301.labyrinthgame.Labyrinth.RotateTileAction;
 
 /**
- * Created by R2-D2 on 11/22/15.
+ * @author Created by Andrew Williams
+ * @version 11/22/15.
  */
 public class LabyrinthLocalGame extends LocalGame {
 
@@ -68,6 +69,7 @@ public class LabyrinthLocalGame extends LocalGame {
         LabyrinthGameState updatedState = new LabyrinthGameState(labyrinthGameState);
         p.sendInfo(updatedState);
     }//sendUpdatedSate
+
 
     /**
      * Check if the game is over
