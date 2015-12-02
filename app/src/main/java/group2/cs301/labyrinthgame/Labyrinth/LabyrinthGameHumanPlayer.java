@@ -38,6 +38,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     private ImageView targetDisplay;
     private Button nextTurnButton;
     private int curTreasure;
+    private TextView selectTile;
 
     private int[] treasuresResources;
 
@@ -115,7 +116,6 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         playerTurnDisplay.setText("It is the " + playerColor + " player's turn.");
 
         curTreasure = labyrinthGameState.getPlayers().get(labyrinthGameState.getCurrentPlayer()).getCurrentTreasure();
-
 
 
         targetDisplay.setImageResource(treasuresResources[curTreasure]);
@@ -201,6 +201,17 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             surfView.startShiftAnimation(labyrinthGameState.getLastXInserted(), labyrinthGameState.getLastYInserted());
         }
 
+        //set info text
+        if(labyrinthGameState.getStage() == LabyrinthGameState.INSERTING) {
+            selectTile.setText("Rotate and insert the extra tile.");
+        }
+        else if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING) {
+            selectTile.setText("Please select a tile to move.");
+        }
+        else if(labyrinthGameState.getStage() == LabyrinthGameState.ENDING) {
+            selectTile.setText("Press NEXT TURN to end your turn.");
+        }
+
     }
 
 
@@ -219,6 +230,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         extraTileBase = (ImageView) myActivity.findViewById(R.id.extra_tile_base);
         extraTileTreasure = (ImageView) myActivity.findViewById(R.id.extra_tile_treasure);
         extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);
+        selectTile = (TextView) myActivity.findViewById(R.id.select_tile_text);
 
 
         nextTurnButton.setOnClickListener(this);
