@@ -33,6 +33,7 @@ public class AnimationThread extends Thread {
                 //interruption is not an issue
             }
         }
+        view.postInvalidate();
     }
 
     /**

@@ -22,7 +22,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
     private int drawTop;
     private int drawSize;
     private int tileSize;
-    private int borderSize = 5;
+    private int borderSize = 6;
     private Board board;
     private ArrayList<PlayerData> players;
     private ShiftAnimation shiftAnim;
@@ -59,6 +59,8 @@ public class LabyrinthSurfaceView extends SurfaceView {
         moveAnim = null;
         shiftAnim = null;
         ticker = null;
+
+        board = new Board();
     }
 
     private void calcStuff(Canvas canvas) {
@@ -174,6 +176,8 @@ public class LabyrinthSurfaceView extends SurfaceView {
         int tileBottom = drawTop + (row + 1) * tileSize + rowOffset - (borderSize / 2);
 
         //draw the background
+        //disabled because a new random background each time is too much computation
+        /*
         for(int blockLeft = tileLeft; blockLeft < tileRight; blockLeft += 5) {
             for(int blockTop = tileTop; blockTop < tileBottom; blockTop += 5) {
                 int color;
@@ -205,6 +209,10 @@ public class LabyrinthSurfaceView extends SurfaceView {
                 canvas.drawRect(blockLeft, blockTop, blockRight, blockBottom, toColor);
             }
         }//draw background
+        */
+        Paint color = new Paint();
+        color.setColor(lightGrey);
+        canvas.drawRect(tileLeft, tileTop, tileRight, tileBottom, color);
 
         //draw the paths
         int centerTop = (tileSize / 3) + tileTop - (borderSize / 2);
@@ -263,6 +271,17 @@ public class LabyrinthSurfaceView extends SurfaceView {
         //TODO draw treasures
 
     }//drawTile
+
+    public void drawBlank(Canvas canvas, boolean row, int num) {
+        Paint color = new Paint();
+        color.setColor(Color.rgb(112, 56, 13));
+        if(row) {
+            canvas.drawRect(0, drawTop + num * tileSize, canvas.getWidth(), drawTop + (num + 1) * tileSize, color);
+        }
+        else {
+            canvas.drawRect(drawLeft + num * tileSize, 0, drawLeft + (num + 1) * tileSize, canvas.getHeight(), color);
+        }
+    }
 
     /**
      * setBoardToDraw

@@ -12,6 +12,8 @@ public class ShiftAnimation{
 
     private int insertRow;
     private int insertColumn;
+    private int drawRow;
+    private int drawColumn;
     private int tickNum;
     private int tickMax;
     private Board board;
@@ -29,9 +31,11 @@ public class ShiftAnimation{
         board = initBoard;
         insertRow = initRow;
         insertColumn = initColumn;
+        drawRow = insertRow + 1;
+        drawColumn = insertColumn + 1;
         tickMax = tileSize;
         tickNum = 0;
-        if (initColumn == 0) {
+        if (initColumn == 0 || initColumn == 6) {
             horizontal = true;
         }
         else {
@@ -49,6 +53,7 @@ public class ShiftAnimation{
      */
     public void tick(Canvas canvas, LabyrinthSurfaceView view) {
         if (horizontal) {
+            view.drawBlank(canvas, true, drawRow);
             view.drawTile(board.getExtraTile(), 0, insertRow, tickNum, 0, canvas);
             view.drawTile(board.getTile(0, insertRow), 1, insertRow, tickNum, 0, canvas);
             view.drawTile(board.getTile(1, insertRow), 2, insertRow, tickNum, 0, canvas);
@@ -59,6 +64,7 @@ public class ShiftAnimation{
             view.drawTile(board.getTile(6, insertRow), 7, insertRow, tickNum, 0, canvas);
         }
         else {
+            view.drawBlank(canvas, false, drawColumn);
             view.drawTile(board.getExtraTile(), insertColumn, 0, 0, tickNum, canvas);
             view.drawTile(board.getTile(insertColumn, 0), insertColumn, 1, 0, tickNum, canvas);
             view.drawTile(board.getTile(insertColumn, 1), insertColumn, 2, 0, tickNum, canvas);
