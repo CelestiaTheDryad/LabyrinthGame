@@ -39,6 +39,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     private Button nextTurnButton;
     private int curTreasure;
     private TextView selectTile;
+    private boolean hasActionToRun;
 
     private int[] treasuresResources;
 
@@ -86,6 +87,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         if(info instanceof LabyrinthGameState) {
             labyrinthGameState = (LabyrinthGameState)info;
             updateGUI();
+            hasActionToRun = true;
         }
     }
 
@@ -257,6 +259,13 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
+        try {
+            Thread.sleep(500);
+        }
+        catch (InterruptedException e) {
+            //no
+        }
+
         if(v == surfView) {
 
             int height = v.getHeight();
@@ -265,7 +274,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             int touchY = (int)(( ((double)event.getY())/((double)height) ) * 9 ) ;
             int touchX = (int)(( ((double)event.getX())/((double)width) ) * 9 ) ;
 
-            Log.println(Log.VERBOSE, "", ""+ touchY + ", " + touchX);
+            Log.println(Log.VERBOSE, "", ""+ touchX + ", " + touchY);
 
             if(touchY == 0 || touchY == 8 || touchX == 0 || touchX == 8) {
                 return false;
@@ -293,10 +302,6 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         }
         else if(v == extraTileBase || v == extraTileTreasure || v == extraTileHighlight) {
             game.sendAction(new RotateTileAction(this));
-            try {
-                Thread.sleep(100);
-            } catch (Exception fuck) {}
-            return true;
         }
 
         return false;

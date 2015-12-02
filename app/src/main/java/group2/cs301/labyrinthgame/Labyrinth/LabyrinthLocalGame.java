@@ -46,11 +46,13 @@ public class LabyrinthLocalGame extends LocalGame {
         }
         if(action instanceof InsertTileAction) {
             labyrinthGameState.insertTile(((InsertTileAction) action).getX(), ((InsertTileAction) action).getY());
+            labyrinthGameState.setStage(LabyrinthGameState.MOVING);
             labyrinthGameState.highlightToMove(labyrinthGameState.getCurrentPlayer());
             return true;
         }
         else if(action instanceof MoveAction) {
             labyrinthGameState.move(((MoveAction) action).getX(), ((MoveAction) action).getY());
+            labyrinthGameState.setStage(LabyrinthGameState.ENDING);
             labyrinthGameState.clearHighlights();
             return true;
         }
@@ -60,6 +62,7 @@ public class LabyrinthLocalGame extends LocalGame {
         }
         else if(action instanceof NextTurnAction) {
             labyrinthGameState.nextTurn();
+            labyrinthGameState.setStage(LabyrinthGameState.INSERTING);
             labyrinthGameState.highlightToInsert();
             return true;
         }

@@ -22,8 +22,8 @@ public class MoveAction extends GameAction {
      */
     public MoveAction(GamePlayer player, int xx, int yy) {
         super(player);
-        int x = xx;
-        int y = yy;
+        x = xx;
+        y = yy;
     }//ctor
 
     //basic getter functions
