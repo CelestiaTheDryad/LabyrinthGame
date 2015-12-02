@@ -29,7 +29,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
                 return new EasyAIPlayer(name);
             }});
 
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 4, "Labyrinth", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Labyrinth", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: Easy AI
         defaultConfig.setRemoteData("Remote Player", "", 0);
