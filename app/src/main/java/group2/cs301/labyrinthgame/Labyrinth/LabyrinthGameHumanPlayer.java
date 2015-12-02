@@ -2,6 +2,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 
 import android.media.Image;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -161,8 +162,36 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     public boolean onTouch(View v, MotionEvent event) {
 
         if(v == surfView) {
-            v.getHeight();
 
+            int height = v.getHeight();
+            int width = v.getWidth();
+
+            int touchY = (int)(( ((double)event.getY())/((double)height) ) * 9 ) ;
+            int touchX = (int)(( ((double)event.getX())/((double)width) ) * 9 ) ;
+
+            Log.println(Log.VERBOSE, "", ""+ touchY + ", " + touchX);
+
+            if(touchY == 0 || touchY == 8 || touchX == 0 || touchX == 8) {
+                return false;
+            }
+
+            touchY--;
+            touchX--;
+            //0-6
+
+            if(labyrinthGameState.getStage() == LabyrinthGameState.INSERTING) {
+                if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
+                    game.sendAction(new InsertTileAction(this, touchX, touchY));
+                }
+            }
+            else if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING) {
+                if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
+                    game.sendAction(new MoveAction(this, touchX, touchY));
+                }
+            }
+            else {
+                return false;
+            }
 
             return true;
         }
