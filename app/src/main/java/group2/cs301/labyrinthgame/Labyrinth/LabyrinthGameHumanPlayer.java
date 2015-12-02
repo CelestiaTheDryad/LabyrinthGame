@@ -280,6 +280,9 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         }
         else if(v == extraTileBase || v == extraTileTreasure || v == extraTileHighlight) {
             game.sendAction(new RotateTileAction(this));
+            try {
+                Thread.sleep(100);
+            } catch (Exception fuck) {}
             return true;
         }
 
