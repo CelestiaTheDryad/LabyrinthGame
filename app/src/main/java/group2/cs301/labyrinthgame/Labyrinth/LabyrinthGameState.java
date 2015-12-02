@@ -83,6 +83,8 @@ public class LabyrinthGameState extends GameState implements Serializable {
         numPlayers = toCopy.numPlayers;
         lastXInserted = toCopy.lastXInserted;
         lastYInserted = toCopy.lastYInserted;
+
+        stage = toCopy.stage;
     }//ctor
 
     /*
