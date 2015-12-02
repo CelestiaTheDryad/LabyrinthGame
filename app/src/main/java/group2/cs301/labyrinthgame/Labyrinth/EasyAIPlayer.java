@@ -50,61 +50,70 @@ public class EasyAIPlayer extends GameComputerPlayer {
         else
             return;
 
-        //don't do anything if it is not my turn
-        if(myState.getCurrentPlayer() != super.playerNum)
-            return;
+        //only do things if it is my turn
+        if(myState.getCurrentPlayer() == playerNum){
+            //First Action to send is Insert
+            if(myState.getStage() == LabyrinthGameState.INSERTING){
+                int[] val = Board.INSERT_LOCATIONS[(int) Math.random() *12];
+                int xx = val[0];
+                int yy = val[1];
+                game.sendAction(new InsertTileAction(this, xx, yy));
+                return;
+            }//if
+            else if(myState.getStage() == LabyrinthGameState.MOVING){
+                //if we are not inserting, we must be moving
+                PlayerData myData = myState.getPlayers().get(playerNum);
+                myState.highlightToMove(playerNum);
 
-        if(myState.getStage() == LabyrinthGameState.INSERTING){
-            boolean thing = true;
-            int x;
-            int y;
-            do {
-                int rand = (int) (Math.random() * 12);
-                x = Board.INSERT_LOCATIONS[rand][0];
-                y = Board.INSERT_LOCATIONS[rand][1];
-                if (x != ((LabyrinthGameState) info).getLastXInserted() || y != ((LabyrinthGameState) info).getLastYInserted()) {
-                    thing = false;
+                //first get all my tiles
+                //loop through each one at a time
+                //if the tile is highlighted and has my treasure, go there and stop
+                //if it is highlighted and farther away than the last highlighted tile, go there
+                Board currBoard = myState.getGameBoard();
+                double curMaxDist = -1;
+                //Get my x,y and the targetX, targetY
+                int myX = myData.getXposition();
+                int myY = myData.getYposition();
+                int tarX = myX;
+                int tarY = myY;
+                //loop through the tiles and find where to move
+                for(int x = 0; x < 7; x++){
+                    for(int y = 0; y < 7; y++){
+                        Tile thisTile = currBoard.getTile(x,y);
+                        if(thisTile.isHighlighted() && (thisTile.getTreasure() == myData.getCurrentTreasure())){
+                            curMaxDist = -1;
+                            game.sendAction(new MoveAction(this, x, y));
+                            return;
+                        }
+                        //calculate the furthest tile away and store that tile's x and y coords
+                        if(thisTile.isHighlighted()){
+                            double thisDist = findDist(myX,myY,x,y);
+                            if(curMaxDist < thisDist){
+                                tarX = x;
+                                tarY = y;
+                            }
+                        }
+                    }
                 }
-            } while (thing);
-            game.sendAction(new InsertTileAction(this, x, y));
-        }//if
-        else if(myState.getStage() == LabyrinthGameState.MOVING){
-            PlayerData myData = myState.getPlayers().get(super.playerNum);
-            myState.highlightToMove(super.playerNum);
-
-            //first get all my tiles
-            //loop through each one at a time
-            //if the tile is highlighted and has my treasure, go there and stop
-            //if it is highlighted and farther away than the last highlighted tile, go there
-            Board currBoard = myState.getGameBoard();
-            double curMaxDist = -1;
-            int xx = 0;
-            int yy = 0;
-            for(int x = 0; x < 7; x++){
-                for(int y = 0; y < 7; y++){
-                    Tile thisTile = currBoard.getTile(x,y);
-                    if(thisTile.isHighlighted() && (thisTile.getTreasure() == myData.getCurrentTreasure())){
-                        curMaxDist = -1;
-                        game.sendAction(new MoveAction(this, x, y));
-                        return;
-                    }
-                    //calculate the furthest tile away and store that tile's x and y coords
-                    double dist = (x - myData.getXposition()) * (x - myData.getXposition());
-                    dist += (y - myData.getYposition()) * (y - myData.getYposition());
-                    dist = Math.sqrt(dist);
-                    if(dist > curMaxDist){
-                        //holds the x,y values that we want to go to
-                        xx = x;
-                        yy = y;
-                    }
+                //if we did not move to a treasure tile, move now
+                if(curMaxDist != -1) {
+                    game.sendAction(new MoveAction(this, myX, myY));
+                    return;
                 }
             }
-            //if we did not move to a treasure tile, move now
-            game.sendAction(new MoveAction(this, xx, yy));
+            else if(myState.getStage() == LabyrinthGameState.ENDING){
+                //end our turn last
+                game.sendAction(new NextTurnAction(this));
+                return;
+            }
         }
-        else if(myState.getStage() == LabyrinthGameState.ENDING){
-            //end our turn last
-            game.sendAction(new NextTurnAction(this));
-        }
+    }
+
+    //pythagorean theorem to find distance between 2 points
+    private double findDist(int myX, int myY, int tarX, int tarY){
+        double dist = (myX - tarY) * (myX - tarX);
+        dist += (myY - tarY) * (myY - tarY);
+        dist = Math.sqrt(dist);
+        return dist;
     }
 }
