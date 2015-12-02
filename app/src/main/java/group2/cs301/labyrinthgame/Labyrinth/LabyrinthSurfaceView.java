@@ -164,7 +164,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
      * @param rowOffset - the number of pixels to offset the tile's row by
      * @param canvas - the canvas to draw the tile on
      */
-    public void drawTile(Tile toDraw, int column, int row, int rowOffset, int columnOffset, Canvas canvas) {
+    public void drawTile(Tile toDraw, int column, int row, int columnOffset, int rowOffset, Canvas canvas) {
         int lightGrey = Color.rgb(200,200,200);
         int medGrey = Color.rgb(125,125,125);
         int darkGrey = Color.rgb(50,50,50);
@@ -332,7 +332,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
      *
      * @return - true if there is an animation going, false if not
      */
-    private boolean animRunning() {
+    public boolean animRunning() {
         return shiftAnim!= null || moveAnim != null;
     }//animRunning
 }

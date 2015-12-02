@@ -18,6 +18,7 @@ public class ShiftAnimation{
     private int tickMax;
     private Board board;
     private boolean horizontal;
+    private boolean normal;
 
     /**
      * constructor for a shift animation
@@ -35,11 +36,21 @@ public class ShiftAnimation{
         drawColumn = insertColumn + 1;
         tickMax = tileSize;
         tickNum = 0;
-        if (initColumn == 0 || initColumn == 6) {
+        if (initColumn == 0) {
             horizontal = true;
+            normal = true;
+        }
+        else if (initColumn == 6) {
+            horizontal = true;
+            normal = false;
+        }
+        else if (initRow == 0) {
+            horizontal = false;
+            normal = true;
         }
         else {
             horizontal = false;
+            normal = false;
         }
     }//ctor
 
@@ -52,7 +63,7 @@ public class ShiftAnimation{
      * @param view - the parent view for drawing methods
      */
     public void tick(Canvas canvas, LabyrinthSurfaceView view) {
-        if (horizontal) {
+        if (horizontal && normal) {
             view.drawBlank(canvas, true, drawRow);
             view.drawTile(board.getExtraTile(), 0, insertRow, tickNum, 0, canvas);
             view.drawTile(board.getTile(0, insertRow), 1, insertRow, tickNum, 0, canvas);
