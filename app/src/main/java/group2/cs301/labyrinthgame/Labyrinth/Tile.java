@@ -1,5 +1,7 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
@@ -72,7 +74,7 @@ public class Tile implements Serializable {
      *
      * @param toCopy
      */
-    public Tile(Tile toCopy) {
+    public Tile(@NonNull Tile toCopy) {
         type = toCopy.type;
         rotation = toCopy.rotation;
 
@@ -83,6 +85,7 @@ public class Tile implements Serializable {
 //        playersPresent[3] = toCopy.playersPresent[3];
 
         treasure = toCopy.treasure;
+        highlighted = toCopy.highlighted;
     }//ctor
 
     /**
@@ -107,6 +110,7 @@ public class Tile implements Serializable {
         if(highlighted) {
             return;
         }
+        highlighted = true;
         if(tileUpwards != null) {
             tileUpwards.highlightPaths();
         }
@@ -119,7 +123,6 @@ public class Tile implements Serializable {
         if(tileLeftWards != null) {
             tileLeftWards.highlightPaths();
         }
-        highlighted = true;
     }//highlightPaths
 
     /**

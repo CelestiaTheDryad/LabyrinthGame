@@ -11,7 +11,8 @@ import group2.cs301.labyrinthgame.Labyrinth.NextTurnAction;
 import group2.cs301.labyrinthgame.Labyrinth.RotateTileAction;
 
 /**
- * Created by R2-D2 on 11/22/15.
+ * @author Created by Andrew Williams
+ * @version 11/22/15.
  */
 public class LabyrinthLocalGame extends LocalGame {
 
@@ -20,8 +21,9 @@ public class LabyrinthLocalGame extends LocalGame {
     /**
      * This ctor creates a new game state
      */
+    //todo: fix this to allow more players
     public LabyrinthLocalGame() {
-        labyrinthGameState = new LabyrinthGameState(4);
+        labyrinthGameState = new LabyrinthGameState(2);
     }
 
     /**
@@ -39,12 +41,17 @@ public class LabyrinthLocalGame extends LocalGame {
      */
     @Override
     public boolean makeMove(GameAction action) {
+        if(!canMove(getPlayerIdx(action.getPlayer()))) {
+            return false;
+        }
         if(action instanceof InsertTileAction) {
             labyrinthGameState.insertTile(((InsertTileAction) action).getX(), ((InsertTileAction) action).getY());
+            labyrinthGameState.highlightToMove(labyrinthGameState.getCurrentPlayer());
             return true;
         }
         else if(action instanceof MoveAction) {
             labyrinthGameState.move(((MoveAction) action).getX(), ((MoveAction) action).getY());
+            labyrinthGameState.clearHighlights();
             return true;
         }
         else if(action instanceof RotateTileAction) {
@@ -53,6 +60,7 @@ public class LabyrinthLocalGame extends LocalGame {
         }
         else if(action instanceof NextTurnAction) {
             labyrinthGameState.nextTurn();
+            labyrinthGameState.highlightToInsert();
             return true;
         }
 
@@ -68,6 +76,7 @@ public class LabyrinthLocalGame extends LocalGame {
         LabyrinthGameState updatedState = new LabyrinthGameState(labyrinthGameState);
         p.sendInfo(updatedState);
     }//sendUpdatedSate
+
 
     /**
      * Check if the game is over

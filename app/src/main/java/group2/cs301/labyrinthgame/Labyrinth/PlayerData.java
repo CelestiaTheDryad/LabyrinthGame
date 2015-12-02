@@ -22,7 +22,7 @@ public class PlayerData implements Serializable{
     private int currentTreasure;
     private int playerColor;
 
-    public PlayerData(int X, int Y) {
+    public PlayerData(int X, int Y, int[] initTreasures) {
         Yposition = Y;
         Xposition = X;
         Ystart = Y;
@@ -30,26 +30,44 @@ public class PlayerData implements Serializable{
         if (X == 0 && Y == 0) {
             playerColor = Color.RED;
         }
-        else if (X == 0 && Y == 6) {
+        else if (X == 6 && Y == 0) {
             playerColor = Color.BLUE;
         }
-        else if (X == 6 && Y == 0) {
-            playerColor = Color.rgb(200,100,0);
+        else if (X == 0 && Y == 6) {
+            playerColor = Color.rgb(255,130,0);
         }
         else if (X == 6 && Y == 6) {
             playerColor = Color.GREEN;
         }
-        treasures= new int[LabyrinthGameState.MAX_NUM_CARDS];
+        treasures = initTreasures;
         currentTreasure = 0;
     }
 
     public PlayerData(PlayerData toCopy) {
         this.Xposition = toCopy.Xposition;
         this.Yposition = toCopy.Yposition;
+
         this.treasures = new int[LabyrinthGameState.MAX_NUM_CARDS];
         for(int i = 0; i < LabyrinthGameState.MAX_NUM_CARDS; i++) {
             this.treasures[i] = toCopy.treasures[i];
         }
+
+        Ystart = toCopy.Ystart;
+        Xstart = toCopy.Xstart;
+        if (Xstart == 0 && Ystart == 0) {
+            playerColor = Color.RED;
+        }
+        else if (Xstart == 6 && Ystart == 0) {
+            playerColor = Color.BLUE;
+        }
+        else if (Xstart == 0 && Ystart == 6) {
+            playerColor = Color.rgb(255,130,0);
+        }
+        else if (Xstart == 6 && Ystart == 6) {
+            playerColor = Color.GREEN;
+        }
+
+
 
         this.currentTreasure = toCopy.currentTreasure;
     }
@@ -60,6 +78,11 @@ public class PlayerData implements Serializable{
      */
     public int getCurrentTreasure() {
         return treasures[currentTreasure];
+    }
+
+
+    public int getRemainingTreasures() {
+        return LabyrinthGameState.MAX_NUM_CARDS - currentTreasure;
     }
 
 
@@ -106,5 +129,7 @@ public class PlayerData implements Serializable{
         }
         return false;
     }
+
+    public int getPlayerColor() {return playerColor;}
 
 }
