@@ -132,53 +132,53 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_0);
             }
-            if(extraTile.getRotation() == Tile.RIGHT)
+            else if(extraTile.getRotation() == Tile.RIGHT)
             {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_1);
             }
-            if(extraTile.getRotation() == Tile.DOWN)
+            else if(extraTile.getRotation() == Tile.DOWN)
             {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_2);
             }
-            if(extraTile.getRotation() == Tile.LEFT)
+            else if(extraTile.getRotation() == Tile.LEFT)
             {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_3);
             }
         }
-        if(extraTile.getType() == Tile.TEE)
+        else if(extraTile.getType() == Tile.TEE)
         {
             if(extraTile.getRotation() == Tile.UP)
             {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_3);
             }
-            if(extraTile.getRotation() == Tile.RIGHT)
+            else if(extraTile.getRotation() == Tile.RIGHT)
             {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_0);
             }
-            if(extraTile.getRotation() == Tile.DOWN)
+            else if(extraTile.getRotation() == Tile.DOWN)
             {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_1);
             }
-            if(extraTile.getRotation() == Tile.LEFT)
+            else if(extraTile.getRotation() == Tile.LEFT)
             {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_2);
             }
         }
-        if(extraTile.getType() == Tile.LINE)
+        else if(extraTile.getType() == Tile.LINE)
         {
             if(extraTile.getRotation() == Tile.UP)
             {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_0);
             }
-            if(extraTile.getRotation() == Tile.RIGHT)
+            else if(extraTile.getRotation() == Tile.RIGHT)
             {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_1);
             }
-            if(extraTile.getRotation() == Tile.DOWN)
+            else if(extraTile.getRotation() == Tile.DOWN)
             {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_0);
             }
-            if(extraTile.getRotation() == Tile.LEFT)
+            else if(extraTile.getRotation() == Tile.LEFT)
             {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_1);
             }
