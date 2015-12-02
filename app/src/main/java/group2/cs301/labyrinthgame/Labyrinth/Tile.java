@@ -1,5 +1,7 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
@@ -72,7 +74,7 @@ public class Tile implements Serializable {
      *
      * @param toCopy
      */
-    public Tile(Tile toCopy) {
+    public Tile(@NonNull Tile toCopy) {
         type = toCopy.type;
         rotation = toCopy.rotation;
 

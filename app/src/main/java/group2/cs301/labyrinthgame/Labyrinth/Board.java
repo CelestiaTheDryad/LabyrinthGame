@@ -34,7 +34,7 @@ public class Board implements Serializable{
                 gameTiles[i][j] = new Tile(toCopy.gameTiles[i][j]);
             }
         }
-        extraTile = new Tile(extraTile);
+        extraTile = new Tile(toCopy.extraTile);
     }//ctor
 
     /**

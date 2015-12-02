@@ -215,7 +215,10 @@ public class LabyrinthSurfaceView extends SurfaceView {
             Paint color = new Paint();
             color.setColor(player.getPlayerColor());
 
-            canvas.drawCircle(drawLeft + (column + 1) * tileSize + columnOffset, drawTop + (row + 1) * tileSize + rowOffset, 15, color);
+            int xPos = drawLeft + (column + 1) * tileSize + columnOffset + tileSize / 2;
+            int yPos = drawTop + (row + 1) * tileSize + rowOffset + tileSize / 2;
+
+            canvas.drawCircle(xPos, yPos, 15, color);
         }
     }
 
