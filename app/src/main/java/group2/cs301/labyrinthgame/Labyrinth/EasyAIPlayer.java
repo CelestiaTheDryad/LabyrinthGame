@@ -12,12 +12,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
  * @version 12/1/15
  */
 public class EasyAIPlayer extends GameComputerPlayer {
-    //vars to determine which part of the turn to take
-    private boolean isActionInsert;
-    private boolean isActionMove;
-    //holds my state
-    private LabyrinthGameState myState;
-
+    private LabyrinthGameState myState;  //holds my state
 
     /*
     * EasyAIPlayer()
@@ -25,9 +20,6 @@ public class EasyAIPlayer extends GameComputerPlayer {
     */
     public EasyAIPlayer(){
         super("Easy AI");
-        //init turn segregation vars
-        isActionInsert = true;
-        isActionMove = false;
     }
 
     @Override
@@ -63,16 +55,14 @@ public class EasyAIPlayer extends GameComputerPlayer {
             return;
 
         //First Action to send is Insert
-        if(isActionInsert){
+        if(myState.getStage() == LabyrinthGameState.INSERTING){
             int[] val = Board.INSERT_LOCATIONS[(int) Math.random() *12];
             int xx = val[0];
             int yy = val[1];
-            isActionInsert = false;
-            isActionMove = true;
             game.sendAction(new InsertTileAction(this, xx, yy));
             return;
         }//if
-        else if(isActionMove){
+        else if(myState.getStage() == LabyrinthGameState.MOVING){
             //if we are not inserting, we must be moving
             PlayerData myData = myState.getPlayers().get(super.playerNum);
             myState.highlightToMove(super.playerNum);
@@ -90,7 +80,6 @@ public class EasyAIPlayer extends GameComputerPlayer {
                     Tile thisTile = currBoard.getTile(x,y);
                     if(thisTile.isHighlighted() && (thisTile.getTreasure() == myData.getCurrentTreasure())){
                         curMaxDist = -1;
-                        isActionMove = false;
                         game.sendAction(new MoveAction(this, x, y));
                         return;
                     }
@@ -107,15 +96,12 @@ public class EasyAIPlayer extends GameComputerPlayer {
             }
             //if we did not move to a treasure tile, move now
             if(curMaxDist != -1) {
-                isActionMove = false;
                 game.sendAction(new MoveAction(this, xx, yy));
                 return;
             }
         }
-        else{
+        else if(myState.getStage() == LabyrinthGameState.ENDING){
             //end our turn last
-            isActionInsert = true;
-            isActionMove = false;
             game.sendAction(new NextTurnAction(this));
             return;
         }
