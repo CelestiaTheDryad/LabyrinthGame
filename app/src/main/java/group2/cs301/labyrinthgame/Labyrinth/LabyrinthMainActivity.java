@@ -31,7 +31,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
             }});
 
         GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Labyrinth", PORT_NUMBER);
-        //todo: swapped id's
+        //todo: unswapped id's
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: Easy AI
         defaultConfig.setRemoteData("Remote Player", "", 0);
