@@ -102,19 +102,19 @@ public class LabyrinthGameState extends GameState implements Serializable {
         this.linkTiles();
         lastXInserted = xx;
         lastYInserted = yy;
-
-        if(xx == 0) {
-            move( (xx++)%7, yy);
-        }
-        else if(xx == 6) {
-            move( (xx--)%7 , yy);
-        }
-        else if(yy == 0) {
-            move(xx, (yy++)%7 );
-        }
-        else if(yy == 6) {
-            move(xx, (yy--) % 7);
-        }
+//todo: fix this shit
+//        if(xx == 0) {
+//            move( (xx++)%7, yy);
+//        }
+//        else if(xx == 6) {
+//            move( (xx--)%7, yy);
+//        }
+//        else if(yy == 0) {
+//            move(xx, (yy++)%7 );
+//        }
+//        else if(yy == 6) {
+//            move(xx, (yy--)%7 );
+//        }
         stage = LabyrinthGameState.MOVING;
     }//insertTile
 
@@ -138,6 +138,9 @@ public class LabyrinthGameState extends GameState implements Serializable {
     public void move(int x, int y) {
         players.get(currentPlayer).movePlayer(x, y);
         stage = LabyrinthGameState.ENDING;
+        if(players.get(currentPlayer).takeTreasure(gameBoard.getTile(x,y).getTreasure()) ) {
+            gameBoard.getTile(x,y).setTreasure(0);
+        }
     }//move
 
 
