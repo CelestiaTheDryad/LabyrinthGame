@@ -39,7 +39,9 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     private Button nextTurnButton;
     private int curTreasure;
     private TextView selectTile;
-    private boolean hasActionToRun;
+    private boolean doAction;
+    private boolean doAnim;
+    private int lastStateStage;
 
     private int[] treasuresResources;
 
@@ -84,10 +86,27 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     @Override
     public void receiveInfo(GameInfo info) {
         int i = 0;
+
+        //DEBUG
+        try {
+            Thread.sleep(50);
+        }
+        catch (InterruptedException e) {
+            //meh
+        }
+
+        //update everything if it's a gameState
         if(info instanceof LabyrinthGameState) {
             labyrinthGameState = (LabyrinthGameState)info;
             updateGUI();
-            hasActionToRun = true;
+            doAction = true;
+            if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING
+                    && lastStateStage != LabyrinthGameState.MOVING) {
+                doAnim = true;
+            }
+            if(labyrinthGameState.getStage() != lastStateStage) {
+                lastStateStage = labyrinthGameState.getStage();
+            }
         }
     }
 
@@ -97,109 +116,81 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
         String playerColor;
 
-        if(labyrinthGameState.getCurrentPlayer() == 0)
-        {
+        if(labyrinthGameState.getCurrentPlayer() == 0) {
             playerColor = "red";
-
         }
-        else if (labyrinthGameState.getCurrentPlayer() == 1)
-        {
+        else if (labyrinthGameState.getCurrentPlayer() == 1) {
             playerColor = "blue";
         }
-        else if(labyrinthGameState.getCurrentPlayer() == 2)
-        {
+        else if(labyrinthGameState.getCurrentPlayer() == 2) {
             playerColor = "orange";
         }
-        else
-        {
+        else {
             playerColor = "green";
         }
 
         playerTurnDisplay.setText("It is the " + playerColor + " player's turn.");
-
         curTreasure = labyrinthGameState.getPlayers().get(labyrinthGameState.getCurrentPlayer()).getCurrentTreasure();
-
-
         targetDisplay.setImageResource(treasuresResources[curTreasure]);
-
         int remainingTreasures = labyrinthGameState.getCurrentPlayerData().getRemainingTreasures();
-
         targetCountDisplay.setText("You have " + remainingTreasures + " to collect.");
 
         Tile extraTile = labyrinthGameState.getGameBoard().getExtraTile();
-
-        if(extraTile.getType() == Tile.CORNER)
-        {
-            if(extraTile.getRotation() == Tile.UP)
-            {
+        if(extraTile.getType() == Tile.CORNER) {
+            if(extraTile.getRotation() == Tile.UP) {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_0);
             }
-            else if(extraTile.getRotation() == Tile.RIGHT)
-            {
+            else if(extraTile.getRotation() == Tile.RIGHT) {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_1);
             }
-            else if(extraTile.getRotation() == Tile.DOWN)
-            {
+            else if(extraTile.getRotation() == Tile.DOWN) {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_2);
             }
-            else if(extraTile.getRotation() == Tile.LEFT)
-            {
+            else if(extraTile.getRotation() == Tile.LEFT) {
                 extraTileBase.setImageResource(R.drawable.tile_corner_rot_3);
             }
         }
-        else if(extraTile.getType() == Tile.TEE)
-        {
-            if(extraTile.getRotation() == Tile.UP)
-            {
+        else if(extraTile.getType() == Tile.TEE) {
+            if(extraTile.getRotation() == Tile.UP) {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_3);
             }
-            else if(extraTile.getRotation() == Tile.RIGHT)
-            {
+            else if(extraTile.getRotation() == Tile.RIGHT) {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_0);
             }
-            else if(extraTile.getRotation() == Tile.DOWN)
-            {
+            else if(extraTile.getRotation() == Tile.DOWN) {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_1);
             }
-            else if(extraTile.getRotation() == Tile.LEFT)
-            {
+            else if(extraTile.getRotation() == Tile.LEFT) {
                 extraTileBase.setImageResource(R.drawable.tile_cross_rot_2);
             }
         }
-        else if(extraTile.getType() == Tile.LINE)
-        {
-            if(extraTile.getRotation() == Tile.UP)
-            {
+        else if(extraTile.getType() == Tile.LINE) {
+            if(extraTile.getRotation() == Tile.UP) {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_0);
             }
-            else if(extraTile.getRotation() == Tile.RIGHT)
-            {
+            else if(extraTile.getRotation() == Tile.RIGHT) {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_1);
             }
-            else if(extraTile.getRotation() == Tile.DOWN)
-            {
+            else if(extraTile.getRotation() == Tile.DOWN) {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_0);
             }
-            else if(extraTile.getRotation() == Tile.LEFT)
-            {
+            else if(extraTile.getRotation() == Tile.LEFT) {
                 extraTileBase.setImageResource(R.drawable.tile_line_rot_1);
             }
         }
 
         extraTileTreasure.setImageResource(treasuresResources[extraTile.getTreasure()]);
 
-        if(extraTile.isHighlighted())
-        {
+        if(extraTile.isHighlighted()) {
             extraTileHighlight.setImageResource(R.drawable.tile_highlight);
         }
-        else
-        {
+        else {
             extraTileHighlight.setImageResource(R.drawable.tile_blank);
         }
 
         surfView.postInvalidate();
 
-        if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING) {
+        if(doAnim) {
             surfView.startShiftAnimation(labyrinthGameState.getLastXInserted(), labyrinthGameState.getLastYInserted());
         }
 
@@ -247,7 +238,8 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     @Override
     public void onClick(View v) {
 
-        if(v == nextTurnButton && labyrinthGameState.getStage() == LabyrinthGameState.ENDING) {
+        if(v == nextTurnButton && labyrinthGameState.getStage() == LabyrinthGameState.ENDING
+                && doAction && !surfView.animRunning()) {
             game.sendAction(new NextTurnAction(this));
 
             Log.println(Log.VERBOSE, "", "nextTurn");
@@ -257,13 +249,6 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-//        try {
-//            Thread.sleep(500);
-//        }
-//        catch (InterruptedException e) {
-//            //no
-//        }
 
         if(v == surfView) {
 
@@ -283,13 +268,15 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             touchX--;
             //0-6
 
-            if(labyrinthGameState.getStage() == LabyrinthGameState.INSERTING) {
+            if(labyrinthGameState.getStage() == LabyrinthGameState.INSERTING
+                    && doAction && !surfView.animRunning()) {
                 if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
                     game.sendAction(new InsertTileAction(this, touchX, touchY));
                     Log.println(Log.VERBOSE, "", "insert");
                 }
             }
-            else if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING) {
+            else if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING
+                    && doAction && !surfView.animRunning()) {
                 if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
                     game.sendAction(new MoveAction(this, touchX, touchY));
                     Log.println(Log.VERBOSE, "", "move");
@@ -301,7 +288,9 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
             return true;
         }
-        else if(v == extraTileBase || v == extraTileTreasure || v == extraTileHighlight) {
+        else if((v == extraTileBase || v == extraTileTreasure || v == extraTileHighlight)&&
+                labyrinthGameState.getStage() == LabyrinthGameState.INSERTING
+                && doAction && !surfView.animRunning()) {
             game.sendAction(new RotateTileAction(this));
             Log.println(Log.VERBOSE, "", "rotate");
         }
