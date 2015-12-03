@@ -119,14 +119,18 @@ public class PlayerData implements Serializable{
      * @return whether or not it took the treasure
      */
     public boolean takeTreasure(int takenTreasure) {
-        if(currentTreasure >= LabyrinthGameState.MAX_NUM_CARDS) {
+        try {
+            if (currentTreasure >= LabyrinthGameState.MAX_NUM_CARDS) {
+                return false;
+            }
+            if (treasures[currentTreasure] == takenTreasure) {
+                currentTreasure++;
+                return true;
+            }
+            return false;
+        } catch(ArrayIndexOutOfBoundsException aioobe) {
             return false;
         }
-        if(treasures[currentTreasure] == takenTreasure) {
-            currentTreasure++;
-            return true;
-        }
-        return false;
     }
 
     public int getXposition() {
