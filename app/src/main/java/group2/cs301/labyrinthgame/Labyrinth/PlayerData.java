@@ -21,8 +21,9 @@ public class PlayerData implements Serializable{
     // current treasure to search for
     private int currentTreasure;
     private int playerColor;
+    private int playerID;
 
-    public PlayerData(int X, int Y, int[] initTreasures) {
+    public PlayerData(int X, int Y, int[] initTreasures, int initID) {
         Yposition = Y;
         Xposition = X;
         Ystart = Y;
@@ -41,6 +42,7 @@ public class PlayerData implements Serializable{
         }
         treasures = initTreasures;
         currentTreasure = 0;
+        playerID = initID;
     }
 
     public PlayerData(PlayerData toCopy) {
@@ -67,8 +69,7 @@ public class PlayerData implements Serializable{
             playerColor = Color.GREEN;
         }
 
-
-
+        this.playerID = toCopy.playerID;
         this.currentTreasure = toCopy.currentTreasure;
     }
 
@@ -131,5 +132,7 @@ public class PlayerData implements Serializable{
     }
 
     public int getPlayerColor() {return playerColor;}
+
+    public int getPlayerID() {return playerID;}
 
 }
