@@ -100,7 +100,6 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         if(labyrinthGameState.getCurrentPlayer() == 0)
         {
             playerColor = "red";
-
         }
         else if (labyrinthGameState.getCurrentPlayer() == 1)
         {
@@ -275,7 +274,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
             Log.println(Log.VERBOSE, "", ""+ touchX + ", " + touchY);
 
-            if(touchY == 0 || touchY == 8 || touchX == 0 || touchX == 8) {
+            if(touchY <= 0 || touchY >= 8 || touchX <= 0 || touchX >= 8) {
                 return false;
             }
 

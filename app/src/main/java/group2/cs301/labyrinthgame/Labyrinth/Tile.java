@@ -143,6 +143,14 @@ public class Tile implements Serializable {
     public int getTreasure() {return treasure;}//getTreasure
 
     /**
+     * setTreasure
+     *
+     * sets the treasure, used to remove taken treasures from the board
+     * @param initTreasure the treasure to set for this tile
+     */
+    public void setTreasure(int initTreasure) { treasure = initTreasure; }
+
+    /**
      * getType
      *
      * get method for the tile's type

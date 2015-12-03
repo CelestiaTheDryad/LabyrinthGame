@@ -171,6 +171,10 @@ public class LabyrinthGameState extends GameState implements Serializable {
      */
     public void move(int x, int y) {
         players.get(currentPlayer).movePlayer(x, y);
+        stage = LabyrinthGameState.ENDING;
+        if(players.get(currentPlayer).takeTreasure(gameBoard.getTile(x,y).getTreasure()) ) {
+            gameBoard.getTile(x,y).setTreasure(0);
+        }
     }//move
 
     /**

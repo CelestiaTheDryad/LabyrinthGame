@@ -19,7 +19,7 @@ public class PlayerData implements Serializable{
     // 1-24 == treasure ID
     private int[] treasures;
     // current treasure to search for
-    private int currentTreasure;
+    private int currentTreasure; //index of treasures array
     private int playerColor;
     private int playerID;
 
@@ -88,9 +88,10 @@ public class PlayerData implements Serializable{
 
 
     /**
-     * todo
-     * @param initX
-     * @param initY
+     * movePlayer
+     *
+     * @param initX - The X position to move the player to
+     * @param initY - The X position to move the player to
      */
     public void movePlayer(int initX, int initY) {
         Xposition = initX;
@@ -98,13 +99,22 @@ public class PlayerData implements Serializable{
     }
 
 
-    //todo
+    /**
+     * getTreasures
+     *
+     * @return returns the array of all treasures for this player
+     */
     public int[] getTreasures() {
         return treasures;
     }
 
 
-
+    /**
+     * takeTreasure
+     *
+     * @param takenTreasure - the treasure to be captured
+     * @return whether or not it took the treasure
+     */
     public boolean takeTreasure(int takenTreasure) {
         if(currentTreasure >= LabyrinthGameState.MAX_NUM_CARDS) {
             return false;
