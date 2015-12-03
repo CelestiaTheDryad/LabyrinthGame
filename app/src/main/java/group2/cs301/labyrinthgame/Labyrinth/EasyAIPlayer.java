@@ -94,7 +94,7 @@ public class EasyAIPlayer extends GameComputerPlayer {
                     }
                 }
                 //if we did not move to a treasure tile, move now
-                if(curMaxDist < -1) {
+                if(curMaxDist > 0) {
                     game.sendAction(new MoveAction(this, tarX, tarY));
                 }
                 else {

@@ -90,18 +90,45 @@ public class LabyrinthGameState extends GameState implements Serializable {
         stage = toCopy.stage;
     }//ctor
 
-    /*
-    * insertTile
-    * @param xx, yy coordinates to insert the extra tile
-    * @precondition xx and yy must be valid coordinates for inserting
-    * calls the insertExtraTile function from gameBoard
-    */
+    /**
+     * insertTile
+     *
+     * inserts the extra tile into a given spot on the game board
+     *
+     * @param xx - column to insert the tile
+     * @param yy - row to insert the tile
+     */
     public void insertTile(int xx, int yy){
         gameBoard.insertExtraTile(xx, yy);
         //update our tiles' links
         this.linkTiles();
         lastXInserted = xx;
         lastYInserted = yy;
+
+        int xShift = 0;
+        int yShift = 0;
+
+        //handle player moving
+        if(xx == 0) {
+            xShift = 1;
+        }
+        else if (xx == 6) {
+            xShift = -1;
+        }
+        else if (yy == 0) {
+            yShift = 1;
+        }
+        else {
+            yShift = -1;
+        }
+
+        for(PlayerData player : players) {
+            //if its moving a column and the player is in that column
+            if(xShift == 0 && player.getXposition() == xx) {
+                //
+            }
+        }
+
     }//insertTile
 
     /**
@@ -124,6 +151,22 @@ public class LabyrinthGameState extends GameState implements Serializable {
     public void move(int x, int y) {
         players.get(currentPlayer).movePlayer(x, y);
     }//move
+
+    /**
+     * move
+     *
+     * moves the player with the passed in ID to a new spot
+     *
+     * @param player - the number of the player to be moved
+     * @param x - the column to move the player to
+     * @param y - the row to move the player to
+     */
+    public void move(int player, int x, int y) {
+        int tempPlayer = currentPlayer;
+        currentPlayer = player;
+        move(x, y);
+        currentPlayer = tempPlayer;
+    }
 
 
     /**
