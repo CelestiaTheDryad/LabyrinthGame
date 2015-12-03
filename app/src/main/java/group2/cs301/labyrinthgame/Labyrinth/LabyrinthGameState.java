@@ -46,13 +46,13 @@ public class LabyrinthGameState extends GameState implements Serializable {
         players = new ArrayList<>();
 
         if(initNumPlayers > 0) {
-            players.add(new PlayerData(0,0, new int[] {10,11,12,13,14,15}));
+            players.add(new PlayerData(0,0, new int[] {10,11,12,13,14,15}, 0));
         } if(initNumPlayers > 1) {
-            players.add(new PlayerData(6,0, new int[] {7,8,9,18,17,16}));
+            players.add(new PlayerData(6,0, new int[] {7,8,9,18,17,16}, 1));
         } if(initNumPlayers > 2) {
-            players.add(new PlayerData(0,6, new int[] {4,5,6,21,20,19}));
+            players.add(new PlayerData(0,6, new int[] {4,5,6,21,20,19}, 2));
         } if(initNumPlayers > 3) {
-            players.add(new PlayerData(6,6, new int[] {1,2,3,24,23,22}));
+            players.add(new PlayerData(6,6, new int[] {1,2,3,24,23,22}, 3));
         }
 
         numPlayers = initNumPlayers;
@@ -125,7 +125,28 @@ public class LabyrinthGameState extends GameState implements Serializable {
         for(PlayerData player : players) {
             //if its moving a column and the player is in that column
             if(xShift == 0 && player.getXposition() == xx) {
-                //
+                int newY = player.getYposition() + yShift;
+                if (newY == -1) {
+                    move(player.getPlayerID(), player.getXposition(), 6);
+                }
+                else if (newY == 7) {
+                    move(player.getPlayerID(), player.getXposition(), 0);
+                }
+                else {
+                    move(player.getPlayerID(), player.getXposition(), newY);
+                }
+            }
+            else if(yShift == 0 && player.getYposition() == yy) {
+                int newX = player.getXposition() + xShift;
+                if (newX == -1) {
+                    move(player.getPlayerID(), 6, player.getYposition());
+                }
+                else if (newX == 7) {
+                    move(player.getPlayerID(), 0, player.getYposition());
+                }
+                else {
+                    move(player.getPlayerID(), newX, player.getYposition());
+                }
             }
         }
 
