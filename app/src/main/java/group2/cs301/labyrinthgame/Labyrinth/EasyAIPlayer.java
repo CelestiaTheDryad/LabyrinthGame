@@ -51,19 +51,17 @@ public class EasyAIPlayer extends GameComputerPlayer {
             return;
 
         //only do things if it is my turn
-        if(myState.getCurrentPlayer() == playerNum){
+        if(true){
             //First Action to send is Insert
             if(myState.getStage() == LabyrinthGameState.INSERTING){
-                int[] val = Board.INSERT_LOCATIONS[(int) Math.random() *12];
+                int[] val = Board.INSERT_LOCATIONS[(int)(Math.random() *12)];
                 int xx = val[0];
                 int yy = val[1];
                 game.sendAction(new InsertTileAction(this, xx, yy));
-                return;
             }//if
             else if(myState.getStage() == LabyrinthGameState.MOVING){
                 //if we are not inserting, we must be moving
                 PlayerData myData = myState.getPlayers().get(playerNum);
-                //myState.highlightToMove(playerNum);
 
                 //first get all my tiles
                 //loop through each one at a time
@@ -81,7 +79,6 @@ public class EasyAIPlayer extends GameComputerPlayer {
                     for(int y = 0; y < 7; y++){
                         Tile thisTile = currBoard.getTile(x,y);
                         if(thisTile.isHighlighted() && (thisTile.getTreasure() == myData.getCurrentTreasure())){
-                            curMaxDist = -1;
                             game.sendAction(new MoveAction(this, x, y));
                             return;
                         }
@@ -91,14 +88,17 @@ public class EasyAIPlayer extends GameComputerPlayer {
                             if(curMaxDist < thisDist){
                                 tarX = x;
                                 tarY = y;
+                                curMaxDist = thisDist;
                             }
                         }
                     }
                 }
                 //if we did not move to a treasure tile, move now
-                if(curMaxDist != -1) {
+                if(curMaxDist > 0) {
+                    game.sendAction(new MoveAction(this, tarX, tarY));
+                }
+                else {
                     game.sendAction(new MoveAction(this, myX, myY));
-                    return;
                 }
             }
             else if(myState.getStage() == LabyrinthGameState.ENDING){

@@ -39,6 +39,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     private Button nextTurnButton;
     private int curTreasure;
     private TextView selectTile;
+    private boolean hasActionToRun;
 
     private int[] treasuresResources;
 
@@ -86,6 +87,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         if(info instanceof LabyrinthGameState) {
             labyrinthGameState = (LabyrinthGameState)info;
             updateGUI();
+            hasActionToRun = true;
         }
     }
 
@@ -246,15 +248,21 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
         if(v == nextTurnButton && labyrinthGameState.getStage() == LabyrinthGameState.ENDING) {
             game.sendAction(new NextTurnAction(this));
+
+            Log.println(Log.VERBOSE, "", "nextTurn");
         }
-//        else if(v == extraTileButton) {
-//            game.sendAction(new RotateTileAction(this));
-//        }
 
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
+//        try {
+//            Thread.sleep(500);
+//        }
+//        catch (InterruptedException e) {
+//            //no
+//        }
 
         if(v == surfView) {
 
@@ -264,7 +272,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             int touchY = (int)(( ((double)event.getY())/((double)height) ) * 9 ) ;
             int touchX = (int)(( ((double)event.getX())/((double)width) ) * 9 ) ;
 
-            Log.println(Log.VERBOSE, "", ""+ touchY + ", " + touchX);
+            Log.println(Log.VERBOSE, "", ""+ touchX + ", " + touchY);
 
             if(touchY <= 0 || touchY >= 8 || touchX <= 0 || touchX >= 8) {
                 return false;
@@ -277,11 +285,13 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             if(labyrinthGameState.getStage() == LabyrinthGameState.INSERTING) {
                 if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
                     game.sendAction(new InsertTileAction(this, touchX, touchY));
+                    Log.println(Log.VERBOSE, "", "insert");
                 }
             }
             else if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING) {
                 if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
                     game.sendAction(new MoveAction(this, touchX, touchY));
+                    Log.println(Log.VERBOSE, "", "move");
                 }
             }
             else {
@@ -292,10 +302,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         }
         else if(v == extraTileBase || v == extraTileTreasure || v == extraTileHighlight) {
             game.sendAction(new RotateTileAction(this));
-            try {
-                Thread.sleep(100);
-            } catch (Exception fuck) {}
-            return true;
+            Log.println(Log.VERBOSE, "", "rotate");
         }
 
         return false;
