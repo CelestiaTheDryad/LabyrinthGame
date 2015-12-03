@@ -78,7 +78,10 @@ public class PlayerData implements Serializable{
      * @return
      */
     public int getCurrentTreasure() {
-        return treasures[currentTreasure];
+        if(currentTreasure < LabyrinthGameState.MAX_NUM_CARDS) {
+            return treasures[currentTreasure];
+        }
+        else { return 0; }
     }
 
 
