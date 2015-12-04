@@ -1,12 +1,12 @@
-package group2.cs301.labyrinthgame;
+package group2.cs301.labyrinthgame.Labyrinth;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import group2.cs301.labyrinthgame.Game.GameMainActivity;
+import group2.cs301.labyrinthgame.R;
 
 
 public class GameRules extends ActionBarActivity {
@@ -19,7 +19,7 @@ public class GameRules extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_rules);
 
-        gameRulesText = (TextView) findViewById(R.id.game_rules);
+        gameRulesText = (TextView) findViewById(R.id.game_rules_text);
 
         gameRulesText.setText(
                 "Current player: Look at your first treasure. This is your first goal in the labyrinth. \n" +
@@ -30,7 +30,7 @@ public class GameRules extends ActionBarActivity {
                         " The tile that is pushed out will become the next player's means of shifting the maze.\n" +
                         "Until the next player's turn, the new extra tile is left where it is so that all players\n" +
                         "will know how the maze has been shifted on this turn.\n\n"
-                + "You must move the maze before each turn, even if you don't need to in order to reach your goal.\n" +
+                        + "You must move the maze before each turn, even if you don't need to in order to reach your goal.\n" +
                         "This way you can wall in another player!\n" +
                         "You may not immediately reverse the last player's move by returning the extra tile to the \n" +
                         "position it was just pushed out of.\n\n" +

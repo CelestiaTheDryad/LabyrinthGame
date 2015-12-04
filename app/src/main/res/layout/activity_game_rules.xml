@@ -9,7 +9,7 @@
 
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/game_rules"
+        android:id="@+id/game_rules_text"
         android:textSize="18dp"
         android:text="test" />
 
