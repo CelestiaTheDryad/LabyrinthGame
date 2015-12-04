@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
 
@@ -41,14 +43,28 @@ public class LabyrinthGameState extends GameState implements Serializable {
 
         players = new ArrayList<>();
 
+        ArrayList<Integer> randomInts = new ArrayList<>();
+        for(int i = 0; i < 24; i++) {
+            randomInts.add(new Integer(i+1));
+        }
+
+        Collections.shuffle(randomInts);
+
+        int[][] randTreasures = new int[4][6];
+        for(int i = 0; i < 4; i++) {
+            for(int j = 1; j <= 6; j++) {
+                randTreasures[i][j-1] = randomInts.get( ((i*6)+j)-1 );
+            }
+        }
+
         if(initNumPlayers > 0) {
-            players.add(new PlayerData(0,0, new int[] {10,11,12,13,14,15}, 0));
+            players.add(new PlayerData(0,0, randTreasures[0], 0));
         } if(initNumPlayers > 1) {
-            players.add(new PlayerData(6,0, new int[] {7,8,9,18,17,16}, 1));
+            players.add(new PlayerData(6,0, randTreasures[1], 1));
         } if(initNumPlayers > 2) {
-            players.add(new PlayerData(0,6, new int[] {4,5,6,21,20,19}, 2));
+            players.add(new PlayerData(0,6, randTreasures[2], 2));
         } if(initNumPlayers > 3) {
-            players.add(new PlayerData(6,6, new int[] {1,2,3,24,23,22}, 3));
+            players.add(new PlayerData(6,6, randTreasures[3], 3));
         }
 
         numPlayers = initNumPlayers;
