@@ -45,7 +45,7 @@ public class LabyrinthGameState extends GameState implements Serializable {
 
         ArrayList<Integer> randomInts = new ArrayList<>();
         for(int i = 0; i < 24; i++) {
-            randomInts.add(new Integer(i+1));
+            randomInts.add(i+1);
         }
 
         Collections.shuffle(randomInts);
