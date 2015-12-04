@@ -1,15 +1,22 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import android.content.Intent;
+import android.media.Image;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import group2.cs301.labyrinthgame.Game.GameHumanPlayer;
 import group2.cs301.labyrinthgame.Game.GameMainActivity;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
+import group2.cs301.labyrinthgame.Game.infoMsg.IllegalMoveInfo;
+import group2.cs301.labyrinthgame.Game.infoMsg.NotYourTurnInfo;
+import group2.cs301.labyrinthgame.Game.infoMsg.TimerInfo;
 import group2.cs301.labyrinthgame.R;
 
 /**
@@ -36,6 +43,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     private boolean doAction;
     private boolean doAnim;
     private int lastStateStage;
+    private Button gameRules;
 
     private int[] treasuresResources;
 
@@ -211,6 +219,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         extraTileTreasure = (ImageView) myActivity.findViewById(R.id.extra_tile_treasure);
         extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);
         selectTile = (TextView) myActivity.findViewById(R.id.select_tile_text);
+        gameRules = (Button) myActivity.findViewById(R.id.game_rules);
 
 
         nextTurnButton.setOnClickListener(this);
@@ -219,6 +228,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         extraTileBase.setOnTouchListener(this);
         extraTileTreasure.setOnTouchListener(this);
         extraTileHighlight.setOnTouchListener(this);
+        gameRules.setOnClickListener(this);
 
     }
 
@@ -230,6 +240,11 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             game.sendAction(new NextTurnAction(this));
             Log.println(Log.VERBOSE, "", "nextTurn");
             doAction = false;
+        }
+
+        if(v == gameRules)
+        {
+            myActivity.startActivity(new Intent(myActivity, GameRules.class));
         }
 
     }
