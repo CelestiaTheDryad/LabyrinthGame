@@ -304,7 +304,8 @@ public abstract class LocalGame implements Game, Tickable {
 	 * who the winner(s), if any, are. If the game is not over, return null;
 	 * 
 	 * @return
-	 * 			a message that tells who has won the game, or null if the
+	 * 			a message that tells who has
+	 * 			the game, or null if the
 	 * 			game is not over
 	 */
 	protected abstract String checkIfGameOver();

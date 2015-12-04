@@ -1,5 +1,6 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Handler;
 import android.util.Log;
@@ -16,6 +17,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
 import group2.cs301.labyrinthgame.Game.infoMsg.IllegalMoveInfo;
 import group2.cs301.labyrinthgame.Game.infoMsg.NotYourTurnInfo;
 import group2.cs301.labyrinthgame.Game.infoMsg.TimerInfo;
+import group2.cs301.labyrinthgame.GameRules;
 import group2.cs301.labyrinthgame.R;
 
 /**
@@ -40,6 +42,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     private int curTreasure;
     private TextView selectTile;
     private boolean hasActionToRun;
+    private Button gameRules;
 
     private int[] treasuresResources;
 
@@ -232,10 +235,12 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         extraTileTreasure = (ImageView) myActivity.findViewById(R.id.extra_tile_treasure);
         extraTileHighlight = (ImageView) myActivity.findViewById(R.id.extra_tile_highlight);
         selectTile = (TextView) myActivity.findViewById(R.id.select_tile_text);
+        gameRules = (Button) myActivity.findViewById(R.id.game_rules);
 
 
         nextTurnButton.setOnClickListener(this);
         surfView.setOnTouchListener(this);
+        gameRules.setOnClickListener(this);
 
         extraTileBase.setOnTouchListener(this);
         extraTileTreasure.setOnTouchListener(this);
@@ -252,17 +257,15 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             Log.println(Log.VERBOSE, "", "nextTurn");
         }
 
+        if(v == gameRules)
+        {
+           myActivity.startActivity(new Intent(myActivity, GameRules.class));
+        }
+
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-//        try {
-//            Thread.sleep(500);
-//        }
-//        catch (InterruptedException e) {
-//            //no
-//        }
 
         if(v == surfView) {
 

@@ -24,4 +24,7 @@
     <string name="current_target">Current Target:</string>
     <string name="targets_remaining">Targets remaining:</string>
     <string name="move_player">Please select a tile to move to.</string>
+    <string name="title_activity_game_rules_activity">game_rules_activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_game_rules">game_rules</string>
 </resources>
