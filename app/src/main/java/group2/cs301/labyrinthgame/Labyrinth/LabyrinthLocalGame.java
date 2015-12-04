@@ -93,7 +93,7 @@ public class LabyrinthLocalGame extends LocalGame {
         String message = null;
 
         if(labyrinthGameState.getCurrentPlayerData().hasWon()) {
-            message = "Game Over! Player " + (labyrinthGameState.getCurrentPlayer()+1) + "has won!";
+            message = "Game Over! Player " + (labyrinthGameState.getCurrentPlayer()+1) + " has won!";
         }
 
         return message;
