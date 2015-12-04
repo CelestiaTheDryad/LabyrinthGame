@@ -1,10 +1,8 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
-import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import group2.cs301.labyrinthgame.Game.infoMsg.GameState;
@@ -32,6 +30,9 @@ public class LabyrinthGameState extends GameState implements Serializable {
 
     private ArrayList<PlayerData> players;
 
+    //todo: show how many treasures each player has at all times
+
+    //todo: Shrink treasures on extra tile
     /**
      * LabyrinthGameState
      *

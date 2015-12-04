@@ -1,21 +1,15 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
-import android.media.Image;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import group2.cs301.labyrinthgame.Game.GameHumanPlayer;
 import group2.cs301.labyrinthgame.Game.GameMainActivity;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
-import group2.cs301.labyrinthgame.Game.infoMsg.IllegalMoveInfo;
-import group2.cs301.labyrinthgame.Game.infoMsg.NotYourTurnInfo;
-import group2.cs301.labyrinthgame.Game.infoMsg.TimerInfo;
 import group2.cs301.labyrinthgame.R;
 
 /**
