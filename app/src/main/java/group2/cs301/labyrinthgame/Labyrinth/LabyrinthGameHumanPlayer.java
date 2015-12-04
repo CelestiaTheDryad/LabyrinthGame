@@ -87,18 +87,9 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
     public void receiveInfo(GameInfo info) {
         int i = 0;
 
-        //DEBUG
-        try {
-            Thread.sleep(50);
-        }
-        catch (InterruptedException e) {
-            //meh
-        }
-
         //update everything if it's a gameState
         if(info instanceof LabyrinthGameState) {
             labyrinthGameState = (LabyrinthGameState)info;
-            updateGUI();
             doAction = true;
             if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING
                     && lastStateStage != LabyrinthGameState.MOVING) {
@@ -107,6 +98,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
             if(labyrinthGameState.getStage() != lastStateStage) {
                 lastStateStage = labyrinthGameState.getStage();
             }
+            updateGUI();
         }
     }
 
@@ -192,6 +184,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
 
         if(doAnim) {
             surfView.startShiftAnimation(labyrinthGameState.getLastXInserted(), labyrinthGameState.getLastYInserted());
+            doAnim = false;
         }
 
         //set info text
@@ -241,14 +234,16 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         if(v == nextTurnButton && labyrinthGameState.getStage() == LabyrinthGameState.ENDING
                 && doAction && !surfView.animRunning()) {
             game.sendAction(new NextTurnAction(this));
-
             Log.println(Log.VERBOSE, "", "nextTurn");
+            doAction = false;
         }
 
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
+
 
         if(v == surfView) {
 
@@ -273,6 +268,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
                 if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
                     game.sendAction(new InsertTileAction(this, touchX, touchY));
                     Log.println(Log.VERBOSE, "", "insert");
+                    doAction = false;
                 }
             }
             else if(labyrinthGameState.getStage() == LabyrinthGameState.MOVING
@@ -280,6 +276,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
                 if(labyrinthGameState.getGameBoard().getTile(touchX, touchY).isHighlighted()) {
                     game.sendAction(new MoveAction(this, touchX, touchY));
                     Log.println(Log.VERBOSE, "", "move");
+                    doAction = false;
                 }
             }
             else {
@@ -293,6 +290,7 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
                 && doAction && !surfView.animRunning()) {
             game.sendAction(new RotateTileAction(this));
             Log.println(Log.VERBOSE, "", "rotate");
+            doAction = false;
         }
 
         return false;
