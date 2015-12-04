@@ -30,17 +30,17 @@ public class LabyrinthMainActivity extends GameMainActivity {
                 return new EasyAIPlayer(name);
             }});
 
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Labyrinth", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 4, "Labyrinth", PORT_NUMBER);
         //todo: unswapped id's
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: Easy AI
-        //defaultConfig.setRemoteData("Remote Player", "", 0);
+        defaultConfig.setRemoteData("Remote Player", "", 0);
 
         return defaultConfig;
     }
 
     @Override
-    public LocalGame createLocalGame() {
-        return new LabyrinthLocalGame();
+    public LocalGame createLocalGame(int numPlayers) {
+        return new LabyrinthLocalGame(numPlayers);
     }
 }

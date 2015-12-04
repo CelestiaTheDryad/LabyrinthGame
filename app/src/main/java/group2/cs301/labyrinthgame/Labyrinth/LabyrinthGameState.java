@@ -38,10 +38,6 @@ public class LabyrinthGameState extends GameState implements Serializable {
      * creates a new game state (default)
      */
     public LabyrinthGameState (int initNumPlayers) {
-//        if(initNumPlayers < 2 || initNumPlayers > 4) {
-//            Log.println(Log.ERROR, "", "WRONG NUMBER OF PLAYERS");
-//            initNumPlayers = 4;
-//        }
 
         players = new ArrayList<>();
 

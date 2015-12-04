@@ -81,7 +81,7 @@ public class Board implements Serializable{
             int orientation = 0;
             int type = 0;
 
-            boolean successful;
+            boolean successful = false;
             boolean addTreasure = false;
 
             //get random tile type
@@ -93,22 +93,28 @@ public class Board implements Serializable{
                     successful = true;
                 }
                 else if (rand == 1 && cornersToAdd > 0) {
-                    cornersToAdd--;
                     type = Tile.CORNER;
                     successful = true;
                     if(cornerTreasuresToAdd > 0) {
-                        cornerTreasuresToAdd--;
-                        addTreasure = true;
+                        if(cornerTreasuresToAdd > cornersToAdd) {
+                            int check = (int) (Math.random() * cornersToAdd);
+                            if (check < cornerTreasuresToAdd) {
+                                addTreasure = true;
+                                cornerTreasuresToAdd--;
+                            }
+                        }
+                        else {
+                            addTreasure = true;
+                            cornerTreasuresToAdd--;
+                        }
                     }
+                    cornersToAdd--;
                 }
                 else if (rand == 2 && teesToAdd > 0){
                     teesToAdd--;
                     type = Tile.TEE;
                     successful = true;
                     addTreasure = true;
-                }
-                else {
-                    successful = false;
                 }
             } while (!successful);
 

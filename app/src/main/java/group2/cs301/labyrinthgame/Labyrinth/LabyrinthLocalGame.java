@@ -21,9 +21,8 @@ public class LabyrinthLocalGame extends LocalGame {
     /**
      * This ctor creates a new game state
      */
-    //todo: fix this to allow more players
-    public LabyrinthLocalGame() {
-        labyrinthGameState = new LabyrinthGameState(2);
+    public LabyrinthLocalGame(int numPlayers) {
+        labyrinthGameState = new LabyrinthGameState(numPlayers);
     }
 
     /**
