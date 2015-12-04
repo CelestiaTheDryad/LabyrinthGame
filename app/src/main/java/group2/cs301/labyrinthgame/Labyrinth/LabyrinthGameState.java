@@ -57,7 +57,7 @@ public class LabyrinthGameState extends GameState implements Serializable {
         int[][] randTreasures = new int[4][6];
         for(int i = 0; i < 4; i++) {
             for(int j = 1; j <= 6; j++) {
-                randTreasures[i][j] = randomInts.get( (i*6)+j );
+                randTreasures[i][j-1] = randomInts.get( ((i*6)+j)-1 );
             }
         }
 
