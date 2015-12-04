@@ -204,11 +204,11 @@ public class LabyrinthSurfaceView extends SurfaceView {
                 rowOffset = tileSize / 4 * -1;
             }
             else if (player.getPlayerColor() == Color.GREEN) {
-                columnOffset = tileSize / 4 * -1;
+                columnOffset = tileSize / 4;
                 rowOffset = tileSize / 4;
             }
             else {
-                columnOffset = tileSize / 4;
+                columnOffset = tileSize / 4 * -1;
                 rowOffset = tileSize / 4;
             }
 
