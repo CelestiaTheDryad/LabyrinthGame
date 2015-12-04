@@ -129,7 +129,7 @@ public class LabyrinthGameStateTest extends TestCase {
 
     //PlayerData Constructor
     public void testPlayerData() throws Exception {
-        PlayerData playerData = new PlayerData(4,2);
+        PlayerData playerData = new PlayerData(4,2,new int[] {1,2,3,24,23,22});
         assertEquals(playerData.getXposition(), 4);
         assertEquals(playerData.getYposition(), 2);
         assertNotNull(playerData.getCurrentTreasure());
@@ -137,6 +137,10 @@ public class LabyrinthGameStateTest extends TestCase {
 
     //test tile linking
     public void testTileLink() throws Exception {
+
+    }
+
+    public void testMoveAction() throws Exception {
 
     }
 
