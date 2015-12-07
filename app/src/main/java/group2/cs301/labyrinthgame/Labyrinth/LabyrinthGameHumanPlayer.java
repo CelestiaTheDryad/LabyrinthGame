@@ -127,7 +127,19 @@ public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.On
         curTreasure = labyrinthGameState.getPlayers().get(labyrinthGameState.getCurrentPlayer()).getCurrentTreasure();
         targetDisplay.setImageResource(treasuresResources[curTreasure]);
         int remainingTreasures = labyrinthGameState.getCurrentPlayerData().getRemainingTreasures();
-        targetCountDisplay.setText("You have " + remainingTreasures + " to collect.");
+        if(labyrinthGameState.getCurrentPlayer() > 0) { //todo: Make this work with multiple humans
+            if (remainingTreasures > 0) {
+                targetCountDisplay.setText("The " + playerColor + " player has " + remainingTreasures + " treasures to collect.");
+            } else {
+                targetCountDisplay.setText("The " + playerColor + " player must return to their starting position.");
+            }
+        } else {
+            if (remainingTreasures > 0) {
+                targetCountDisplay.setText("You have " + remainingTreasures + " treasures to collect.");
+            } else {
+                targetCountDisplay.setText("You must return to your starting position.");
+            }
+        }
 
         Tile extraTile = labyrinthGameState.getGameBoard().getExtraTile();
         if(extraTile.getType() == Tile.CORNER) {
