@@ -1,7 +1,7 @@
 package group2.cs301.labyrinthgame.Labyrinth;
 
 /**
- * @author Brendan Thomas
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version December 1, 2015
  */
 public class AnimationThread extends Thread {

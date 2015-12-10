@@ -8,8 +8,8 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
  * This player is EASY - It will randomly select a place to insert a tile (does not rotate).
  * It also really enjoys walking so it walks as far away from its starting place as possible.
  *
- * @author Ben Rumptz
- * @version 12/1/15
+ *  @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
+ *  @version 12/1/15
  */
 public class EasyAIPlayer extends GameComputerPlayer {
     private LabyrinthGameState myState;  //holds my state

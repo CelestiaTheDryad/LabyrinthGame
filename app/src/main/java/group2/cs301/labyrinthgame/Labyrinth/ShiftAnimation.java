@@ -3,7 +3,7 @@ package group2.cs301.labyrinthgame.Labyrinth;
 import android.graphics.Canvas;
 
 /**
- * @author Brendan Thomas
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version November 29, 2015
  *
  * class that controls the drawing of a shifting row of tiles on a LabyrinthSurfaceView

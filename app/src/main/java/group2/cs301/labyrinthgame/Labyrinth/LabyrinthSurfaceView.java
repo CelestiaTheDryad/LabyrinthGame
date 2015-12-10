@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import group2.cs301.labyrinthgame.R;
 
 /**
- * @author Brendan Thomas
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version December 1, 2015
  *
  * This class is the drawing surface for the game board

@@ -4,7 +4,7 @@ import group2.cs301.labyrinthgame.Game.*;
 import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
 
 /**
- * @author Ben Rumptz
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version 12/9/15
  * TODO Update either the insert or move function to think
  */

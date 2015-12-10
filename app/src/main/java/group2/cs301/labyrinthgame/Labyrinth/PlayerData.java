@@ -5,7 +5,7 @@ import android.graphics.Color;
 import java.io.Serializable;
 
 /**
- * @author Andrew Williams, Brendan Thomas
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version December 1, 2015
  */
 public class PlayerData implements Serializable{

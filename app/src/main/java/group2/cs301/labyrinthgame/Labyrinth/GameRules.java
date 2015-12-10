@@ -4,14 +4,22 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import group2.cs301.labyrinthgame.R;
 
+/**
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
+ * @version December 1, 2015
+ */
 
-public class GameRules extends ActionBarActivity {
+
+public class GameRules extends ActionBarActivity implements View.OnClickListener{
 
     private TextView gameRulesText;
+    private Button returnButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +28,7 @@ public class GameRules extends ActionBarActivity {
         setContentView(R.layout.activity_game_rules);
 
         gameRulesText = (TextView) findViewById(R.id.game_rules_text);
+        returnButton = (Button) findViewById(R.id.returnButton);
 
         gameRulesText.setText(
                 "Current player: Look at your first treasure. This is your first goal in the labyrinth. \n" +
@@ -49,8 +58,6 @@ public class GameRules extends ActionBarActivity {
 
         );
 
-        //todo: return button to go back to the previous layout.
-
     }
 
     @Override
@@ -73,5 +80,14 @@ public class GameRules extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if(v == returnButton)
+        {
+            finish();
+        }
     }
 }

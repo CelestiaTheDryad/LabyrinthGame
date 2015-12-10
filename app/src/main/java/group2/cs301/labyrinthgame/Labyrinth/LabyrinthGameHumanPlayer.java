@@ -20,7 +20,7 @@ import group2.cs301.labyrinthgame.Game.infoMsg.TimerInfo;
 import group2.cs301.labyrinthgame.R;
 
 /**
- * @author Brendan Thomas, Andrew Williams
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version December 1, 2015
  */
 public class LabyrinthGameHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {

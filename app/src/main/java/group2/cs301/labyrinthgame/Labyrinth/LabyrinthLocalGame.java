@@ -6,7 +6,7 @@ import group2.cs301.labyrinthgame.Game.actionMsg.GameAction;
 
 
 /**
- * @author Created by Andrew Williams
+ * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version 11/22/15.
  */
 public class LabyrinthLocalGame extends LocalGame {
