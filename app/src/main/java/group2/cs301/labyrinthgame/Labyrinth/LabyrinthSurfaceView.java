@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
@@ -16,7 +17,7 @@ import group2.cs301.labyrinthgame.R;
 
 /**
  * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
- * @version December 1, 2015
+ * @version December 14, 2015
  *
  * This class is the drawing surface for the game board
  */
@@ -33,6 +34,9 @@ public class LabyrinthSurfaceView extends SurfaceView {
     private MoveAnimation moveAnim;
     private AnimationThread ticker;
     private Bitmap[] treasureImages;
+
+    private int backColor;
+    private int lightGrey;
 
     public LabyrinthSurfaceView(Context context) {
         super(context);
@@ -58,8 +62,11 @@ public class LabyrinthSurfaceView extends SurfaceView {
         //allow drawing on the canvas
         setWillNotDraw(false);
 
+        backColor = Color.rgb(112, 56, 13);
+        lightGrey = Color.rgb(200,200,200);
+
         //set the background of the canvas to a nice brown
-        setBackgroundColor(Color.rgb(112, 56, 13));
+        setBackgroundColor(backColor);
 
         moveAnim = null;
         shiftAnim = null;
@@ -120,7 +127,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
         }
 
         //get the general space buffer around the square, at least 4 pixels
-        //the difference of all the buffers should eb even divisible by 9
+        //the difference of all the buffers should be evenly divisible by 9
         if ((canvasHeight - heightBuffer * 2) % 9 < 5) {
             genBuffer = (canvasHeight - heightBuffer * 2) % 9 + 9;
         }
@@ -156,7 +163,166 @@ public class LabyrinthSurfaceView extends SurfaceView {
             drawHighlights(canvas);
             drawPlayers(canvas);
         }
+        drawInsertArrows(canvas);
+        drawPlayerStarts(canvas);
     }//draw
+
+    /**
+     * drawInsertArrows
+     *
+     * draws the arrows on the board to show where tiles may be inserted
+     *
+     * @param canvas - canvas to draw on
+     */
+    private void drawInsertArrows(Canvas canvas) {
+        drawArrowUp(canvas, 2);
+        drawArrowUp(canvas, 4);
+        drawArrowUp(canvas, 6);
+
+        drawArrowDown(canvas, 2);
+        drawArrowDown(canvas, 4);
+        drawArrowDown(canvas, 6);
+
+        drawArrowLeft(canvas, 2);
+        drawArrowLeft(canvas, 4);
+        drawArrowLeft(canvas, 6);
+
+        drawArrowRight(canvas, 2);
+        drawArrowRight(canvas, 4);
+        drawArrowRight(canvas, 6);
+    }
+
+    private void drawArrowUp(Canvas canvas, int column) {
+        int boxTop = drawTop + tileSize * 8;
+        int boxLeft = drawLeft + tileSize * column;
+
+        Path arrow = new Path();
+        arrow.moveTo(boxLeft + 2 * (tileSize / 5), boxTop + 3 * (tileSize / 4));
+        arrow.lineTo(boxLeft + 2 * (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + (tileSize / 4));
+        arrow.lineTo(boxLeft + 4 * (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + 3 * (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + 3 * (tileSize / 5), boxTop + 3 * (tileSize / 4));
+        arrow.lineTo(boxLeft + 2 * (tileSize / 5), boxTop + 3 * (tileSize / 4));
+
+        Paint toColor = new Paint();
+        toColor.setColor(lightGrey);
+        canvas.drawPath(arrow, toColor);
+    }
+
+    private void drawArrowDown(Canvas canvas, int column) {
+        int boxTop = drawTop;
+        int boxLeft = drawLeft + tileSize * column;
+
+        Path arrow = new Path();
+        arrow.moveTo(boxLeft + 2 * (tileSize / 5), boxTop + (tileSize / 4));
+        arrow.lineTo(boxLeft + 2 * (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + 3 * (tileSize / 4));
+        arrow.lineTo(boxLeft + 4 * (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + 3 * (tileSize / 5), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + 3 * (tileSize / 5), boxTop + (tileSize / 4));
+        arrow.lineTo(boxLeft + 2 * (tileSize / 5), boxTop + (tileSize / 4));
+
+        Paint toColor = new Paint();
+        toColor.setColor(lightGrey);
+        canvas.drawPath(arrow, toColor);
+    }
+
+    private void drawArrowLeft(Canvas canvas, int row) {
+        int boxTop = tileSize * row + drawTop;
+        int boxLeft = drawLeft + tileSize * 8;
+
+        Path arrow = new Path();
+        arrow.moveTo(boxLeft + 3 * (tileSize / 4), boxTop + 2 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + 2 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 4), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + 4 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + 3 * (tileSize / 5));
+        arrow.lineTo(boxLeft + 3 * (tileSize / 4), boxTop + 3 * (tileSize / 5));
+        arrow.lineTo(boxLeft + 3 * (tileSize / 4), boxTop + 2 * (tileSize / 5));
+
+        Paint toColor = new Paint();
+        toColor.setColor(lightGrey);
+        canvas.drawPath(arrow, toColor);
+    }
+
+    private void drawArrowRight(Canvas canvas, int row) {
+        int boxTop = tileSize * row + drawTop;
+        int boxLeft = drawLeft;
+
+        Path arrow = new Path();
+        arrow.moveTo(boxLeft + (tileSize / 4), boxTop + 2 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + 2 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + (tileSize / 5));
+        arrow.lineTo(boxLeft + 3 * (tileSize / 4), boxTop + (tileSize / 2));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + 4 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 2), boxTop + 3 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 4), boxTop + 3 * (tileSize / 5));
+        arrow.lineTo(boxLeft + (tileSize / 4), boxTop + 2 * (tileSize / 5));
+
+        Paint toColor = new Paint();
+        toColor.setColor(lightGrey);
+        canvas.drawPath(arrow, toColor);
+    }
+
+    /**
+     * drawPlayerStarts
+     *
+     * highlights each player's original tile
+     *
+     * @param canvas - canvas to draw on
+     */
+    private void drawPlayerStarts(Canvas canvas) {
+        Paint color = new Paint();
+
+        int tileLeft;
+        int tileRight;
+        int tileTop;
+        int tileBottom;
+
+        for (PlayerData player : players) {
+            if (player.getPlayerColor() == Color.RED) {
+                color.setColor(Color.RED);
+
+                tileLeft = drawLeft + tileSize + (borderSize / 2);
+                tileRight = drawLeft + 2 * tileSize - (borderSize / 2);
+                tileTop = drawTop + tileSize + (borderSize / 2);
+                tileBottom = drawTop + 2 * tileSize - (borderSize / 2);
+            }
+            else if (player.getPlayerColor() == Color.BLUE) {
+                color.setColor(Color.BLUE);
+
+                tileLeft = drawLeft + 7 * tileSize + (borderSize / 2);
+                tileRight = drawLeft + 8 * tileSize - (borderSize / 2);
+                tileTop = drawTop + tileSize + (borderSize / 2);
+                tileBottom = drawTop + 2 * tileSize - (borderSize / 2);
+            }
+            else if (player.getPlayerColor() == Color.rgb(255,130,0)) {
+                color.setColor(Color.rgb(255,130,0));
+
+                tileLeft = drawLeft + tileSize + (borderSize / 2);
+                tileRight = drawLeft + 2 * tileSize - (borderSize / 2);
+                tileTop = drawTop + 7 * tileSize + (borderSize / 2);
+                tileBottom = drawTop + 8 * tileSize - (borderSize / 2);
+            }
+            else {
+                color.setColor(Color.GREEN);
+
+                tileLeft = drawLeft + 7 * tileSize + (borderSize / 2);
+                tileRight = drawLeft + 8 * tileSize - (borderSize / 2);
+                tileTop = drawTop + 7 * tileSize + (borderSize / 2);
+                tileBottom = drawTop + 8 * tileSize - (borderSize / 2);
+            }
+
+            canvas.drawRect(tileLeft, tileTop, tileRight, tileTop + borderSize, color);
+            canvas.drawRect(tileLeft, tileTop, tileLeft + borderSize, tileBottom, color);
+            canvas.drawRect(tileRight - borderSize, tileTop, tileRight, tileBottom, color);
+            canvas.drawRect(tileLeft, tileBottom - borderSize, tileRight, tileBottom, color);
+        }
+    }
 
     /**
      * drawHighlights
@@ -251,9 +417,6 @@ public class LabyrinthSurfaceView extends SurfaceView {
      * @param canvas - the canvas to draw the tile on
      */
     public void drawTile(Tile toDraw, int column, int row, int columnOffset, int rowOffset, Canvas canvas) {
-        int lightGrey = Color.rgb(200,200,200);
-        int medGrey = Color.rgb(125,125,125);
-        int darkGrey = Color.rgb(50,50,50);
 
         //find pixel boundaries to draw the tile in
         int tileLeft = drawLeft + column * tileSize + columnOffset + (borderSize / 2);
@@ -362,7 +525,7 @@ public class LabyrinthSurfaceView extends SurfaceView {
 
     public void drawBlank(Canvas canvas, boolean row, int num) {
         Paint color = new Paint();
-        color.setColor(Color.rgb(112, 56, 13));
+        color.setColor(backColor);
         if(row) {
             canvas.drawRect(0, drawTop + num * tileSize, canvas.getWidth(), drawTop + (num + 1) * tileSize, color);
         }
