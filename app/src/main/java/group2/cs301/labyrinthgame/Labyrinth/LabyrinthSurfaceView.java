@@ -421,6 +421,6 @@ public class LabyrinthSurfaceView extends SurfaceView {
      * @return - true if there is an animation going, false if not
      */
     public boolean animRunning() {
-        return shiftAnim!= null || moveAnim != null;
+        return shiftAnim != null || moveAnim != null;
     }//animRunning
 }

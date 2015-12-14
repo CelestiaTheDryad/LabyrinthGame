@@ -131,7 +131,7 @@ public class EasyAIPlayer extends GameComputerPlayer {
 
     //pythagorean theorem to find distance between 2 points
     private double findDist(int myX, int myY, int tarX, int tarY){
-        double dist = (myX - tarY) * (myX - tarX);
+        double dist = (myX - tarX) * (myX - tarX);
         dist += (myY - tarY) * (myY - tarY);
         dist = Math.sqrt(dist);
         return dist;
