@@ -83,7 +83,7 @@ public class HardAIPlayer extends GameComputerPlayer {
             //if the tile is highlighted and has my treasure, go there and stop
             //if it is highlighted and close to my target, go there since I can get there soon
             Board currBoard = myState.getGameBoard();
-            double curClosestDist = -1;
+            double curClosestDist = 100;
             //Get my x,y and the targetX, targetY
             int myX = myData.getXposition();
             int myY = myData.getYposition();
@@ -111,7 +111,7 @@ public class HardAIPlayer extends GameComputerPlayer {
                 }
             }
             //if we can move, go to that location
-            if(curClosestDist > 0) {
+            if(curClosestDist != 100) {
                 game.sendAction(new MoveAction(this, tarX, tarY));
             }
             //if we can't move, stay still
