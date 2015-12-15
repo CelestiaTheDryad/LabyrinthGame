@@ -6,7 +6,6 @@ import group2.cs301.labyrinthgame.Game.infoMsg.GameInfo;
 /**
  * @author G. Emily Nitzberg, Ben Rumptz, Brendan Thomas, Andrew Williams
  * @version 12/9/15
- * TODO Update either the insert or move function to think
  */
 public class HardAIPlayer extends GameComputerPlayer {
     private LabyrinthGameState myState;  //holds my state
@@ -58,8 +57,6 @@ public class HardAIPlayer extends GameComputerPlayer {
             //fine
         }
 
-        //TODO smarter inserting (may be ignored for smarter movement/positioning)
-
         if(myState.getStage() == LabyrinthGameState.INSERTING){
             int xx, yy;
             do {
@@ -71,7 +68,6 @@ public class HardAIPlayer extends GameComputerPlayer {
             game.sendAction(new InsertTileAction(this, xx, yy));
         }//if
 
-        //TODO smarter movement/positioning (may be ignored for smarter inserting)  
         else if(myState.getStage() == LabyrinthGameState.MOVING){
             //wait for the humans' puny animations
             try {
@@ -85,9 +81,9 @@ public class HardAIPlayer extends GameComputerPlayer {
             //first get all my tiles
             //loop through each one at a time
             //if the tile is highlighted and has my treasure, go there and stop
-            //if it is highlighted and farther away than the last highlighted tile, go there
+            //if it is highlighted and close to my target, go there since I can get there soon
             Board currBoard = myState.getGameBoard();
-            double curMaxDist = -1;
+            double curClosestDist = -1;
             //Get my x,y and the targetX, targetY
             int myX = myData.getXposition();
             int myY = myData.getYposition();
@@ -101,21 +97,24 @@ public class HardAIPlayer extends GameComputerPlayer {
                         game.sendAction(new MoveAction(this, x, y));
                         return;
                     }
-                    //calculate the furthest tile away and store that tile's x and y coords
+                    //calculate the best tile and store that tile's x and y coords
                     if(thisTile.isHighlighted()){
-                        double thisDist = findDist(myX,myY,x,y);
-                        if(curMaxDist < thisDist){
+                        //find how far the highlighted tile is from my target treasure
+                        double tileToTreasure = findDistToMyTreasurefromX(currBoard, myData, x, y);
+                        //if it is the closest tile to my treasure, go there
+                        if(tileToTreasure < curClosestDist){
                             tarX = x;
                             tarY = y;
-                            curMaxDist = thisDist;
+                            curClosestDist = tileToTreasure;
                         }
                     }
                 }
             }
-            //if we did not move to a treasure tile, move now
-            if(curMaxDist > 0) {
+            //if we can move, go to that location
+            if(curClosestDist > 0) {
                 game.sendAction(new MoveAction(this, tarX, tarY));
             }
+            //if we can't move, stay still
             else {
                 game.sendAction(new MoveAction(this, myX, myY));
             }
@@ -127,9 +126,25 @@ public class HardAIPlayer extends GameComputerPlayer {
 
     //pythagorean theorem to find distance between 2 points
     private double findDist(int myX, int myY, int tarX, int tarY){
-        double dist = (myX - tarY) * (myX - tarX);
+        double dist = (myX - tarX) * (myX - tarX);
         dist += (myY - tarY) * (myY - tarY);
         dist = Math.sqrt(dist);
-        return dist;
+        return Math.abs(dist);
+    }
+
+    //finds the distance from a coord (theX,theY) to the treasure that PlayerData p is looking for
+    private double findDistToMyTreasurefromX(Board b, PlayerData p, int theX, int theY){
+        int x = 0;
+        int y = 0;
+        for(int i = 0; i < 7; ++i){
+            for(int j = 0; j < 7; ++j){
+                if(b.getTile(i,j).getTreasure() == p.getCurrentTreasure()){
+                    x = i;
+                    y = j;
+                    break;
+                }
+            }
+        }
+        return findDist(x,y, theX, theY);
     }
 }
